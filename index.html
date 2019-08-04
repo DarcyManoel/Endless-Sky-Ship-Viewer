@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 		<title>Ship Viewer</title>
 	</head>
 	<body>
+		<div id="dialogscreen">
+			<div class="cover"></div>
+			<img class="dialog" src="assets/dialog.png"/>
+			<input class="upload" type="file"/>
+			<p onclick="toggledialog()">OK</p>
+		</div>
 		<table>
 			<tr>
-				<td id="left" class="side"></td>
+				<td id="left" class="side">
+					<p onclick="toggledialog()">Change Image</p>
+					<p>Swizzle</p>
+					<p>Collision</p>
+					<p>Mirror</p>
+				</td>
 				<td class="leftedge" onclick="slideleft()"></td>
 				<td></td>
 				<td class="rightedge" onclick="slideright()"></td>

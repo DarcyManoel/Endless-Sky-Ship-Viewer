@@ -6,3 +6,6 @@ function slideright(){
 	document.getElementById("right").classList.toggle("side");
 	document.getElementById("right").classList.toggle("slide");
 }
+function toggledialog(){
+	document.getElementById("dialogscreen").classList.toggle("hidden");
+}

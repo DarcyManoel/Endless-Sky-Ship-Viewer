@@ -1,23 +1,60 @@
+#dialogscreen p{
+	font-size:1vw;
+	left:53.9vw;
+	padding:.4vw 1.8vw .4vw 1.8vw;
+	position:absolute;
+	top:53.5vh;
+}
+#dialogscreen{
+	position:absolute;
+}
+#left p:hover{
+	background:linear-gradient(to right,#333 70%,rgba(1,1,1,0));
+	color:#fff;
+}
+.cover{
+	background-color:rgba(0,0,0,.6);
+	height:100vh;
+	position:absolute;
+	top:0;
+	width:100vw;
+}
+.dialog{
+	height:18vh;
+	left:40vw;
+	position:absolute;
+	top:41vh;
+}
+.hidden{
+	display:none;
+}
 .leftedge,.rightedge{
+	background-size:auto 100%;
 	width:1.5vw;
 }
 .leftedge{
 	background-image:url("assets/left edge.png");
-	background-size:auto 100%;
 }
 .rightedge{
 	background-image:url("assets/right edge.png");
-	background-size:auto 100%;
+}
+.side,.slide{
+	background-color:#202020;
+	padding:1vh 0 0 0;
+	vertical-align:top;
 }
 .side{
 	animation:shrink .8s;
-	background-color:#202020;
 	width:16vw;
 }
 .slide{
 	transition:.8s;
-	background-color:#202020;
 	width:24vw;
+}
+.upload{
+	left:42.3vw;
+	position:absolute;
+	top:44vh;
 }
 @keyframes shrink{
 	from{width:24vw;}
@@ -27,7 +64,15 @@ body{
 	background-image:url("assets/menu.png");
 	background-position:center;
 	background-size:auto 100%;
+	color:#ccc;
+	cursor:default;
+	font-family:Ubuntu;
 	margin:0;
+	user-select:none;
+}
+p{
+	margin:2px 0 2px 0;
+	padding:1px 0 3px 20px;
 }
 table{
 	border-spacing:0;
