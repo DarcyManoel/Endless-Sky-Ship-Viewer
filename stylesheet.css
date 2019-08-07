@@ -35,7 +35,7 @@
 	display:none;
 }
 .leftedge,.rightedge{
-	background-size:auto 100%;
+	background-size:100% auto;
 	width:20px;
 }
 .leftedge{
