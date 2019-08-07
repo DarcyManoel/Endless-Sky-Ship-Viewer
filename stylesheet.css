@@ -1,9 +1,10 @@
 #dialogscreen p{
-	font-size:1vw;
-	left:53.9vw;
-	padding:.4vw 1.8vw .4vw 1.8vw;
+	font-size:14px;
+	left:50vw;
+	padding:5.5px 21px 5.5px 21px;
 	position:absolute;
-	top:53.5vh;
+	top:50vh;
+	transform:translate(48px,10px);
 }
 #dialogscreen{
 	position:absolute;
@@ -24,10 +25,11 @@
 	width:100vw;
 }
 .dialog{
-	left:40vw;
+	left:50vw;
 	position:absolute;
-	top:41vh;
-	width:20.3vw;
+	top:50vh;
+	transform:translate(-50%,-50%);
+	width:250px;
 }
 .hidden{
 	display:none;
@@ -59,9 +61,11 @@
 	width:24vw;
 }
 .upload{
-	left:42.3vw;
+	height:25px;
+	left:50vw;
 	position:absolute;
-	top:44vh;
+	top:50vh;
+	transform:translate(-95px,-40px);
 }
 @keyframes shrink{
 	from{width:24vw;}
@@ -77,12 +81,12 @@ body{
 	margin:0;
 	user-select:none;
 }
-p{
-	margin:2px 0 2px 0;
-	padding:1px 0 3px 20px;
-}
 table{
 	border-spacing:0;
 	height:100vh;
 	width:100vw;
+}
+td p{
+	margin:2px 0 2px 0;
+	padding:1px 0 3px 20px;
 }
