@@ -5,25 +5,32 @@
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 		<title>Ship Viewer</title>
 	</head>
-	<body>
-		<div id="dialogscreen">
+	<body onload="initialize()">
+		<div id="dialogscreen" class="hidden">
 			<div class="cover"></div>
 			<img class="dialog" src="assets/dialog.png"/>
-			<input class="upload" type="file"/>
-			<p onclick="toggledialog()">OK</p>
+			<input onchange="loadImage()" class="upload" id="file" type="file"/>
+			<p onclick="toggleDialog()">OK</p>
 		</div>
 		<table>
 			<tr>
 				<td id="left" class="side">
-					<p onclick="toggledialog()">Change Image</p>
-					<p>Swizzle</p>
-					<p>Collision</p>
-					<p>Mirror</p>
+					<p onclick="toggleDialog()">Load Image</p>
+					<p class="hidden" id="swizzle" onclick="changeSwizzle()">Swizzle 0</p>
+					<p class="hidden" id="outline" onclick="toggleOutline()">Outline Hidden</p>
+					<p class="hidden" id="mirror" onclick="toggleMirror()">Mirror Off</p>
+					<p class="hidden" id="engine" onclick="addPoint(this.id)">Add Engine</p>
+					<p class="hidden" id="gun" onclick="addPoint(this.id)">Add Gun</p>
+					<p class="hidden" id="turret" onclick="addPoint(this.id)">Add Turret</p>
 				</td>
-				<td class="leftedge" onclick="slideleft()"></td>
-				<td></td>
-				<td class="rightedge" onclick="slideright()"></td>
-				<td id="right" class="side"></td>
+				<td class="leftedge" onclick="slideLeft()"></td>
+				<td class="main">
+					<canvas class="hidden" id="canvas"></canvas>
+				</td>
+				<td class="rightedge" onclick="slideRight()"></td>
+				<td id="right" class="side">
+					<p id="points"></p>
+				</td>
 			</tr>
 		</table>
 	</body>

@@ -12,6 +12,10 @@
 	background:linear-gradient(to right,#333 70%,rgba(1,1,1,0));
 	color:#fff;
 }
+#points{
+	cursor:text;
+	user-select:text;
+}
 .cover{
 	background-color:rgba(0,0,0,.6);
 	height:100vh;
@@ -20,20 +24,23 @@
 	width:100vw;
 }
 .dialog{
-	height:18vh;
 	left:40vw;
 	position:absolute;
 	top:41vh;
+	width:20.3vw;
 }
 .hidden{
 	display:none;
 }
 .leftedge,.rightedge{
 	background-size:auto 100%;
-	width:1.5vw;
+	width:20px;
 }
 .leftedge{
 	background-image:url("assets/left edge.png");
+}
+.main{
+	text-align:center;
 }
 .rightedge{
 	background-image:url("assets/right edge.png");
