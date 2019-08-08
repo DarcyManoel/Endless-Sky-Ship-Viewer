@@ -33,7 +33,9 @@ function drawCoordinates(x,y){
 }
 function drawImage(){
 	document.getElementById("canvas").classList.remove("hidden")
+	document.getElementById("drone").classList.remove("hidden")
 	document.getElementById("engine").classList.remove("hidden")
+	document.getElementById("fighter").classList.remove("hidden")
 	document.getElementById("gun").classList.remove("hidden")
 	document.getElementById("mirror").classList.remove("hidden")
 	document.getElementById("outline").classList.remove("hidden")
