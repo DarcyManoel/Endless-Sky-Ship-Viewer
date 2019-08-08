@@ -6,11 +6,12 @@
 		<title>Ship Viewer</title>
 	</head>
 	<body onload="initialize()">
-		<div id="dialogscreen" class="hidden">
+		<div id="dialogScreen" class="hidden">
 			<div class="cover"></div>
 			<img class="dialog" src="assets/dialog.png"/>
 			<input onchange="loadImage()" class="upload" id="file" type="file"/>
-			<p onclick="toggleDialog()">OK</p>
+			<p id="imageSize"></p>
+			<p id="confirm" onclick="toggleDialog()">OK</p>
 		</div>
 		<table>
 			<tr>
@@ -26,11 +27,11 @@
 					<p class="hidden" id="fighter" onclick="addPoint(this.id)">Add Fighter</p>
 					<p class="hidden" id="drone" onclick="addPoint(this.id)">Add Drone</p>
 				</td>
-				<td class="leftedge" onclick="slideLeft()"></td>
+				<td class="leftEdge" onclick="slideLeft()"></td>
 				<td class="main">
 					<canvas class="hidden" id="canvas"></canvas>
 				</td>
-				<td class="rightedge" onclick="slideRight()"></td>
+				<td class="rightEdge" onclick="slideRight()"></td>
 				<td id="right" class="side">
 					<p id="points"></p>
 				</td>

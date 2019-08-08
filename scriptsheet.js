@@ -32,18 +32,19 @@ function drawCoordinates(x,y){
 	drawImage();
 }
 function drawImage(){
-	document.getElementById("canvas").classList.remove("hidden")
-	document.getElementById("drone").classList.remove("hidden")
-	document.getElementById("engine").classList.remove("hidden")
-	document.getElementById("fighter").classList.remove("hidden")
-	document.getElementById("gun").classList.remove("hidden")
-	document.getElementById("mirror").classList.remove("hidden")
-	document.getElementById("outline").classList.remove("hidden")
-	document.getElementById("swizzle").classList.remove("hidden")
-	document.getElementById("turret").classList.remove("hidden")
+	document.getElementById("canvas").classList.remove("hidden");
+	document.getElementById("drone").classList.remove("hidden");
+	document.getElementById("engine").classList.remove("hidden");
+	document.getElementById("fighter").classList.remove("hidden");
+	document.getElementById("gun").classList.remove("hidden");
+	document.getElementById("mirror").classList.remove("hidden");
+	document.getElementById("outline").classList.remove("hidden");
+	document.getElementById("swizzle").classList.remove("hidden");
+	document.getElementById("turret").classList.remove("hidden");
 	var canvas=document.getElementById("canvas");
 	var context=canvas.getContext("2d");
 	context.clearRect(0,0,canvas.width,canvas.height);
+	document.getElementById("imageSize").innerHTML=(canvas.width/2)+"px by "+(canvas.height/2)+"px";
 	if(image){
 		context.drawImage(image,0,0,canvas.width,canvas.height);
 	}
@@ -191,5 +192,5 @@ function slideRight(){
 	document.getElementById("right").classList.toggle("slide");
 }
 function toggleDialog(){
-	document.getElementById("dialogscreen").classList.toggle("hidden");
+	document.getElementById("dialogScreen").classList.toggle("hidden");
 }
