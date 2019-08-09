@@ -116,7 +116,8 @@ function addPoint(name){
 		return;
 	}
 	if(mirror){
-
+		document.getElementById("points").innerHTML+=name+" "+Math.abs(xCoordinate)+" "+yCoordinate+"<br>";
+		document.getElementById("points").innerHTML+=name+" -"+Math.abs(xCoordinate)+" "+yCoordinate+"<br>";
 	}
 	else{
 		document.getElementById("points").innerHTML+=name+" "+xCoordinate+" "+yCoordinate+"<br>";
