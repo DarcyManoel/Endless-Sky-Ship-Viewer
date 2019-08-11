@@ -110,6 +110,14 @@ function drawImage(){
 	context.lineWidth=1;
 	context.strokeStyle="#F00";
 	context.stroke();
+	if(mirror){
+		var rx=canvas.width-x;
+		context.beginPath();
+		context.arc(rx,y,5,0,2*Math.PI,false);
+		context.lineWidth=1;
+		context.strokeStyle="#F00";
+		context.stroke();
+	}
 }
 function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
