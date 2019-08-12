@@ -29,6 +29,8 @@ function onMouseUp(event){
 function drawCoordinates(x,y){
 	xCoordinate=.5*(x-.5*canvas.width);
 	yCoordinate=.5*(y-.5*canvas.height);
+	document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate;
+	document.getElementById("yCoordinate").innerHTML="Y: "+yCoordinate;
 	drawImage();
 }
 function drawImage(){

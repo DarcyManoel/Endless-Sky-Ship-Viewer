@@ -23,7 +23,7 @@
 }
 #points{
 	cursor:text;
-	height:95vh;
+	max-height:86vh;
 	overflow:hidden;
 	user-select:text;
 }
@@ -91,6 +91,9 @@ body{
 	font-family:Ubuntu;
 	margin:0;
 	user-select:none;
+}
+p{
+	text-align:left;
 }
 table{
 	border-spacing:0;
