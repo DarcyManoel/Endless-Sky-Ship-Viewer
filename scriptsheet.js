@@ -29,8 +29,6 @@ function onMouseUp(event){
 function drawCoordinates(x,y){
 	xCoordinate=.5*(x-.5*canvas.width);
 	yCoordinate=.5*(y-.5*canvas.height);
-	document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate;
-	document.getElementById("yCoordinate").innerHTML="Y: "+yCoordinate;
 	drawImage();
 }
 function drawImage(){
@@ -119,7 +117,12 @@ function drawImage(){
 		context.lineWidth=1;
 		context.strokeStyle="#F00";
 		context.stroke();
+		document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate+" ("+(xCoordinate*-1)+")";
 	}
+	else{
+		document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate;
+	}
+	document.getElementById("yCoordinate").innerHTML="Y: "+yCoordinate;
 }
 function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
