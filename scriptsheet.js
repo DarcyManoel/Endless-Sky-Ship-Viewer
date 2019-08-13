@@ -193,6 +193,7 @@ function toggleMirror(){
 		mirror=0;
 		document.getElementById("mirror").innerHTML="Mirror Off"
 	}
+	drawImage();
 }
 function slideLeft(){
 	document.getElementById("left").classList.toggle("side");
