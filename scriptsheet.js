@@ -1,3 +1,5 @@
+var coordinates=[
+]
 var image;
 var isDragging=false;
 var mirror=0;
@@ -129,12 +131,14 @@ function addPoint(name){
 		return;
 	}
 	if(mirror){
-		document.getElementById("points").innerHTML+=name+" "+Math.abs(xCoordinate)+" "+yCoordinate+"<br>";
-		document.getElementById("points").innerHTML+=name+" -"+Math.abs(xCoordinate)+" "+yCoordinate+"<br>";
+		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
+		coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);
 	}
 	else{
-		document.getElementById("points").innerHTML+=name+" "+xCoordinate+" "+yCoordinate+"<br>";
+		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
 	}
+	coordinates.sort();
+	document.getElementById("points").innerHTML=coordinates.join("<br>");
 }
 function loadImage(){
 	if(typeof window.FileReader!=="function"){
