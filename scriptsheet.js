@@ -64,12 +64,14 @@ function drawCoordinates(x,y){
 function drawImage(){
 	loaded=true;
 	document.getElementById("canvas").classList.remove("hidden");
+	document.getElementById("coordinates").classList.remove("hidden");
 	document.getElementById("drone").classList.remove("hidden");
 	document.getElementById("engine").classList.remove("hidden");
 	document.getElementById("fighter").classList.remove("hidden");
 	document.getElementById("gun").classList.remove("hidden");
 	document.getElementById("mirror").classList.remove("hidden");
 	document.getElementById("outline").classList.remove("hidden");
+	document.getElementById("points").classList.remove("hidden");
 	document.getElementById("swizzle").classList.remove("hidden");
 	document.getElementById("turret").classList.remove("hidden");
 	var canvas=document.getElementById("canvas");
