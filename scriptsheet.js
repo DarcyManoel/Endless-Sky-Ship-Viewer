@@ -9,24 +9,52 @@ var scale=2;
 var swizzle=0;
 var xCoordinate;
 var yCoordinate;
-function initialize(){
-	var canvas=document.getElementById("canvas");
-	canvas.addEventListener("mousedown",onMouseDown);
-	canvas.addEventListener("mousemove",onMouseMove);
-	document.body.addEventListener("mouseup",onMouseUp);
-}
-function onMouseDown(event){
-	isDragging=true;
-	drawCoordinates(event.offsetX,event.offsetY);
-}
-function onMouseMove(event){
-	if(!isDragging){
+function addPoint(name){
+	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
 		return;
 	}
-	drawCoordinates(event.offsetX,event.offsetY);
+	if(mirror){
+		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
+		coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);
+	}
+	else{
+		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
+	}
+	coordinates.sort();
+	document.getElementById("points").innerHTML=coordinates.join("<br>");
 }
-function onMouseUp(event){
-	isDragging=false;
+function changeSwizzle(){
+	if(swizzle<6){
+		swizzle++;
+	}
+	else{
+		swizzle=0;
+	}
+	drawImage();
+}
+function control(event){
+	if(loaded){
+		switch(event.keyCode){
+			case 37:
+				xCoordinate-=.5;
+			break;
+			case 38:
+				yCoordinate-=.5;
+			break;
+			case 39:
+				xCoordinate+=.5;
+			break;
+			case 40:
+				yCoordinate+=.5;
+			break;
+		}
+		drawImage();
+	}
+}
+function createImage(){
+	image=new Image();
+	image.onload=imageLoaded;
+	image.src=reader.result;
 }
 function drawCoordinates(x,y){
 	xCoordinate=.5*(x-.5*canvas.width);
@@ -127,38 +155,20 @@ function drawImage(){
 	}
 	document.getElementById("yCoordinate").innerHTML="Y: "+yCoordinate;
 }
-function control(event){
-	if(loaded){
-		switch(event.keyCode){
-			case 37:
-				xCoordinate-=.5;
-			break;
-			case 38:
-				yCoordinate-=.5;
-			break;
-			case 39:
-				xCoordinate+=.5;
-			break;
-			case 40:
-				yCoordinate+=.5;
-			break;
-		}
-		drawImage();
-	}
+function imageLoaded(){
+	var canvas=document.getElementById("canvas");
+	canvas.width=image.width*scale;
+	canvas.height=image.height*scale;
+	xCoordinate=NaN;
+	yCoordinate=NaN;
+	drawImage();
+	document.getElementById("points").innerHTML="";
 }
-function addPoint(name){
-	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
-		return;
-	}
-	if(mirror){
-		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
-		coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);
-	}
-	else{
-		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
-	}
-	coordinates.sort();
-	document.getElementById("points").innerHTML=coordinates.join("<br>");
+function initialize(){
+	var canvas=document.getElementById("canvas");
+	canvas.addEventListener("mousedown",onMouseDown);
+	canvas.addEventListener("mousemove",onMouseMove);
+	document.body.addEventListener("mouseup",onMouseUp);
 }
 function loadImage(){
 	if(typeof window.FileReader!=="function"){
@@ -179,37 +189,29 @@ function loadImage(){
 		scale=2;
 	}
 }
-function createImage(){
-	image=new Image();
-	image.onload=imageLoaded;
-	image.src=reader.result;
+function onMouseDown(event){
+	isDragging=true;
+	drawCoordinates(event.offsetX,event.offsetY);
 }
-function imageLoaded(){
-	var canvas=document.getElementById("canvas");
-	canvas.width=image.width*scale;
-	canvas.height=image.height*scale;
-	xCoordinate=NaN;
-	yCoordinate=NaN;
-	drawImage();
-	document.getElementById("points").innerHTML="";
+function onMouseMove(event){
+	if(!isDragging){
+		return;
+	}
+	drawCoordinates(event.offsetX,event.offsetY);
 }
-function changeSwizzle(){
-	if(swizzle<6){
-		swizzle++;
-	}
-	else{
-		swizzle=0;
-	}
-	drawImage();
+function onMouseUp(event){
+	isDragging=false;
 }
-function toggleOutline(){
-	if(!outline){
-		outline=1;
-	}
-	else{
-		outline=0;
-	}
-	drawImage();
+function slideLeft(){
+	document.getElementById("left").classList.toggle("side");
+	document.getElementById("left").classList.toggle("slide");
+}
+function slideRight(){
+	document.getElementById("right").classList.toggle("side");
+	document.getElementById("right").classList.toggle("slide");
+}
+function toggleDialog(){
+	document.getElementById("dialogScreen").classList.toggle("hidden");
 }
 function toggleMirror(){
 	if(!mirror){
@@ -222,14 +224,12 @@ function toggleMirror(){
 	}
 	drawImage();
 }
-function slideLeft(){
-	document.getElementById("left").classList.toggle("side");
-	document.getElementById("left").classList.toggle("slide");
-}
-function slideRight(){
-	document.getElementById("right").classList.toggle("side");
-	document.getElementById("right").classList.toggle("slide");
-}
-function toggleDialog(){
-	document.getElementById("dialogScreen").classList.toggle("hidden");
+function toggleOutline(){
+	if(!outline){
+		outline=1;
+	}
+	else{
+		outline=0;
+	}
+	drawImage();
 }
