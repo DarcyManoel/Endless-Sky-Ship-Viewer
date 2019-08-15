@@ -1,14 +1,14 @@
-var coordinates=[
-]
+var coordinates=[];
 var image;
-var isDragging=false;
-var mirror=0;
-var outline=0;
+var isDragging;
+var loaded;
+var mirror;
+var outline;
 var reader;
 var scale=2;
 var swizzle=0;
-var xCoordinate=NaN;
-var yCoordinate=NaN;
+var xCoordinate;
+var yCoordinate;
 function initialize(){
 	var canvas=document.getElementById("canvas");
 	canvas.addEventListener("mousedown",onMouseDown);
@@ -34,6 +34,7 @@ function drawCoordinates(x,y){
 	drawImage();
 }
 function drawImage(){
+	loaded=true;
 	document.getElementById("canvas").classList.remove("hidden");
 	document.getElementById("drone").classList.remove("hidden");
 	document.getElementById("engine").classList.remove("hidden");
@@ -126,6 +127,25 @@ function drawImage(){
 	}
 	document.getElementById("yCoordinate").innerHTML="Y: "+yCoordinate;
 }
+function control(event){
+	if(loaded){
+		switch(event.keyCode){
+			case 37:
+				xCoordinate-=.5;
+			break;
+			case 38:
+				yCoordinate-=.5;
+			break;
+			case 39:
+				xCoordinate+=.5;
+			break;
+			case 40:
+				yCoordinate+=.5;
+			break;
+		}
+		drawImage();
+	}
+}
 function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
 		return;
@@ -183,7 +203,7 @@ function changeSwizzle(){
 	drawImage();
 }
 function toggleOutline(){
-	if(outline==0){
+	if(!outline){
 		outline=1;
 	}
 	else{
@@ -192,7 +212,7 @@ function toggleOutline(){
 	drawImage();
 }
 function toggleMirror(){
-	if(mirror==0){
+	if(!mirror){
 		mirror=1;
 		document.getElementById("mirror").innerHTML="Mirror On"
 	}
