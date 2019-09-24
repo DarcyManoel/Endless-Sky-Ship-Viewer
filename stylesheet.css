@@ -63,7 +63,7 @@
 	vertical-align:top;
 }
 .side{
-	animation:shrink .8s;
+	transition:.8s;
 	width:16vw;
 }
 .slide{
@@ -77,10 +77,6 @@
 	position:absolute;
 	top:50vh;
 	transform:translate(-95px,-40px);
-}
-@keyframes shrink{
-	from{width:24vw;}
-	to{width:16vw;}
 }
 body{
 	background-color:#000;
