@@ -164,7 +164,8 @@ function imageLoaded(){
 	xCoordinate=NaN;
 	yCoordinate=NaN;
 	drawImage();
-	document.getElementById("points").innerHTML="";
+	coordinates=[];
+	document.getElementById("points").innerHTML=coordinates.join("<br>");
 }
 function initialize(){
 	var canvas=document.getElementById("canvas");
