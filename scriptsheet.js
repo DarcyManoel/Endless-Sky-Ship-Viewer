@@ -15,7 +15,9 @@ function addPoint(name){
 	}
 	if(mirror){
 		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
-		coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);
+		if(xCoordinate!=0){
+			coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);
+		}
 	}
 	else{
 		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
