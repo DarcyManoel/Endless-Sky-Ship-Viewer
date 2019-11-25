@@ -151,13 +151,12 @@ function drawImage(){
 		context.beginPath();
 		context.arc(rx,y,5,0,2*Math.PI,false);
 		context.setLineDash([]);
-		context.lineWidth=1;
-		context.strokeStyle="#F00";
 		context.stroke();
 		context.beginPath();
-		context.setLineDash([10,5]);
+		context.setLineDash([20,10]);
 		context.moveTo(canvas.width/2,0);
 		context.lineTo(canvas.width/2,canvas.height);
+		context.lineWidth=1.5;
 		context.stroke();
 		document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate+" ("+(xCoordinate*-1)+")";
 	}
@@ -170,8 +169,8 @@ function imageLoaded(){
 	var canvas=document.getElementById("canvas");
 	canvas.width=image.width*scale;
 	canvas.height=image.height*scale;
-	xCoordinate=NaN;
-	yCoordinate=NaN;
+	xCoordinate=0;
+	yCoordinate=0;
 	drawImage();
 	coordinates=[];
 	document.getElementById("points").innerHTML=coordinates.join("<br>");
