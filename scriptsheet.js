@@ -104,7 +104,7 @@ function drawImage(){
 		pixels[i+2]=blue;
 	}
 	if(outline){
-		document.getElementById("outline").innerHTML="Outline Shown"
+		document.getElementById("outline").innerHTML="Outline Shown";
 		var i=0;
 		for(var i=0;i<pixels.length&&!pixels[i+3];i+=4){}
 		var start=i;
