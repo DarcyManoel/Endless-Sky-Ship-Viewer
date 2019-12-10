@@ -22,7 +22,10 @@ function addPoint(name){
 	else{
 		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
 	}
-	coordinates.sort();
+	document.getElementById("points").innerHTML=coordinates.join("<br>");
+}
+function undoPoint(){
+	coordinates.pop()
 	document.getElementById("points").innerHTML=coordinates.join("<br>");
 }
 function changeSwizzle(){
@@ -76,6 +79,7 @@ function drawImage(){
 	document.getElementById("points").classList.remove("hidden");
 	document.getElementById("swizzle").classList.remove("hidden");
 	document.getElementById("turret").classList.remove("hidden");
+	document.getElementById("undo").classList.remove("hidden");
 	var canvas=document.getElementById("canvas");
 	var context=canvas.getContext("2d");
 	context.clearRect(0,0,canvas.width,canvas.height);
