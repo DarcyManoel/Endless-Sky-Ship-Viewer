@@ -10,18 +10,15 @@ var swizzle=0;
 var xCoordinate;
 var yCoordinate;
 function addPoint(name){
-	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
-		return;
-	}
+	if(isNaN(xCoordinate)||isNaN(yCoordinate))
+		{return;}
 	if(mirror){
 		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
-		if(xCoordinate!=0){
-			coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);
-		}
+		if(xCoordinate!=0)
+			{coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);}
 	}
-	else{
-		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
-	}
+	else
+		{coordinates.push(name+" "+xCoordinate+" "+yCoordinate);}
 	document.getElementById("points").innerHTML=coordinates.join("<br>");
 }
 function undoPoint(){
@@ -29,30 +26,22 @@ function undoPoint(){
 	document.getElementById("points").innerHTML=coordinates.join("<br>");
 }
 function changeSwizzle(){
-	if(swizzle<6){
-		swizzle++;
-	}
-	else{
-		swizzle=0;
-	}
+	if(swizzle<6)
+		{swizzle++;}
+	else
+		{swizzle=0;}
 	drawImage();
 }
 function control(event){
 	if(loaded){
-		switch(event.keyCode){
-			case 37:
-				xCoordinate-=.5;
-			break;
-			case 38:
-				yCoordinate-=.5;
-			break;
-			case 39:
-				xCoordinate+=.5;
-			break;
-			case 40:
-				yCoordinate+=.5;
-			break;
-		}
+		if(event.keycode==37)
+			{xCoordinate-=.5;}
+		else if(event.keycode==38)
+			{yCoordinate-=.5;}
+		else if(event.keycode==39)
+			{xCoordinate+=.5;}
+		else if(event.keycode==40)
+			{yCoordinate+=.5;}
 		drawImage();
 	}
 }
@@ -84,9 +73,8 @@ function drawImage(){
 	var context=canvas.getContext("2d");
 	context.clearRect(0,0,canvas.width,canvas.height);
 	document.getElementById("imageSize").innerHTML=(canvas.width/2)+"px by "+(canvas.height/2)+"px";
-	if(image){
-		context.drawImage(image,0,0,canvas.width,canvas.height);
-	}
+	if(image)
+		{context.drawImage(image,0,0,canvas.width,canvas.height);}
 	document.getElementById("swizzle").innerHTML="Swizzle "+swizzle;
 	var SWIZZLE=[
 		[0,1,2],
@@ -128,20 +116,17 @@ function drawImage(){
 			pixels[i+1]=0;
 			pixels[i+2]=0;
 			pixels[i+3]=255;
-			while(!pixels[(i+3+DIR[d])%pixels.length]){
-				d=(d+1)%8;
-			}
+			while(!pixels[(i+3+DIR[d])%pixels.length]){d=(d+1)%8;}
 			i=(i+DIR[d])%pixels.length;
 			d=(d+6)%8;
-		}while(i!=start);
+		}
+		while(i!=start);
 	}
-	else{
-		document.getElementById("outline").innerHTML="Outline Hidden";
-	}
+	else
+		{document.getElementById("outline").innerHTML="Outline Hidden";}
 	context.putImageData(imageData,0,0);
-	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
-		return;
-	}
+	if(isNaN(xCoordinate)||isNaN(yCoordinate))
+		{return;}
 	var x=xCoordinate*2+.5*canvas.width;
 	var y=yCoordinate*2+.5*canvas.height;
 	context.beginPath();
@@ -164,9 +149,8 @@ function drawImage(){
 		context.stroke();
 		document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate+" ("+(xCoordinate*-1)+")";
 	}
-	else{
-		document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate;
-	}
+	else
+		{document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate;}
 	document.getElementById("yCoordinate").innerHTML="Y: "+yCoordinate;
 }
 function imageLoaded(){
@@ -186,32 +170,27 @@ function initialize(){
 	document.body.addEventListener("mouseup",onMouseUp);
 }
 function loadImage(){
-	if(typeof window.FileReader!=="function"){
-		return;
-	}
+	if(typeof window.FileReader!=="function")
+		{return;}
 	var input=document.getElementById("file");
-	if(!input||!input.files||!input.files[0]){
-		return;
-	}
+	if(!input||!input.files||!input.files[0])
+		{return;}
 	reader=new FileReader();
 	reader.onload=createImage;
 	var file=input.files[0];
 	reader.readAsDataURL(file);
-	if(file.name.lastIndexOf("@2x")==file.name.lastIndexOf(".")-3){
-		scale=1;
-	}
-	else{
-		scale=2;
-	}
+	if(file.name.lastIndexOf("@2x")==file.name.lastIndexOf(".")-3)
+		{scale=1;}
+	else
+		{scale=2;}
 }
 function onMouseDown(event){
 	isDragging=true;
 	drawCoordinates(event.offsetX,event.offsetY);
 }
 function onMouseMove(event){
-	if(!isDragging){
-		return;
-	}
+	if(!isDragging)
+		{return;}
 	drawCoordinates(event.offsetX,event.offsetY);
 }
 function onMouseUp(event){
@@ -240,11 +219,9 @@ function toggleMirror(){
 	drawImage();
 }
 function toggleOutline(){
-	if(!outline){
-		outline=1;
-	}
-	else{
-		outline=0;
-	}
+	if(!outline)
+		{outline=1;}
+	else
+		{outline=0;}
 	drawImage();
 }
