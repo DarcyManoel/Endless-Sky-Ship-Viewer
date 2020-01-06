@@ -132,7 +132,7 @@ function drawImage(){
 	context.beginPath();
 	context.arc(x,y,5,0,2*Math.PI,false);
 	context.setLineDash([]);
-	context.lineWidth=1;
+	context.lineWidth=1.5;
 	context.strokeStyle="#F00";
 	context.stroke();
 	if(mirror){
