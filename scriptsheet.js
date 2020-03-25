@@ -13,17 +13,17 @@ function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate))
 		{return;}
 	if(mirror){
-		coordinates.push(name+" "+xCoordinate+" "+yCoordinate);
+		coordinates.push(name+` `+xCoordinate+` `+yCoordinate);
 		if(xCoordinate!=0)
-			{coordinates.push(name+" "+(xCoordinate*-1)+" "+yCoordinate);}
+			{coordinates.push(name+` `+(xCoordinate*-1)+` `+yCoordinate);}
 	}
 	else
-		{coordinates.push(name+" "+xCoordinate+" "+yCoordinate);}
-	document.getElementById("points").innerHTML=coordinates.join("<br>");
+		{coordinates.push(name+` `+xCoordinate+` `+yCoordinate);}
+	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 }
 function undoPoint(){
 	coordinates.pop()
-	document.getElementById("points").innerHTML=coordinates.join("<br>");
+	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 }
 function changeSwizzle(){
 	if(swizzle<6)
@@ -57,25 +57,25 @@ function drawCoordinates(x,y){
 }
 function drawImage(){
 	loaded=true;
-	document.getElementById("canvas").classList.remove("hidden");
-	document.getElementById("coordinates").classList.remove("hidden");
-	document.getElementById("drone").classList.remove("hidden");
-	document.getElementById("engine").classList.remove("hidden");
-	document.getElementById("fighter").classList.remove("hidden");
-	document.getElementById("gun").classList.remove("hidden");
-	document.getElementById("mirror").classList.remove("hidden");
-	document.getElementById("outline").classList.remove("hidden");
-	document.getElementById("points").classList.remove("hidden");
-	document.getElementById("swizzle").classList.remove("hidden");
-	document.getElementById("turret").classList.remove("hidden");
-	document.getElementById("undo").classList.remove("hidden");
-	var canvas=document.getElementById("canvas");
-	var context=canvas.getContext("2d");
+	document.getElementById(`canvas`).classList.remove(`hidden`);
+	document.getElementById(`coordinates`).classList.remove(`hidden`);
+	document.getElementById(`drone`).classList.remove(`hidden`);
+	document.getElementById(`engine`).classList.remove(`hidden`);
+	document.getElementById(`fighter`).classList.remove(`hidden`);
+	document.getElementById(`gun`).classList.remove(`hidden`);
+	document.getElementById(`mirror`).classList.remove(`hidden`);
+	document.getElementById(`outline`).classList.remove(`hidden`);
+	document.getElementById(`points`).classList.remove(`hidden`);
+	document.getElementById(`swizzle`).classList.remove(`hidden`);
+	document.getElementById(`turret`).classList.remove(`hidden`);
+	document.getElementById(`undo`).classList.remove(`hidden`);
+	var canvas=document.getElementById(`canvas`);
+	var context=canvas.getContext(`2d`);
 	context.clearRect(0,0,canvas.width,canvas.height);
-	document.getElementById("imageSize").innerHTML=(canvas.width/2)+"px by "+(canvas.height/2)+"px";
+	document.getElementById(`imageSize`).innerHTML=(canvas.width/2)+`px by `+(canvas.height/2)+`px`;
 	if(image)
 		{context.drawImage(image,0,0,canvas.width,canvas.height);}
-	document.getElementById("swizzle").innerHTML="Swizzle "+swizzle;
+	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle;
 	var SWIZZLE=[
 		[0,1,2],
 		[0,2,1],
@@ -96,7 +96,7 @@ function drawImage(){
 		pixels[i+2]=blue;
 	}
 	if(outline){
-		document.getElementById("outline").innerHTML="Outline Shown";
+		document.getElementById(`outline`).innerHTML=`Outline Shown`;
 		var i=0;
 		for(var i=0;i<pixels.length&&!pixels[i+3];i+=4){}
 		var start=i;
@@ -123,7 +123,7 @@ function drawImage(){
 		while(i!=start);
 	}
 	else
-		{document.getElementById("outline").innerHTML="Outline Hidden";}
+		{document.getElementById(`outline`).innerHTML=`Outline Hidden`;}
 	context.putImageData(imageData,0,0);
 	if(isNaN(xCoordinate)||isNaN(yCoordinate))
 		{return;}
@@ -133,7 +133,7 @@ function drawImage(){
 	context.arc(x,y,5,0,2*Math.PI,false);
 	context.setLineDash([]);
 	context.lineWidth=1.5;
-	context.strokeStyle="#F00";
+	context.strokeStyle=`#F00`;
 	context.stroke();
 	if(mirror){
 		var rx=canvas.width-x;
@@ -147,39 +147,39 @@ function drawImage(){
 		context.lineTo(canvas.width/2,canvas.height);
 		context.lineWidth=1.5;
 		context.stroke();
-		document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate+" ("+(xCoordinate*-1)+")";
+		document.getElementById(`xCoordinate`).innerHTML=`X: `+xCoordinate+` (`+(xCoordinate*-1)+`)`;
 	}
 	else
-		{document.getElementById("xCoordinate").innerHTML="X: "+xCoordinate;}
-	document.getElementById("yCoordinate").innerHTML="Y: "+yCoordinate;
+		{document.getElementById(`xCoordinate`).innerHTML=`X: `+xCoordinate;}
+	document.getElementById(`yCoordinate`).innerHTML=`Y: `+yCoordinate;
 }
 function imageLoaded(){
-	var canvas=document.getElementById("canvas");
+	var canvas=document.getElementById(`canvas`);
 	canvas.width=image.width*scale;
 	canvas.height=image.height*scale;
 	xCoordinate=0;
 	yCoordinate=0;
 	drawImage();
 	coordinates=[];
-	document.getElementById("points").innerHTML=coordinates.join("<br>");
+	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 }
 function initialize(){
-	var canvas=document.getElementById("canvas");
-	canvas.addEventListener("mousedown",onMouseDown);
-	canvas.addEventListener("mousemove",onMouseMove);
-	document.body.addEventListener("mouseup",onMouseUp);
+	var canvas=document.getElementById(`canvas`);
+	canvas.addEventListener(`mousedown`,onMouseDown);
+	canvas.addEventListener(`mousemove`,onMouseMove);
+	document.body.addEventListener(`mouseup`,onMouseUp);
 }
 function loadImage(){
-	if(typeof window.FileReader!=="function")
+	if(typeof window.FileReader!==`function`)
 		{return;}
-	var input=document.getElementById("file");
+	var input=document.getElementById(`file`);
 	if(!input||!input.files||!input.files[0])
 		{return;}
 	reader=new FileReader();
 	reader.onload=createImage;
 	var file=input.files[0];
 	reader.readAsDataURL(file);
-	if(file.name.lastIndexOf("@2x")==file.name.lastIndexOf(".")-3)
+	if(file.name.lastIndexOf(`@2x`)==file.name.lastIndexOf(`.`)-3)
 		{scale=1;}
 	else
 		{scale=2;}
@@ -197,24 +197,24 @@ function onMouseUp(event){
 	isDragging=false;
 }
 function slideLeft(){
-	document.getElementById("left").classList.toggle("side");
-	document.getElementById("left").classList.toggle("slide");
+	document.getElementById(`left`).classList.toggle(`side`);
+	document.getElementById(`left`).classList.toggle(`slide`);
 }
 function slideRight(){
-	document.getElementById("right").classList.toggle("side");
-	document.getElementById("right").classList.toggle("slide");
+	document.getElementById(`right`).classList.toggle(`side`);
+	document.getElementById(`right`).classList.toggle(`slide`);
 }
 function toggleDialog(){
-	document.getElementById("dialogScreen").classList.toggle("hidden");
+	document.getElementById(`dialogScreen`).classList.toggle(`hidden`);
 }
 function toggleMirror(){
 	if(!mirror){
 		mirror=1;
-		document.getElementById("mirror").innerHTML="Mirror On";
+		document.getElementById(`mirror`).innerHTML=`Mirror On`;
 	}
 	else{
 		mirror=0;
-		document.getElementById("mirror").innerHTML="Mirror Off";
+		document.getElementById(`mirror`).innerHTML=`Mirror Off`;
 	}
 	drawImage();
 }

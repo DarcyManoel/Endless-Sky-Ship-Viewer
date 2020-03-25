@@ -84,7 +84,7 @@
 }
 body{
 	background-color:#111;
-	background-image:url("assets/menu.png");
+	background-image:url(assets/menu.png);
 	background-position:center;
 	background-size:auto 100%;
 	color:#ccc;
