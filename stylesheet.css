@@ -91,6 +91,7 @@ body{
 	cursor:default;
 	font-family:Ubuntu;
 	margin:0;
+	overscroll-behavior:none;
 	user-select:none;
 }
 p{
