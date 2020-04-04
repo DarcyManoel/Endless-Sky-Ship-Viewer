@@ -34,13 +34,13 @@ function changeSwizzle(){
 }
 function control(event){
 	if(loaded){
-		if(event.keyCode==37)
+		if(event.keyCode==37||event.keyCode==65)
 			{xCoordinate-=.5;}
-		else if(event.keyCode==38)
+		else if(event.keyCode==38||event.keyCode==87)
 			{yCoordinate-=.5;}
-		else if(event.keyCode==39)
+		else if(event.keyCode==39||event.keyCode==68)
 			{xCoordinate+=.5;}
-		else if(event.keyCode==40)
+		else if(event.keyCode==40||event.keyCode==83)
 			{yCoordinate+=.5;}
 		drawImage();
 	}
