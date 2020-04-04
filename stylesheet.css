@@ -26,6 +26,7 @@
 	max-height:86vh;
 	overflow:hidden;
 	user-select:text;
+	white-space:pre;
 }
 #undo{
 	cursor:pointer;

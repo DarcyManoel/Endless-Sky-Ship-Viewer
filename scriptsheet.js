@@ -18,7 +18,7 @@ function addPoint(name){
 			{coordinates.push(name+` `+(xCoordinate*-1)+` `+yCoordinate);}
 	}
 	else
-		{coordinates.push(name+` `+xCoordinate+` `+yCoordinate);}
+		{coordinates.push("\t"+name+` `+xCoordinate+` `+yCoordinate);}
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 }
 function undoPoint(){
