@@ -34,9 +34,9 @@ function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate))
 		{return;}
 	if(mirror){
-		coordinates.push("\t"+name+` `+xCoordinate+` `+yCoordinate);
+		coordinates.push("\t"+name+` `+Math.abs(xCoordinate)*-1+` `+yCoordinate);
 		if(xCoordinate!=0)
-			{coordinates.push("\t"+name+` `+(xCoordinate*-1)+` `+yCoordinate);}
+			{coordinates.push("\t"+name+` `+Math.abs(xCoordinate)+` `+yCoordinate);}
 	}
 	else
 		{coordinates.push("\t"+name+` `+xCoordinate+` `+yCoordinate);}
