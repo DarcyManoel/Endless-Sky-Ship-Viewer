@@ -1,3 +1,4 @@
+// Creates global variables to be called to and overwritten
 var coordinates=[];
 var image;
 var isDragging;
@@ -9,6 +10,26 @@ var scale=2;
 var swizzle=0;
 var xCoordinate;
 var yCoordinate;
+
+// Runs on page load, creates the initial canvas and sets event listeners
+function initialize(){
+	var canvas=document.getElementById(`canvas`);
+	canvas.addEventListener(`mousedown`,onMouseDown);
+	canvas.addEventListener(`mousemove`,onMouseMove);
+	document.body.addEventListener(`mouseup`,onMouseUp);
+}
+
+// Slides the sidebars out to cover more of the screen
+function slideLeft(){
+	document.getElementById(`left`).classList.toggle(`side`);
+	document.getElementById(`left`).classList.toggle(`slide`);
+}
+function slideRight(){
+	document.getElementById(`right`).classList.toggle(`side`);
+	document.getElementById(`right`).classList.toggle(`slide`);
+}
+
+// Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate))
 		{return;}
@@ -21,10 +42,14 @@ function addPoint(name){
 		{coordinates.push("\t"+name+` `+xCoordinate+` `+yCoordinate);}
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 }
+
+// Removes the latest entry from the hardpoint output
 function undoPoint(){
 	coordinates.pop()
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 }
+
+// Runs on selecting the swizzles option, each press iterates through each swizzle option
 function changeSwizzle(){
 	if(swizzle<6)
 		{swizzle++;}
@@ -32,6 +57,8 @@ function changeSwizzle(){
 		{swizzle=0;}
 	drawImage();
 }
+
+// Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
 	if(loaded){
 		if(event.keyCode==37||event.keyCode==65)
@@ -45,16 +72,64 @@ function control(event){
 		drawImage();
 	}
 }
+
+// Toggles between displaying dialog for image upload or hiding it
+function toggleDialog(){
+	document.getElementById(`dialogScreen`).classList.toggle(`hidden`);
+}
+
+// Runs on uploading image to the site, loads uploaded image into ship viewer
+function loadImage(){
+	if(typeof window.FileReader!==`function`)
+		{return;}
+	var input=document.getElementById(`file`);
+	if(!input||!input.files||!input.files[0])
+		{return;}
+	reader=new FileReader();
+	reader.onload=createImage;
+	var file=input.files[0];
+	reader.readAsDataURL(file);
+	if(file.name.lastIndexOf(`@2x`)==file.name.lastIndexOf(`.`)-3)
+		{scale=1;}
+	else
+		{scale=2;}
+}
 function createImage(){
 	image=new Image();
 	image.onload=imageLoaded;
 	image.src=reader.result;
+}
+function imageLoaded(){
+	var canvas=document.getElementById(`canvas`);
+	canvas.width=image.width*scale;
+	canvas.height=image.height*scale;
+	xCoordinate=0;
+	yCoordinate=0;
+	drawImage();
+	coordinates=[];
+	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
+}
+
+// Controls the selection reticle and writes to coordinates when dragging
+function onMouseMove(event){
+	if(!isDragging)
+		{return;}
+	drawCoordinates(event.offsetX,event.offsetY);
+}
+function onMouseDown(event){
+	isDragging=true;
+	drawCoordinates(event.offsetX,event.offsetY);
+}
+function onMouseUp(event){
+	isDragging=false;
 }
 function drawCoordinates(x,y){
 	xCoordinate=.5*(x-.5*canvas.width);
 	yCoordinate=.5*(y-.5*canvas.height);
 	drawImage();
 }
+
+// Runs on refreshing of canvas, is called on any change to the position of the reticle or any option which alters or draws over the ship image
 function drawImage(){
 	loaded=true;
 	document.getElementById(`canvas`).classList.remove(`hidden`);
@@ -153,60 +228,8 @@ function drawImage(){
 		{document.getElementById(`xCoordinate`).innerHTML=`X: `+xCoordinate;}
 	document.getElementById(`yCoordinate`).innerHTML=`Y: `+yCoordinate;
 }
-function imageLoaded(){
-	var canvas=document.getElementById(`canvas`);
-	canvas.width=image.width*scale;
-	canvas.height=image.height*scale;
-	xCoordinate=0;
-	yCoordinate=0;
-	drawImage();
-	coordinates=[];
-	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
-}
-function initialize(){
-	var canvas=document.getElementById(`canvas`);
-	canvas.addEventListener(`mousedown`,onMouseDown);
-	canvas.addEventListener(`mousemove`,onMouseMove);
-	document.body.addEventListener(`mouseup`,onMouseUp);
-}
-function loadImage(){
-	if(typeof window.FileReader!==`function`)
-		{return;}
-	var input=document.getElementById(`file`);
-	if(!input||!input.files||!input.files[0])
-		{return;}
-	reader=new FileReader();
-	reader.onload=createImage;
-	var file=input.files[0];
-	reader.readAsDataURL(file);
-	if(file.name.lastIndexOf(`@2x`)==file.name.lastIndexOf(`.`)-3)
-		{scale=1;}
-	else
-		{scale=2;}
-}
-function onMouseDown(event){
-	isDragging=true;
-	drawCoordinates(event.offsetX,event.offsetY);
-}
-function onMouseMove(event){
-	if(!isDragging)
-		{return;}
-	drawCoordinates(event.offsetX,event.offsetY);
-}
-function onMouseUp(event){
-	isDragging=false;
-}
-function slideLeft(){
-	document.getElementById(`left`).classList.toggle(`side`);
-	document.getElementById(`left`).classList.toggle(`slide`);
-}
-function slideRight(){
-	document.getElementById(`right`).classList.toggle(`side`);
-	document.getElementById(`right`).classList.toggle(`slide`);
-}
-function toggleDialog(){
-	document.getElementById(`dialogScreen`).classList.toggle(`hidden`);
-}
+
+// Image overlay tools which help with hardpoint positioning/troubleshooting
 function toggleMirror(){
 	if(!mirror){
 		mirror=1;
