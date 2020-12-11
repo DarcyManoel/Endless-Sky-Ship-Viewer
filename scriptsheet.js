@@ -19,16 +19,6 @@ function initialize(){
 	document.body.addEventListener(`mouseup`,onMouseUp);
 }
 
-// Slides the sidebars out to cover more of the screen
-function slideLeft(){
-	document.getElementById(`left`).classList.toggle(`side`);
-	document.getElementById(`left`).classList.toggle(`slide`);
-}
-function slideRight(){
-	document.getElementById(`right`).classList.toggle(`side`);
-	document.getElementById(`right`).classList.toggle(`slide`);
-}
-
 // Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate))
@@ -41,12 +31,18 @@ function addPoint(name){
 	else
 		{coordinates.push("\t"+name+` `+xCoordinate+` `+yCoordinate);}
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
+	document.getElementById(`undo`).classList.remove(`greyOut`);
+	document.getElementById(`undo`).classList.add(`highlight`);
 }
 
 // Removes the latest entry from the hardpoint output
 function undoPoint(){
-	coordinates.pop()
+	coordinates.pop();
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
+	if(!coordinates[0]){
+		document.getElementById(`undo`).classList.remove(`highlight`);
+		document.getElementById(`undo`).classList.add(`greyOut`);
+	}
 }
 
 // Runs on selecting the swizzles option, each press iterates through each swizzle option
@@ -73,13 +69,14 @@ function control(event){
 	}
 }
 
-// Toggles between displaying dialog for image upload or hiding it
-function toggleDialog(){
-	document.getElementById(`dialogScreen`).classList.toggle(`hidden`);
-}
-
 // Runs on uploading image to the site, loads uploaded image into ship viewer
 function loadImage(){
+	document.getElementById(`swizzle`).classList.remove(`greyOut`);
+	document.getElementById(`swizzle`).classList.add(`highlight`);
+	document.getElementById(`outline`).classList.remove(`greyOut`);
+	document.getElementById(`outline`).classList.add(`highlight`);
+	document.getElementById(`mirror`).classList.remove(`greyOut`);
+	document.getElementById(`mirror`).classList.add(`highlight`);
 	if(typeof window.FileReader!==`function`)
 		{return;}
 	var input=document.getElementById(`file`);
@@ -133,7 +130,6 @@ function drawCoordinates(x,y){
 function drawImage(){
 	loaded=true;
 	document.getElementById(`canvas`).classList.remove(`hidden`);
-	document.getElementById(`coordinates`).classList.remove(`hidden`);
 	document.getElementById(`drone`).classList.remove(`hidden`);
 	document.getElementById(`engine`).classList.remove(`hidden`);
 	document.getElementById(`fighter`).classList.remove(`hidden`);
@@ -144,10 +140,11 @@ function drawImage(){
 	document.getElementById(`swizzle`).classList.remove(`hidden`);
 	document.getElementById(`turret`).classList.remove(`hidden`);
 	document.getElementById(`undo`).classList.remove(`hidden`);
+	document.getElementById(`xCoordinate`).classList.remove(`hidden`);
+	document.getElementById(`yCoordinate`).classList.remove(`hidden`);
 	var canvas=document.getElementById(`canvas`);
 	var context=canvas.getContext(`2d`);
 	context.clearRect(0,0,canvas.width,canvas.height);
-	document.getElementById(`imageSize`).innerHTML=(canvas.width/2)+`px by `+(canvas.height/2)+`px`;
 	if(image)
 		{context.drawImage(image,0,0,canvas.width,canvas.height);}
 	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle;

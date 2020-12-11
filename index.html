@@ -1,48 +1,40 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
+		<!-- Establish resource links -->
 		<link href="assets/sparrow.png" rel="icon">
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
 		<title>Ship Viewer</title>
 	</head>
+
+	<!-- Contains all page content, initializes content -->
 	<body onload="initialize()" onkeydown="control(event)">
-		<div id="dialogScreen" class="hidden">
-			<div class="cover"></div>
-			<img class="dialog" src="assets/dialog.png"/>
-			<input onchange="loadImage()" class="upload" id="file" type="file"/>
-			<p id="imageSize"></p>
-			<p id="confirm" onclick="toggleDialog()">OK</p>
-		</div>
-		<table>
-			<tr>
-				<td id="left" class="side">
-					<p onclick="toggleDialog()">Load Image</p>
-					<p class="hidden" id="swizzle" onclick="changeSwizzle()">Swizzle 0</p>
-					<p class="hidden" id="outline" onclick="toggleOutline()">Outline Hidden</p>
-					<p class="hidden" id="mirror" onclick="toggleMirror()">Mirror Off</p>
-					<br>
-					<p class="hidden" id="engine" onclick="addPoint(this.id)">Add Engine</p>
-					<p class="hidden" id="gun" onclick="addPoint(this.id)">Add Gun</p>
-					<p class="hidden" id="turret" onclick="addPoint(this.id)">Add Turret</p>
-					<p class="hidden" id="fighter" onclick="addPoint(this.id)">Add Fighter</p>
-					<p class="hidden" id="drone" onclick="addPoint(this.id)">Add Drone</p>
-				</td>
-				<td class="leftEdge" onclick="slideLeft()"></td>
-				<td class="main">
-					<canvas class="hidden" id="canvas"></canvas>
-				</td>
-				<td class="rightEdge" onclick="slideRight()"></td>
-				<td id="right" class="side">
-					<div class="hidden" id="coordinates">
-						<p id="xCoordinate">X:</p>
-						<p id="yCoordinate">Y:</p>
-					</div>
-					<p class="hidden" id="undo" onclick="undoPoint()">&#9100;</p>
-					<p class="hidden" id="points"></p>
-				</td>
-			</tr>
-		</table>
+
+		<!-- Ship hitbox -->
+		<canvas class="hidden" id="canvas"></canvas>
+
+		<!-- Actions -->
+		<label class="highlight" id="loadImage" for="file">Load Image</label>
+		<input onchange="loadImage()" class="hidden" id="file" type="file"/>
+		<label class="greyOut" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
+		<label class="greyOut" id="outline" onclick="toggleOutline()">Outline Hidden</label>
+		<label class="greyOut" id="mirror" onclick="toggleMirror()">Mirror Off</label>
+		<label class="hidden highlight" id="engine" onclick="addPoint(this.id)">Add Engine</label>
+		<label class="hidden highlight" id="gun" onclick="addPoint(this.id)">Add Gun</label>
+		<label class="hidden highlight" id="turret" onclick="addPoint(this.id)">Add Turret</label>
+		<label class="hidden highlight" id="fighter" onclick="addPoint(this.id)">Add Fighter</label>
+		<label class="hidden highlight" id="drone" onclick="addPoint(this.id)">Add Drone</label>
+		<label class="hidden highlight" id="xCoordinate">X:</label>
+		<label class="hidden highlight" id="yCoordinate">Y:</label>
+		<label class="hidden greyOut" id="undo" onclick="undoPoint()">&#9100;</label>
+		<p class="hidden" id="points"/>
+
 	</body>
+
+	<!-- Link page functions to page content -->
 	<script type="text/javascript" src="scriptsheet.js"></script>
+
 </html>
