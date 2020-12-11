@@ -123,6 +123,16 @@ body{
 	display:none;
 }
 
+label{
+	animation:highlightOff .5s;
+	color:#aaa;
+	cursor:pointer;
+}
+
+label:hover{
+	animation:highlightOn .5s forwards;
+}
+
 .greyOut{
 	animation:darkenOff .5s;
 	color:#555;
@@ -131,16 +141,6 @@ body{
 
 .greyOut:hover{
 	animation:darkenOn .5s forwards;
-}
-
-.highlight{
-	animation:highlightOff .5s;
-	color:#aaa;
-	cursor:pointer;
-}
-
-.highlight:hover{
-	animation:highlightOn .5s forwards;
 }
 
 /* Keyframes */

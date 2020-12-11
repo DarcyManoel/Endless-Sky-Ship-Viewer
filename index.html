@@ -14,10 +14,10 @@
 	<body onload="initialize()" onkeydown="control(event)">
 
 		<!-- Ship hitbox -->
-		<canvas class="hidden" id="canvas"></canvas>
+		<canvas id="canvas"></canvas>
 
 		<!-- Actions -->
-		<label class="highlight" id="loadImage" for="file">Load Image</label>
+		<label id="loadImage" for="file">Load Image</label>
 		<input onchange="loadImage()" class="hidden" id="file" type="file"/>
 		<label class="greyOut" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
 		<label class="greyOut" id="outline" onclick="toggleOutline()">Outline Hidden</label>

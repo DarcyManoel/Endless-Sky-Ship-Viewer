@@ -72,10 +72,9 @@ function control(event){
 // Runs on uploading image to the site, loads uploaded image into ship viewer
 function loadImage(){
 	var unavailable=document.getElementsByClassName(`greyOut`);
-	for(i=0;i<unavailable.length;i++){
-		unavailable[i].classList.remove(`greyOut`);
-		unavailable[i].classList.add(`highlight`);
-	};
+	while(unavailable.length){
+		unavailable[0].classList.remove(`greyOut`);
+	}
 	if(typeof window.FileReader!==`function`)
 		{return;}
 	var input=document.getElementById(`file`);
