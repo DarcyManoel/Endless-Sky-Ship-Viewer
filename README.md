@@ -4,4 +4,5 @@ Provides various options to help with creating ships, including applying the dif
 # https://endless-sky-tools.github.io/Endless-Sky-Ship-Viewer/
 
 # Compatibility
+- Google Chrome
 - Safari
