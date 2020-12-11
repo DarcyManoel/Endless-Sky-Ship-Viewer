@@ -17,7 +17,7 @@ function initialize(){
 	canvas.addEventListener(`mousedown`,onMouseDown);
 	canvas.addEventListener(`mousemove`,onMouseMove);
 	document.body.addEventListener(`mouseup`,onMouseUp);
-}
+};
 
 // Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
@@ -33,7 +33,7 @@ function addPoint(name){
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	document.getElementById(`undo`).classList.remove(`greyOut`);
 	document.getElementById(`undo`).classList.add(`highlight`);
-}
+};
 
 // Removes the latest entry from the hardpoint output
 function undoPoint(){
@@ -42,8 +42,8 @@ function undoPoint(){
 	if(!coordinates[0]){
 		document.getElementById(`undo`).classList.remove(`highlight`);
 		document.getElementById(`undo`).classList.add(`greyOut`);
-	}
-}
+	};
+};
 
 // Runs on selecting the swizzles option, each press iterates through each swizzle option
 function changeSwizzle(){
@@ -52,7 +52,7 @@ function changeSwizzle(){
 	else
 		{swizzle=0;}
 	drawImage();
-}
+};
 
 // Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
@@ -66,17 +66,16 @@ function control(event){
 		else if(event.keyCode==40||event.keyCode==83)
 			{yCoordinate+=.5;}
 		drawImage();
-	}
-}
+	};
+};
 
 // Runs on uploading image to the site, loads uploaded image into ship viewer
 function loadImage(){
-	document.getElementById(`swizzle`).classList.remove(`greyOut`);
-	document.getElementById(`swizzle`).classList.add(`highlight`);
-	document.getElementById(`outline`).classList.remove(`greyOut`);
-	document.getElementById(`outline`).classList.add(`highlight`);
-	document.getElementById(`mirror`).classList.remove(`greyOut`);
-	document.getElementById(`mirror`).classList.add(`highlight`);
+	var unavailable=document.getElementsByClassName(`greyOut`);
+	for(i=0;i<unavailable.length;i++){
+		unavailable[i].classList.remove(`greyOut`);
+		unavailable[i].classList.add(`highlight`);
+	};
 	if(typeof window.FileReader!==`function`)
 		{return;}
 	var input=document.getElementById(`file`);
@@ -90,12 +89,12 @@ function loadImage(){
 		{scale=1;}
 	else
 		{scale=2;}
-}
+};
 function createImage(){
 	image=new Image();
 	image.onload=imageLoaded;
 	image.src=reader.result;
-}
+};
 function imageLoaded(){
 	var canvas=document.getElementById(`canvas`);
 	canvas.width=image.width*scale;
@@ -105,43 +104,30 @@ function imageLoaded(){
 	drawImage();
 	coordinates=[];
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
-}
+};
 
 // Controls the selection reticle and writes to coordinates when dragging
 function onMouseMove(event){
 	if(!isDragging)
 		{return;}
 	drawCoordinates(event.offsetX,event.offsetY);
-}
+};
 function onMouseDown(event){
 	isDragging=true;
 	drawCoordinates(event.offsetX,event.offsetY);
-}
+};
 function onMouseUp(event){
 	isDragging=false;
-}
+};
 function drawCoordinates(x,y){
 	xCoordinate=.5*(x-.5*canvas.width);
 	yCoordinate=.5*(y-.5*canvas.height);
 	drawImage();
-}
+};
 
 // Runs on refreshing of canvas, is called on any change to the position of the reticle or any option which alters or draws over the ship image
 function drawImage(){
 	loaded=true;
-	document.getElementById(`canvas`).classList.remove(`hidden`);
-	document.getElementById(`drone`).classList.remove(`hidden`);
-	document.getElementById(`engine`).classList.remove(`hidden`);
-	document.getElementById(`fighter`).classList.remove(`hidden`);
-	document.getElementById(`gun`).classList.remove(`hidden`);
-	document.getElementById(`mirror`).classList.remove(`hidden`);
-	document.getElementById(`outline`).classList.remove(`hidden`);
-	document.getElementById(`points`).classList.remove(`hidden`);
-	document.getElementById(`swizzle`).classList.remove(`hidden`);
-	document.getElementById(`turret`).classList.remove(`hidden`);
-	document.getElementById(`undo`).classList.remove(`hidden`);
-	document.getElementById(`xCoordinate`).classList.remove(`hidden`);
-	document.getElementById(`yCoordinate`).classList.remove(`hidden`);
 	var canvas=document.getElementById(`canvas`);
 	var context=canvas.getContext(`2d`);
 	context.clearRect(0,0,canvas.width,canvas.height);
@@ -166,7 +152,7 @@ function drawImage(){
 		pixels[i+0]=red;
 		pixels[i+1]=green;
 		pixels[i+2]=blue;
-	}
+	};
 	if(outline){
 		document.getElementById(`outline`).innerHTML=`Outline Shown`;
 		var i=0;
@@ -224,7 +210,7 @@ function drawImage(){
 	else
 		{document.getElementById(`xCoordinate`).innerHTML=`X: `+xCoordinate;}
 	document.getElementById(`yCoordinate`).innerHTML=`Y: `+yCoordinate;
-}
+};
 
 // Image overlay tools which help with hardpoint positioning/troubleshooting
 function toggleMirror(){
@@ -235,13 +221,13 @@ function toggleMirror(){
 	else{
 		mirror=0;
 		document.getElementById(`mirror`).innerHTML=`Mirror Off`;
-	}
+	};
 	drawImage();
-}
+};
 function toggleOutline(){
 	if(!outline)
 		{outline=1;}
 	else
 		{outline=0;}
 	drawImage();
-}
+};
