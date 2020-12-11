@@ -127,7 +127,6 @@ body{
 	animation:darkenOff .5s;
 	color:#555;
 	pointer-events:none;
-	cursor:pointer;
 }
 
 .greyOut:hover{
