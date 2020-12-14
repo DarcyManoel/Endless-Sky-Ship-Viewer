@@ -6,7 +6,6 @@ var loaded;
 var mirror;
 var outline;
 var reader;
-var scale=2;
 var swizzle=0;
 var xCoordinate;
 var yCoordinate;
@@ -96,8 +95,11 @@ function createImage(){
 };
 function imageLoaded(){
 	var canvas=document.getElementById(`canvas`);
-	canvas.width=image.width*scale;
-	canvas.height=image.height*scale;
+	inflation=image.height/750;
+	image.width=(image.width/image.height)*750;
+	image.height=750;
+	canvas.height=image.height;
+	canvas.width=image.width;
 	xCoordinate=0;
 	yCoordinate=0;
 	drawImage();
@@ -204,11 +206,11 @@ function drawImage(){
 		context.lineTo(canvas.width/2,canvas.height);
 		context.lineWidth=1.5;
 		context.stroke();
-		document.getElementById(`xCoordinate`).innerHTML=`X: `+xCoordinate+` (`+(xCoordinate*-1)+`)`;
+		document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round(xCoordinate*(inflation*scale),1)+` (`+Math.round((xCoordinate*(inflation*scale))*-1,1)+`)`;
 	}
 	else
-		{document.getElementById(`xCoordinate`).innerHTML=`X: `+xCoordinate;}
-	document.getElementById(`yCoordinate`).innerHTML=`Y: `+yCoordinate;
+		{document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round(xCoordinate*(inflation*scale),1);}
+	document.getElementById(`yCoordinate`).innerHTML=`Y: `+Math.round(yCoordinate*(inflation*scale),1);
 };
 
 // Image overlay tools which help with hardpoint positioning/troubleshooting
