@@ -24,6 +24,49 @@ body{
 	top:0;
 }
 
+#points{
+	cursor:text;
+	line-height:3vh;
+	max-height:100%;
+	overflow:scroll;
+	position:absolute;
+	right:6vw;
+	top:9vh;
+
+	/* USER SELECT */
+	user-select:text;
+	-webkit-user-select:text;
+
+	white-space:pre;
+	width:12vw;
+}
+
+.hidden{
+	display:none;
+}
+
+label{
+	animation:highlightOff .5s;
+	color:#aaa;
+	cursor:pointer;
+}
+
+label:hover{
+	animation:highlightOn .5s forwards;
+}
+
+.greyOut{
+	animation:darkenOff .5s;
+	color:#555;
+	pointer-events:none;
+}
+
+.greyOut:hover{
+	animation:darkenOn .5s forwards;
+}
+
+/* Actions */
+
 #loadImage{
 	left:2vw;
 	position:absolute;
@@ -78,6 +121,14 @@ body{
 	top:40vh;
 }
 
+#undo{
+	font-size:40px;
+	position:absolute;
+	right:14vw;
+	text-align:left;
+	top:3.5vh;
+}
+
 #xCoordinate{
 	position:absolute;
 	right:0;
@@ -94,56 +145,7 @@ body{
 	width:12vw;
 }
 
-#undo{
-	font-size:40px;
-	position:absolute;
-	right:14vw;
-	text-align:left;
-	top:3.5vh;
-}
-
-#points{
-	cursor:text;
-	line-height:3vh;
-	max-height:100%;
-	overflow:scroll;
-	position:absolute;
-	right:6vw;
-	top:9vh;
-
-	/* USER SELECT */
-	user-select:text;
-	-webkit-user-select:text;
-
-	white-space:pre;
-	width:12vw;
-}
-
-.hidden{
-	display:none;
-}
-
-label{
-	animation:highlightOff .5s;
-	color:#aaa;
-	cursor:pointer;
-}
-
-label:hover{
-	animation:highlightOn .5s forwards;
-}
-
-.greyOut{
-	animation:darkenOff .5s;
-	color:#555;
-	pointer-events:none;
-}
-
-.greyOut:hover{
-	animation:darkenOn .5s forwards;
-}
-
-/* Keyframes */
+/* Animations */
 @keyframes darkenOn{
 	100%{
 		color:#333;
