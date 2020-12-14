@@ -56,14 +56,26 @@ function changeSwizzle(){
 // Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
 	if(loaded){
-		if(event.keyCode==37||event.keyCode==65)
-			{xCoordinate-=.5;}
-		else if(event.keyCode==38||event.keyCode==87)
-			{yCoordinate-=.5;}
-		else if(event.keyCode==39||event.keyCode==68)
-			{xCoordinate+=.5;}
-		else if(event.keyCode==40||event.keyCode==83)
-			{yCoordinate+=.5;}
+		if(event.keyCode==37||event.keyCode==65){
+			if(Math.abs(image.width/4)*-1<xCoordinate){
+				xCoordinate-=.5;
+			}
+		}
+		if(event.keyCode==38||event.keyCode==87){
+			if(Math.abs(image.height/4)*-1<yCoordinate){
+				yCoordinate-=.5;
+			}
+		}
+		if(event.keyCode==39||event.keyCode==68){
+			if(image.width/4>xCoordinate){
+				xCoordinate+=.5;
+			}
+		}
+		if(event.keyCode==40||event.keyCode==83){
+			if((image.height/4)>yCoordinate){
+				yCoordinate+=.5;
+			}
+		}
 		drawImage();
 	};
 };
