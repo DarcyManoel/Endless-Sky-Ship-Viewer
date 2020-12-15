@@ -58,22 +58,22 @@ function control(event){
 	if(loaded){
 		if(event.keyCode==37||event.keyCode==65){
 			if(Math.abs(image.width/4)*-1<xCoordinate){
-				xCoordinate-=.5;
+				xCoordinate-=.5/(inflation*scale);
 			}
 		}
 		if(event.keyCode==38||event.keyCode==87){
 			if(Math.abs(image.height/4)*-1<yCoordinate){
-				yCoordinate-=.5;
+				yCoordinate-=.5/(inflation*scale);
 			}
 		}
 		if(event.keyCode==39||event.keyCode==68){
 			if(image.width/4>xCoordinate){
-				xCoordinate+=.5;
+				xCoordinate+=.5/(inflation*scale);
 			}
 		}
 		if(event.keyCode==40||event.keyCode==83){
 			if((image.height/4)>yCoordinate){
-				yCoordinate+=.5;
+				yCoordinate+=.5/(inflation*scale);
 			}
 		}
 		drawImage();
@@ -218,11 +218,11 @@ function drawImage(){
 		context.lineTo(canvas.width/2,canvas.height);
 		context.lineWidth=1.5;
 		context.stroke();
-		document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round(xCoordinate*(inflation*scale),1)+` (`+Math.round((xCoordinate*(inflation*scale))*-1,1)+`)`;
+		document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)`;
 	}
 	else
-		{document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round(xCoordinate*(inflation*scale),1);}
-	document.getElementById(`yCoordinate`).innerHTML=`Y: `+Math.round(yCoordinate*(inflation*scale),1);
+		{document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round((xCoordinate*(inflation*scale))*2)/2;}
+	document.getElementById(`yCoordinate`).innerHTML=`Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2;
 };
 
 // Image overlay tools which help with hardpoint positioning/troubleshooting
