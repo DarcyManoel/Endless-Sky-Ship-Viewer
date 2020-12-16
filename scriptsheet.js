@@ -22,15 +22,17 @@ function initialize(){
 
 // Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
-	if(isNaN(xCoordinate)||isNaN(yCoordinate))
-		{return;}
+	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
+		return;
+	};
 	if(mirror){
 		coordinates.push("\t"+name+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		if(xCoordinate!=0)
-			{coordinates.push("\t"+name+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);}
-	}
-	else
-		{coordinates.push("\t"+name+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);}
+		if(xCoordinate!=0){
+			coordinates.push("\t"+name+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
+		};
+	}else{
+		coordinates.push("\t"+name+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
+	};
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	document.getElementById(`undo`).classList.remove(`greyOut`);
 	document.getElementById(`undo`).classList.add(`highlight`);
@@ -48,10 +50,11 @@ function undoPoint(){
 
 // Runs on selecting the swizzles option, each press iterates through each swizzle option
 function changeSwizzle(){
-	if(swizzle<6)
-		{swizzle++;}
-	else
-		{swizzle=0;}
+	if(swizzle<6){
+		swizzle++;
+	}else{
+		swizzle=0;
+	};
 	drawImage();
 };
 
@@ -85,8 +88,9 @@ function lockYAxis(){
 
 // Controls the selection reticle and writes to coordinates when dragging
 function onMouseMove(event){
-	if(!isDragging)
-		{return;}
+	if(!isDragging){
+		return;
+	};
 	drawCoordinates(event.offsetX,event.offsetY);
 };
 function onMouseDown(event){
@@ -111,26 +115,30 @@ function drawCoordinates(x,y){
 // Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
 	if(loaded){
-		if(event.keyCode==37||event.keyCode==65){
-			if(Math.abs(image.width/4)*-1<xCoordinate){
-				xCoordinate-=.5/(inflation*scale);
-			}
-		}
-		if(event.keyCode==38||event.keyCode==87){
-			if(Math.abs(image.height/4)*-1<yCoordinate){
-				yCoordinate-=.5/(inflation*scale);
-			}
-		}
-		if(event.keyCode==39||event.keyCode==68){
-			if(image.width/4>xCoordinate){
-				xCoordinate+=.5/(inflation*scale);
-			}
-		}
-		if(event.keyCode==40||event.keyCode==83){
-			if((image.height/4)>yCoordinate){
-				yCoordinate+=.5/(inflation*scale);
-			}
-		}
+		if(!xAxisLocked){
+			if(event.keyCode==37||event.keyCode==65){
+				if(Math.abs(image.width/4)*-1<xCoordinate){
+					xCoordinate-=.5/(inflation*scale);
+				};
+			};
+			if(event.keyCode==39||event.keyCode==68){
+				if(image.width/4>xCoordinate){
+					xCoordinate+=.5/(inflation*scale);
+				};
+			};
+		};
+		if(!yAxisLocked){
+			if(event.keyCode==38||event.keyCode==87){
+				if(Math.abs(image.height/4)*-1<yCoordinate){
+					yCoordinate-=.5/(inflation*scale);
+				};
+			};
+			if(event.keyCode==40||event.keyCode==83){
+				if((image.height/4)>yCoordinate){
+					yCoordinate+=.5/(inflation*scale);
+				};
+			};
+		};
 		drawImage();
 	};
 };
@@ -140,20 +148,23 @@ function loadImage(){
 	var unavailable=document.getElementsByClassName(`greyOut`);
 	while(unavailable.length){
 		unavailable[0].classList.remove(`greyOut`);
-	}
-	if(typeof window.FileReader!==`function`)
-		{return;}
+	};
+	if(typeof window.FileReader!==`function`){
+		return;
+	};
 	var input=document.getElementById(`file`);
-	if(!input||!input.files||!input.files[0])
-		{return;}
+	if(!input||!input.files||!input.files[0]){
+		return;
+	};
 	reader=new FileReader();
 	reader.onload=createImage;
 	var file=input.files[0];
 	reader.readAsDataURL(file);
-	if(file.name.lastIndexOf(`@2x`)==file.name.lastIndexOf(`.`)-3)
-		{scale=1;}
-	else
-		{scale=2;}
+	if(file.name.lastIndexOf(`@2x`)==file.name.lastIndexOf(`.`)-3){
+		scale=1;
+	}else{
+		scale=2;
+	};
 };
 function createImage(){
 	image=new Image();
@@ -180,8 +191,9 @@ function drawImage(){
 	var canvas=document.getElementById(`canvas`);
 	var context=canvas.getContext(`2d`);
 	context.clearRect(0,0,canvas.width,canvas.height);
-	if(image)
-		{context.drawImage(image,0,0,canvas.width,canvas.height);}
+	if(image){
+		context.drawImage(image,0,0,canvas.width,canvas.height);
+	};
 	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle;
 	var SWIZZLE=[
 		[0,1,2],
@@ -205,7 +217,7 @@ function drawImage(){
 	if(outline){
 		document.getElementById(`outline`).innerHTML=`Outline Shown`;
 		var i=0;
-		for(var i=0;i<pixels.length&&!pixels[i+3];i+=4){}
+		for(var i=0;i<pixels.length&&!pixels[i+3];i+=4){};
 		var start=i;
 		var DIR=[
 			pixels.length-4*canvas.width,
@@ -226,14 +238,14 @@ function drawImage(){
 			while(!pixels[(i+3+DIR[d])%pixels.length]){d=(d+1)%8;}
 			i=(i+DIR[d])%pixels.length;
 			d=(d+6)%8;
-		}
-		while(i!=start);
-	}
-	else
-		{document.getElementById(`outline`).innerHTML=`Outline Hidden`;}
+		}while(i!=start);
+	}else{
+		document.getElementById(`outline`).innerHTML=`Outline Hidden`;
+	};
 	context.putImageData(imageData,0,0);
-	if(isNaN(xCoordinate)||isNaN(yCoordinate))
-		{return;};
+	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
+		return;
+	};
 	var x=xCoordinate*2+.5*canvas.width;
 	var y=yCoordinate*2+.5*canvas.height;
 	context.beginPath();
@@ -285,9 +297,9 @@ function drawImage(){
 		context.lineWidth=1.5;
 		context.stroke();
 		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`;
-	}
-	else
-		{document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`;}
+	}else{
+		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
+	};
 	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
 };
 
@@ -296,17 +308,17 @@ function toggleMirror(){
 	if(!mirror){
 		mirror=1;
 		document.getElementById(`mirror`).innerHTML=`Mirror On`;
-	}
-	else{
+	}else{
 		mirror=0;
 		document.getElementById(`mirror`).innerHTML=`Mirror Off`;
 	};
 	drawImage();
 };
 function toggleOutline(){
-	if(!outline)
-		{outline=1;}
-	else
-		{outline=0;}
+	if(!outline){
+		outline=1;
+	}else{
+		outline=0;
+	};
 	drawImage();
 };
