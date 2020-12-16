@@ -25,12 +25,12 @@ function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate))
 		{return;}
 	if(mirror){
-		coordinates.push("\t"+name+` `+Math.abs(xCoordinate)*-1+` `+yCoordinate);
+		coordinates.push("\t"+name+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		if(xCoordinate!=0)
-			{coordinates.push("\t"+name+` `+Math.abs(xCoordinate)+` `+yCoordinate);}
+			{coordinates.push("\t"+name+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);}
 	}
 	else
-		{coordinates.push("\t"+name+` `+xCoordinate+` `+yCoordinate);}
+		{coordinates.push("\t"+name+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);}
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	document.getElementById(`undo`).classList.remove(`greyOut`);
 	document.getElementById(`undo`).classList.add(`highlight`);
