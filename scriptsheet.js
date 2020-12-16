@@ -7,6 +7,8 @@ var mirror;
 var outline;
 var reader;
 var swizzle=0;
+var xAxisLocked;
+var yAxisLocked;
 var xCoordinate;
 var yCoordinate;
 
@@ -50,6 +52,59 @@ function changeSwizzle(){
 		{swizzle++;}
 	else
 		{swizzle=0;}
+	drawImage();
+};
+
+// Locks or unlocks the manipulation of coordinates along certain axis
+function lockXAxis(){
+	if(xAxisLocked){
+		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
+		xAxisLocked=false;
+		drawImage();
+	}else{
+		document.getElementById(`xCoordinate`).style=`text-decoration:underline overline;`;
+		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
+		yAxisLocked=false;
+		xAxisLocked=true;
+		drawImage();
+	};
+};
+function lockYAxis(){
+	if(yAxisLocked){
+		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
+		yAxisLocked=false;
+		drawImage();
+	}else{
+		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
+		document.getElementById(`yCoordinate`).style=`text-decoration:underline overline;`;
+		xAxisLocked=false;
+		yAxisLocked=true;
+		drawImage();
+	};
+};
+
+// Controls the selection reticle and writes to coordinates when dragging
+function onMouseMove(event){
+	if(!isDragging)
+		{return;}
+	drawCoordinates(event.offsetX,event.offsetY);
+};
+function onMouseDown(event){
+	isDragging=true;
+	drawCoordinates(event.offsetX,event.offsetY);
+};
+function onMouseUp(event){
+	isDragging=false;
+};
+function drawCoordinates(x,y){
+	if(xAxisLocked){
+		yCoordinate=.5*(y-.5*canvas.height);
+	}else if(yAxisLocked){
+		xCoordinate=.5*(x-.5*canvas.width);
+	}else{
+		yCoordinate=.5*(y-.5*canvas.height);
+		xCoordinate=.5*(x-.5*canvas.width);
+	};
 	drawImage();
 };
 
@@ -119,25 +174,6 @@ function imageLoaded(){
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 };
 
-// Controls the selection reticle and writes to coordinates when dragging
-function onMouseMove(event){
-	if(!isDragging)
-		{return;}
-	drawCoordinates(event.offsetX,event.offsetY);
-};
-function onMouseDown(event){
-	isDragging=true;
-	drawCoordinates(event.offsetX,event.offsetY);
-};
-function onMouseUp(event){
-	isDragging=false;
-};
-function drawCoordinates(x,y){
-	xCoordinate=.5*(x-.5*canvas.width);
-	yCoordinate=.5*(y-.5*canvas.height);
-	drawImage();
-};
-
 // Runs on refreshing of canvas, is called on any change to the position of the reticle or any option which alters or draws over the ship image
 function drawImage(){
 	loaded=true;
@@ -197,7 +233,7 @@ function drawImage(){
 		{document.getElementById(`outline`).innerHTML=`Outline Hidden`;}
 	context.putImageData(imageData,0,0);
 	if(isNaN(xCoordinate)||isNaN(yCoordinate))
-		{return;}
+		{return;};
 	var x=xCoordinate*2+.5*canvas.width;
 	var y=yCoordinate*2+.5*canvas.height;
 	context.beginPath();
@@ -206,23 +242,53 @@ function drawImage(){
 	context.lineWidth=1.5;
 	context.strokeStyle=`#F00`;
 	context.stroke();
+	if(xAxisLocked){
+		context.beginPath();
+		context.setLineDash([15,10]);
+		context.moveTo(x,y-20);
+		context.lineTo(x,y+20);
+		context.lineWidth=1.5;
+		context.stroke();
+	}else if(yAxisLocked){
+		context.beginPath();
+		context.setLineDash([15,10]);
+		context.moveTo(x-20,y);
+		context.lineTo(x+20,y);
+		context.lineWidth=1.5;
+		context.stroke();
+	};
 	if(mirror){
 		var rx=canvas.width-x;
 		context.beginPath();
 		context.arc(rx,y,5,0,2*Math.PI,false);
 		context.setLineDash([]);
 		context.stroke();
+		if(xAxisLocked){
+			context.beginPath();
+			context.setLineDash([15,10]);
+			context.moveTo(rx,y-20);
+			context.lineTo(rx,y+20);
+			context.lineWidth=1.5;
+			context.stroke();
+		}else if(yAxisLocked){
+			context.beginPath();
+			context.setLineDash([15,10]);
+			context.moveTo(rx-20,y);
+			context.lineTo(rx+20,y);
+			context.lineWidth=1.5;
+			context.stroke();
+		};
 		context.beginPath();
 		context.setLineDash([20,10]);
 		context.moveTo(canvas.width/2,0);
 		context.lineTo(canvas.width/2,canvas.height);
 		context.lineWidth=1.5;
 		context.stroke();
-		document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)`;
+		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`;
 	}
 	else
-		{document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round((xCoordinate*(inflation*scale))*2)/2;}
-	document.getElementById(`yCoordinate`).innerHTML=`Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2;
+		{document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`;}
+	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
 };
 
 // Image overlay tools which help with hardpoint positioning/troubleshooting
