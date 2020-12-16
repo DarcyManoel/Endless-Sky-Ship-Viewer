@@ -14,6 +14,10 @@ body{
 
 }
 
+::-webkit-scrollbar{
+	display:none;
+}
+
 #canvas{
 	animation:blurOff 1s;
 	bottom:0; 
@@ -27,8 +31,9 @@ body{
 #points{
 	cursor:text;
 	line-height:3vh;
-	max-height:100%;
-	overflow:scroll;
+	height:85vh;
+	overflow-x:hidden;
+	overflow-y:scroll;
 	position:absolute;
 	right:6vw;
 	top:9vh;
