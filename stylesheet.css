@@ -14,6 +14,8 @@ body{
 
 }
 
+/* Hide scrollbars page-wide */
+
 ::-webkit-scrollbar{
 	display:none;
 }
@@ -28,35 +30,17 @@ body{
 	top:0;
 }
 
-#points{
-	cursor:text;
-	line-height:3vh;
-	height:85vh;
-	overflow-x:hidden;
-	overflow-y:scroll;
-	position:absolute;
-	right:6vw;
-	top:9vh;
-
-	/* USER SELECT */
-	user-select:text;
-	-webkit-user-select:text;
-
-	white-space:pre;
-	width:12vw;
-}
-
 .hidden{
 	display:none;
 }
 
-label{
+label,p{
 	animation:highlightOff .5s;
 	color:#aaa;
 	cursor:pointer;
 }
 
-label:hover{
+label:hover,p:hover{
 	animation:highlightOn .5s forwards;
 }
 
@@ -148,6 +132,19 @@ label:hover{
 	text-align:left;
 	top:7vh;
 	width:12vw;
+}
+
+#points{
+	line-height:3vh;
+	height:85vh;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	position:absolute;
+	right:0;
+	text-align:left;
+	top:9vh;
+	white-space:pre;
+	width:18vw;
 }
 
 /* Animations */

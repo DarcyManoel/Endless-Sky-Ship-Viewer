@@ -323,3 +323,7 @@ function toggleOutline(){
 	};
 	drawImage();
 };
+
+function copyPoints(){
+	navigator.clipboard.writeText(coordinates.join(`\n`));
+};
