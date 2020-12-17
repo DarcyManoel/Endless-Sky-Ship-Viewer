@@ -27,7 +27,7 @@ function addPoint(name){
 	};
 	if(mirror){
 		coordinates.push("\t"+name+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		if(xCoordinate!=0){
+		if(Math.round(xCoordinate)!=0){
 			coordinates.push("\t"+name+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		};
 	}else{
@@ -100,17 +100,6 @@ function onMouseDown(event){
 function onMouseUp(event){
 	isDragging=false;
 };
-function drawCoordinates(x,y){
-	if(xAxisLocked){
-		yCoordinate=.5*(y-.5*canvas.height);
-	}else if(yAxisLocked){
-		xCoordinate=.5*(x-.5*canvas.width);
-	}else{
-		yCoordinate=.5*(y-.5*canvas.height);
-		xCoordinate=.5*(x-.5*canvas.width);
-	};
-	drawImage();
-};
 
 // Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
@@ -141,6 +130,18 @@ function control(event){
 		};
 		drawImage();
 	};
+};
+
+function drawCoordinates(x,y){
+	if(xAxisLocked){
+		yCoordinate=.5*(y-.5*canvas.height);
+	}else if(yAxisLocked){
+		xCoordinate=.5*(x-.5*canvas.width);
+	}else{
+		yCoordinate=.5*(y-.5*canvas.height);
+		xCoordinate=.5*(x-.5*canvas.width);
+	};
+	drawImage();
 };
 
 // Runs on uploading image to the site, loads uploaded image into ship viewer
