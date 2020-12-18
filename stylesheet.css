@@ -136,7 +136,7 @@ label:hover,p:hover{
 
 #points{
 	line-height:3vh;
-	height:85vh;
+	max-height:85vh;
 	overflow-x:hidden;
 	overflow-y:scroll;
 	position:absolute;
