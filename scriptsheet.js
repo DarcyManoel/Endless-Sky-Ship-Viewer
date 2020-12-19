@@ -24,38 +24,51 @@ function initialize(){
 function contractHardpoints(){
 	// Reset hardpoint selection
 	document.getElementById(`engines`).classList.remove(`availableDark`);
+	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints(),expandEngines()`);
 	document.getElementById(`weapons`).classList.remove(`availableDark`);
+	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints(),expandWeapons()`);
 	document.getElementById(`bays`).classList.remove(`availableDark`);
+	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints(),expandBays()`);
 	// Hide engines
-	document.getElementById(`engine`).classList.add(`hidden`);
-	document.getElementById(`reverseEngine`).classList.add(`hidden`);
-	document.getElementById(`steeringEngine`).classList.add(`hidden`);
+	document.getElementById(`engine`).classList.add(`fade`);
+	document.getElementById(`reverseEngine`).classList.add(`fade`);
+	document.getElementById(`steeringEngine`).classList.add(`fade`);
 	// Hide weapons
-	document.getElementById(`gun`).classList.add(`hidden`);
-	document.getElementById(`turret`).classList.add(`hidden`);
+	document.getElementById(`gun`).classList.add(`fade`);
+	document.getElementById(`turret`).classList.add(`fade`);
 	// Hide bays
-	document.getElementById(`fighter`).classList.add(`hidden`);
-	document.getElementById(`drone`).classList.add(`hidden`);
+	document.getElementById(`fighter`).classList.add(`fade`);
+	document.getElementById(`drone`).classList.add(`fade`);
 };function expandEngines(){
 	// Filter hardpoint selection
+	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints()`);
 	document.getElementById(`weapons`).classList.add(`availableDark`);
 	document.getElementById(`bays`).classList.add(`availableDark`);
 	// Show engines
+	document.getElementById(`engine`).classList.remove(`fade`);
+	document.getElementById(`reverseEngine`).classList.remove(`fade`);
+	document.getElementById(`steeringEngine`).classList.remove(`fade`);
 	document.getElementById(`engine`).classList.remove(`hidden`);
 	document.getElementById(`reverseEngine`).classList.remove(`hidden`);
 	document.getElementById(`steeringEngine`).classList.remove(`hidden`);
 };function expandWeapons(){
 	// Filter hardpoint selection
 	document.getElementById(`engines`).classList.add(`availableDark`);
+	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints()`);
 	document.getElementById(`bays`).classList.add(`availableDark`);
 	// Show weapons
+	document.getElementById(`gun`).classList.remove(`fade`);
+	document.getElementById(`turret`).classList.remove(`fade`);
 	document.getElementById(`gun`).classList.remove(`hidden`);
 	document.getElementById(`turret`).classList.remove(`hidden`);
 };function expandBays(){
 	// Filter hardpoint selection
 	document.getElementById(`engines`).classList.add(`availableDark`);
 	document.getElementById(`weapons`).classList.add(`availableDark`);
+	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints()`);
 	// Show bays
+	document.getElementById(`fighter`).classList.remove(`fade`);
+	document.getElementById(`drone`).classList.remove(`fade`);
 	document.getElementById(`fighter`).classList.remove(`hidden`);
 	document.getElementById(`drone`).classList.remove(`hidden`);
 };
@@ -185,6 +198,7 @@ function drawCoordinates(x,y){
 function loadImage(){
 	var unavailable=document.getElementsByClassName(`unavailable`);
 	while(unavailable.length){
+		unavailable[0].classList.add(`available`);
 		unavailable[0].classList.remove(`unavailable`);
 	};
 	if(typeof window.FileReader!==`function`){

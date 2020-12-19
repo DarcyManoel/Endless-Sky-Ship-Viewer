@@ -17,7 +17,7 @@
 		<canvas id="canvas"></canvas>
 
 		<!-- Actions -->
-		<label id="loadImage" for="file">Load Image</label>
+		<label class="available" id="loadImage" for="file">Load Image</label>
 		<input class="hidden" id="file" type="file" onchange="loadImage()"/>
 		<label class="unavailable" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
 		<label class="unavailable" id="outline" onclick="toggleOutline()">Outline Hidden</label>
@@ -25,25 +25,25 @@
 
 		<!-- Engine hardpoints -->
 		<label class="unavailable" id="engines" onclick="contractHardpoints(),expandEngines()">Engines&hellip;</label>
-		<label class="unavailable hidden" id="engine" onclick="addPoint(this.id),contractHardpoints()">Engine</label>
-		<label class="unavailable hidden" id="reverseEngine" onclick="addPoint(this.id),contractHardpoints()">Reverse Engine</label>
-		<label class="unavailable hidden" id="steeringEngine" onclick="addPoint(this.id),contractHardpoints()">Steering Engine</label>
+		<label class="hidden available fade" id="engine" onclick="addPoint(this.id),contractHardpoints()">Engine</label>
+		<label class="hidden available fade" id="reverseEngine" onclick="addPoint(this.id),contractHardpoints()">Reverse Engine</label>
+		<label class="hidden available fade" id="steeringEngine" onclick="addPoint(this.id),contractHardpoints()">Steering Engine</label>
 
 		<!-- Weapon hardpoints -->
 		<label class="unavailable" id="weapons" onclick="contractHardpoints(),expandWeapons()">Weapons&hellip;</label>
-		<label class="unavailable hidden" id="gun" onclick="addPoint(this.id),contractHardpoints()">Gun</label>
-		<label class="unavailable hidden" id="turret" onclick="addPoint(this.id),contractHardpoints()">Turret</label>
+		<label class="hidden available fade" id="gun" onclick="addPoint(this.id),contractHardpoints()">Gun</label>
+		<label class="hidden available fade" id="turret" onclick="addPoint(this.id),contractHardpoints()">Turret</label>
 
 		<!-- Bay hardpoints -->
 		<label class="unavailable" id="bays" onclick="contractHardpoints(),expandBays()">Bays&hellip;</label>
-		<label class="unavailable hidden" id="fighter" onclick="addPoint(this.id),contractHardpoints()">Fighter</label>
-		<label class="unavailable hidden" id="drone" onclick="addPoint(this.id),contractHardpoints()">Drone</label>
+		<label class="hidden available fade" id="fighter" onclick="addPoint(this.id),contractHardpoints()">Fighter</label>
+		<label class="hidden available fade" id="drone" onclick="addPoint(this.id),contractHardpoints()">Drone</label>
 
 		<!-- Coordinates -->
 		<label class="unavailable" id="undo" onclick="undoPoint()">&#9100;</label>
 		<label class="unavailable" id="xCoordinate" onclick="lockXAxis()">X:</label>
 		<label class="unavailable" id="yCoordinate" onclick="lockYAxis()">Y:</label>
-		<p id="points" onclick="copyPoints()"></p>
+		<p class="unavailable" id="points" onclick="copyPoints()"></p>
 
 	</body>
 

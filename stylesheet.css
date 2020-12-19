@@ -11,6 +11,8 @@ body{
 	/* USER SELECT */
 	user-select:none;
 	-webkit-user-select:none;
+
+	vertical-align:middle;
 }#canvas{
 	animation:blurOff 1s;
 	-webkit-animation:blurOff 1s;
@@ -30,12 +32,12 @@ body{
 /* General aesthetic */
 .hidden{
 	display:none;
-}label,p{
+}.available{
 	animation:bright .5s;
 	-webkit-animation:bright .5s;
 	color:#aaa;
 	cursor:pointer;
-}label:hover,p:hover{
+}.available:hover{
 	animation:highlight .5s forwards;
 	-webkit-animation:highlight .5s forwards;
 }.unavailable{
@@ -50,6 +52,9 @@ body{
 }.availableDark:hover{
 	animation:brighten .5s forwards;
 	-webkit-animation:brighten .5s forwards;
+}.fade{
+	animation:hide .3s forwards !important;
+	-webkit-animation:hide .3s forwards !important;
 }
 
 /* Actions */
@@ -153,7 +158,17 @@ body{
 }
 
 /* Animations */
-@keyframes darken{
+@keyframes hide{
+	0%{
+		opacity:1;
+		left:9.5vw;
+	}99%{
+		left:12vw;
+	}100%{
+		left:-10vw;
+		opacity:0;
+	}
+}@keyframes darken{
 	0%{
 		color:#999;
 	}100%{
@@ -168,6 +183,7 @@ body{
 		color:#eee;
 	}100%{
 		color:#aaa;
+		opacity:1;
 	}
 }@keyframes highlight{
 	100%{
