@@ -154,7 +154,9 @@ body{
 
 /* Animations */
 @keyframes darken{
-	100%{
+	0%{
+		color:#999;
+	}100%{
 		color:#555;
 	}
 }@keyframes brighten{
@@ -162,7 +164,9 @@ body{
 		color:#999;
 	}
 }@keyframes bright{
-	100%{
+	0%{
+		color:#eee;
+	}100%{
 		color:#aaa;
 	}
 }@keyframes highlight{
