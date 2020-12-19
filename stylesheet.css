@@ -11,17 +11,9 @@ body{
 	/* USER SELECT */
 	user-select:none;
 	-webkit-user-select:none;
-
-}
-
-/* Hide scrollbars page-wide */
-
-::-webkit-scrollbar{
-	display:none;
-}
-
-#canvas{
+}#canvas{
 	animation:blurOff 1s;
+	-webkit-animation:blurOff 1s;
 	bottom:0; 
 	left:0; 
 	margin:auto;
@@ -30,111 +22,124 @@ body{
 	top:0;
 }
 
-.hidden{
+/* Hide scrollbars page-wide */
+::-webkit-scrollbar{
 	display:none;
 }
 
-label,p{
-	animation:highlightOff .5s;
+/* General aesthetic */
+.hidden{
+	display:none;
+}label,p{
+	animation:bright .5s;
+	-webkit-animation:bright .5s;
 	color:#aaa;
 	cursor:pointer;
-}
-
-label:hover,p:hover{
-	animation:highlightOn .5s forwards;
-}
-
-.greyOut{
-	animation:darkenOff .5s;
+}label:hover,p:hover{
+	animation:highlight .5s forwards;
+	-webkit-animation:highlight .5s forwards;
+}.unavailable{
+	animation:darken .5s;
+	-webkit-animation:darken .5s;
 	color:#555;
 	pointer-events:none;
-}
-
-.greyOut:hover{
-	animation:darkenOn .5s forwards;
+}.availableDark{
+	animation:darken .5s;
+	-webkit-animation:darken .5s;
+	color:#555;
+}.availableDark:hover{
+	animation:brighten .5s forwards;
+	-webkit-animation:brighten .5s forwards;
 }
 
 /* Actions */
-
 #loadImage{
 	left:2vw;
 	position:absolute;
 	top:4vh;
-}
-
-#swizzle{
+}#swizzle{
 	left:2vw;
 	position:absolute;
 	top:8vh;
-}
-
-#outline{
+}#outline{
 	left:2vw;
 	position:absolute;
 	top:12vh;
-}
-
-#mirror{
+}#mirror{
 	left:2vw;
 	position:absolute;
 	top:16vh;
 }
 
-#engine{
+/* Engine hardpoints */
+#engines{
 	left:2vw;
 	position:absolute;
 	top:24vh;
-}
-
-#gun{
-	left:2vw;
+}#engine{
+	left:9.5vw;
+	position:absolute;
+	top:20vh;
+}#reverseEngine{
+	left:9.5vw;
+	position:absolute;
+	top:24vh;
+}#steeringEngine{
+	left:9.5vw;
 	position:absolute;
 	top:28vh;
 }
 
-#turret{
+/* Weapon hardpoints */
+#weapons{
+	left:2vw;
+	position:absolute;
+	top:28vh;
+}#gun{
+	left:9.5vw;
+	position:absolute;
+	top:26vh;
+}#turret{
+	left:9.5vw;
+	position:absolute;
+	top:30vh;
+}
+
+/* Bay hardpoints */
+#bays{
 	left:2vw;
 	position:absolute;
 	top:32vh;
-}
-
-#fighter{
-	left:2vw;
+}#fighter{
+	left:9.5vw;
 	position:absolute;
-	top:36vh;
-}
-
-#drone{
-	left:2vw;
+	top:30vh;
+}#drone{
+	left:9.5vw;
 	position:absolute;
-	top:40vh;
+	top:34vh;
 }
 
+/* Coordinates */
 #undo{
 	font-size:40px;
 	position:absolute;
 	right:14vw;
 	text-align:left;
 	top:3.5vh;
-}
-
-#xCoordinate{
+}#xCoordinate{
 	position:absolute;
 	right:0;
 	text-align:left;
 	top:4vh;
 	width:12vw;
-}
-
-#yCoordinate{
+}#yCoordinate{
 	position:absolute;
 	right:0;
 	text-align:left;
 	top:7vh;
 	width:12vw;
-}
-
-#points{
+}#points{
 	line-height:3vh;
 	max-height:85vh;
 	overflow-x:hidden;
@@ -148,32 +153,20 @@ label:hover,p:hover{
 }
 
 /* Animations */
-@keyframes darkenOn{
-	100%{
-		color:#333;
-	}
-}
-
-@keyframes darkenOff{
-	0%{
-		color:#333;
-	}
+@keyframes darken{
 	100%{
 		color:#555;
 	}
-}
-
-@keyframes highlightOn{
+}@keyframes brighten{
 	100%{
-		color:#eee;
+		color:#999;
 	}
-}
-
-@keyframes highlightOff{
-	0%{
-		color:#eee;
-	}
+}@keyframes bright{
 	100%{
 		color:#aaa;
+	}
+}@keyframes highlight{
+	100%{
+		color:#eee;
 	}
 }

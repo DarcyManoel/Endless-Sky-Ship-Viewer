@@ -20,6 +20,46 @@ function initialize(){
 	document.body.addEventListener(`mouseup`,onMouseUp);
 };
 
+// Hardpoints selection
+function contractHardpoints(){
+	// Reset hardpoint selection
+	document.getElementById(`engines`).classList.remove(`availableDark`);
+	document.getElementById(`weapons`).classList.remove(`availableDark`);
+	document.getElementById(`bays`).classList.remove(`availableDark`);
+	// Hide engines
+	document.getElementById(`engine`).classList.add(`hidden`);
+	document.getElementById(`reverseEngine`).classList.add(`hidden`);
+	document.getElementById(`steeringEngine`).classList.add(`hidden`);
+	// Hide weapons
+	document.getElementById(`gun`).classList.add(`hidden`);
+	document.getElementById(`turret`).classList.add(`hidden`);
+	// Hide bays
+	document.getElementById(`fighter`).classList.add(`hidden`);
+	document.getElementById(`drone`).classList.add(`hidden`);
+};function expandEngines(){
+	// Filter hardpoint selection
+	document.getElementById(`weapons`).classList.add(`availableDark`);
+	document.getElementById(`bays`).classList.add(`availableDark`);
+	// Show engines
+	document.getElementById(`engine`).classList.remove(`hidden`);
+	document.getElementById(`reverseEngine`).classList.remove(`hidden`);
+	document.getElementById(`steeringEngine`).classList.remove(`hidden`);
+};function expandWeapons(){
+	// Filter hardpoint selection
+	document.getElementById(`engines`).classList.add(`availableDark`);
+	document.getElementById(`bays`).classList.add(`availableDark`);
+	// Show weapons
+	document.getElementById(`gun`).classList.remove(`hidden`);
+	document.getElementById(`turret`).classList.remove(`hidden`);
+};function expandBays(){
+	// Filter hardpoint selection
+	document.getElementById(`engines`).classList.add(`availableDark`);
+	document.getElementById(`weapons`).classList.add(`availableDark`);
+	// Show bays
+	document.getElementById(`fighter`).classList.remove(`hidden`);
+	document.getElementById(`drone`).classList.remove(`hidden`);
+};
+
 // Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
 	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
@@ -34,7 +74,7 @@ function addPoint(name){
 		coordinates.push("\t"+name+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 	};
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
-	document.getElementById(`undo`).classList.remove(`greyOut`);
+	document.getElementById(`undo`).classList.remove(`unavailable`);
 	document.getElementById(`undo`).classList.add(`highlight`);
 };
 
@@ -44,7 +84,7 @@ function undoPoint(){
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	if(!coordinates[0]){
 		document.getElementById(`undo`).classList.remove(`highlight`);
-		document.getElementById(`undo`).classList.add(`greyOut`);
+		document.getElementById(`undo`).classList.add(`unavailable`);
 	};
 };
 
@@ -71,8 +111,7 @@ function lockXAxis(){
 		xAxisLocked=true;
 		drawImage();
 	};
-};
-function lockYAxis(){
+};function lockYAxis(){
 	if(yAxisLocked){
 		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
 		yAxisLocked=false;
@@ -92,12 +131,10 @@ function onMouseMove(event){
 		return;
 	};
 	drawCoordinates(event.offsetX,event.offsetY);
-};
-function onMouseDown(event){
+};function onMouseDown(event){
 	isDragging=true;
 	drawCoordinates(event.offsetX,event.offsetY);
-};
-function onMouseUp(event){
+};function onMouseUp(event){
 	isDragging=false;
 };
 
@@ -146,9 +183,9 @@ function drawCoordinates(x,y){
 
 // Runs on uploading image to the site, loads uploaded image into ship viewer
 function loadImage(){
-	var unavailable=document.getElementsByClassName(`greyOut`);
+	var unavailable=document.getElementsByClassName(`unavailable`);
 	while(unavailable.length){
-		unavailable[0].classList.remove(`greyOut`);
+		unavailable[0].classList.remove(`unavailable`);
 	};
 	if(typeof window.FileReader!==`function`){
 		return;
@@ -166,13 +203,11 @@ function loadImage(){
 	}else{
 		scale=2;
 	};
-};
-function createImage(){
+};function createImage(){
 	image=new Image();
 	image.onload=imageLoaded;
 	image.src=reader.result;
-};
-function imageLoaded(){
+};function imageLoaded(){
 	var canvas=document.getElementById(`canvas`);
 	inflation=image.height/750;
 	image.width=(image.width/image.height)*750;
@@ -314,16 +349,13 @@ function toggleMirror(){
 		document.getElementById(`mirror`).innerHTML=`Mirror Off`;
 	};
 	drawImage();
-};
-function toggleOutline(){
+};function toggleOutline(){
 	if(!outline){
 		outline=1;
 	}else{
 		outline=0;
 	};
 	drawImage();
-};
-
-function copyPoints(){
+};function copyPoints(){
 	navigator.clipboard.writeText(coordinates.join(`\n`));
 };
