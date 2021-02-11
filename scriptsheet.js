@@ -6,6 +6,7 @@ var loaded;
 var mirror;
 var outline;
 var reader;
+var selection;
 var swizzle=0;
 var xAxisLocked;
 var yAxisLocked;
@@ -22,6 +23,7 @@ function initialize(){
 
 // Hardpoints selection
 function contractHardpoints(){
+	selection=``;
 	// Reset hardpoint selection
 	document.getElementById(`engines`).classList.remove(`availableDark`);
 	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints(),expandEngines()`);
@@ -40,6 +42,7 @@ function contractHardpoints(){
 	document.getElementById(`fighter`).classList.add(`fade`);
 	document.getElementById(`drone`).classList.add(`fade`);
 };function expandEngines(){
+	selection=`engines`;
 	// Filter hardpoint selection
 	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints()`);
 	document.getElementById(`weapons`).classList.add(`availableDark`);
@@ -52,6 +55,7 @@ function contractHardpoints(){
 	document.getElementById(`reverseEngine`).classList.remove(`hidden`);
 	document.getElementById(`steeringEngine`).classList.remove(`hidden`);
 };function expandWeapons(){
+	selection=`weapons`;
 	// Filter hardpoint selection
 	document.getElementById(`engines`).classList.add(`availableDark`);
 	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints()`);
@@ -62,6 +66,7 @@ function contractHardpoints(){
 	document.getElementById(`gun`).classList.remove(`hidden`);
 	document.getElementById(`turret`).classList.remove(`hidden`);
 };function expandBays(){
+	selection=`bays`;
 	// Filter hardpoint selection
 	document.getElementById(`engines`).classList.add(`availableDark`);
 	document.getElementById(`weapons`).classList.add(`availableDark`);
@@ -96,6 +101,8 @@ function addPoint(name){
 			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
 		}else if(newName==`"steering engine"`){
 			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+		}else if(selection==`bays`){
+			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else{
 			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}
@@ -106,6 +113,8 @@ function addPoint(name){
 				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
 			}else if(newName==`"steering engine"`){
 				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+			}else if(selection==`bays`){
+				coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 			}else{
 				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 			}
@@ -117,6 +126,8 @@ function addPoint(name){
 			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
 		}else if(newName==`"steering engine"`){
 			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+		}else if(selection==`bays`){
+			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else{
 			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}
