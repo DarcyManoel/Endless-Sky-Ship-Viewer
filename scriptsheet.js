@@ -95,42 +95,48 @@ function addPoint(name){
 		};
 	};
 	if(mirror){
-		if(newName==`engine`){
-			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-		}else if(newName==`"reverse engine"`){
-			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
-		}else if(newName==`"steering engine"`){
-			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+		if(selection==`engines`){
+			if(newName==`engine`){
+				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
+			}else if(newName==`"reverse engine"`){
+				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
+			}else if(newName==`"steering engine"`){
+				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+			};
+		}else if(selection==`weapons`){
+			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else if(selection==`bays`){
 			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}else{
-			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}
+		};
 		if(Math.round(xCoordinate)!=0){
-			if(newName==`engine`){
-				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-			}else if(newName==`"reverse engine"`){
-				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
-			}else if(newName==`"steering engine"`){
-				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+			if(selection==`engines`){
+				if(newName==`engine`){
+					coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
+				}else if(newName==`"reverse engine"`){
+					coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
+				}else if(newName==`"steering engine"`){
+					coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+				};
+			}else if(selection==`weapons`){
+				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 			}else if(selection==`bays`){
 				coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-			}else{
-				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-			}
+			};
 		};
 	}else{
-		if(newName==`engine`){
-			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-		}else if(newName==`"reverse engine"`){
-			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
-		}else if(newName==`"steering engine"`){
-			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+		if(selection==`engines`){
+			if(newName==`engine`){
+				coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
+			}else if(newName==`"reverse engine"`){
+				coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 180\n\t\tunder`);
+			}else if(newName==`"steering engine"`){
+				coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
+			};
+		}else if(selection==`weapons`){
+			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else if(selection==`bays`){
 			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}else{
-			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}
+		};
 	};
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	document.getElementById(`undo`).classList.remove(`unavailable`);
@@ -226,9 +232,7 @@ function control(event){
 		};
 		drawImage();
 	};
-};
-
-function drawCoordinates(x,y){
+};function drawCoordinates(x,y){
 	if(xAxisLocked){
 		yCoordinate=.5*(y-.5*canvas.height);
 	}else if(yAxisLocked){
