@@ -1,11 +1,17 @@
 // Creates global variables to be called to and overwritten
+var angleDeg;
+var angleDegReverse;
 var coordinates=[];
+var drawingAngle;
 var image;
+var inflation;
 var isDragging;
 var loaded;
 var mirror;
+var newName;
 var outline;
 var reader;
+var scale;
 var selection;
 var swizzle=0;
 var xAxisLocked;
@@ -80,7 +86,7 @@ function contractHardpoints(){
 
 // Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
-	var newName=name;
+	newName=name;
 	for(i=0;i<name.length;i++){
 		if(name[i]==name[i].toUpperCase()){
 			newName=``;
@@ -101,28 +107,14 @@ function addPoint(name){
 	};
 	if(mirror){
 		if(selection==`engines`){
-			if(newName==`engine`){
-				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-			}else if(newName==`reverse engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-			}else if(newName==`steering engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
-			};
+			getEngineAngle();
 		}else if(selection==`weapons`){
 			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else if(selection==`bays`){
 			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		};
 		if(Math.round(xCoordinate)!=0){
-			if(selection==`engines`){
-				if(newName==`engine`){
-					coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-				}else if(newName==`reverse engine`){
-					coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-				}else if(newName==`steering engine`){
-					coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
-				};
-			}else if(selection==`weapons`){
+			if(selection==`weapons`){
 				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 			}else if(selection==`bays`){
 				coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
@@ -130,13 +122,7 @@ function addPoint(name){
 		};
 	}else{
 		if(selection==`engines`){
-			if(newName==`engine`){
-				coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-			}else if(newName==`reverse engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder`);
-			}else if(newName==`steering engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle 0\n\t\tunder\n\t\tleft`);
-			};
+			getEngineAngle();
 		}else if(selection==`weapons`){
 			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else if(selection==`bays`){
@@ -146,6 +132,12 @@ function addPoint(name){
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	document.getElementById(`undo`).classList.remove(`unavailable`);
 	document.getElementById(`undo`).classList.add(`highlight`);
+};
+
+// Provides the user an opportunity to angle the engines
+function getEngineAngle(){
+	drawingAngle=1;
+	canvas.addEventListener(`mousemove`,drawImage);
 };
 
 // Removes the latest entry from the hardpoint output
@@ -202,6 +194,27 @@ function onMouseMove(event){
 	};
 	drawCoordinates(event.offsetX,event.offsetY);
 };function onMouseDown(event){
+	if(drawingAngle==1){
+		drawingAngle=0;
+		canvas.removeEventListener(`mousemove`,drawImage);
+		if(newName==`engine`){
+			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDeg+`\n\t\tunder`);
+		}else if(newName==`reverse engine`){
+			coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDegReverse+`\n\t\tunder`);
+		}else if(newName==`steering engine`){
+			coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDeg+`\n\t\tunder\n\t\tleft`);
+		};
+		if(mirror){
+			if(newName==`engine`){
+				coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*-2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDeg*-1+`\n\t\tunder`);
+			}else if(newName==`reverse engine`){
+				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*-2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDegReverse*-1+`\n\t\tunder`);
+			}else if(newName==`steering engine`){
+				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*-2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDeg*-1+`\n\t\tunder\n\t\tleft`);
+			};
+		};
+		document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
+	};
 	isDragging=true;
 	drawCoordinates(event.offsetX,event.offsetY);
 };function onMouseUp(event){
@@ -406,6 +419,38 @@ function drawImage(){
 		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
 	};
 	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
+	if(drawingAngle==1){
+		context.beginPath();
+		context.moveTo(x,y);
+		context.lineTo(event.offsetX,event.offsetY);
+		context.setLineDash([15,10]);
+		context.stroke();
+		angleDeg=Math.round(Math.atan2(event.offsetX-x,event.offsetY-y)*-180/Math.PI);
+		angleDegReverse=Math.round(Math.atan2(x-event.offsetX,y-event.offsetY)*-180/Math.PI);
+		if(newName==`reverse engine`){
+			context.beginPath();
+			context.font=`30px Arial`;
+			context.shadowColor=`black`;
+			context.shadowBlur=7;
+			context.fillStyle=`#000`;
+			context.fillText(angleDegReverse,event.offsetX,event.offsetY-9);
+			context.shadowBlur=0;
+			context.fillStyle=`#fff`;
+			context.fillText(angleDegReverse,event.offsetX,event.offsetY-10);
+			context.stroke();
+		}else{
+			context.beginPath();
+			context.font=`30px Arial`;
+			context.shadowColor=`black`;
+			context.shadowBlur=7;
+			context.fillStyle=`#000`;
+			context.fillText(angleDeg,event.offsetX,event.offsetY-9);
+			context.shadowBlur=0;
+			context.fillStyle=`#fff`;
+			context.fillText(angleDeg,event.offsetX,event.offsetY-10);
+			context.stroke();
+		};
+	};
 };
 
 // Image overlay tools which help with hardpoint positioning/troubleshooting
