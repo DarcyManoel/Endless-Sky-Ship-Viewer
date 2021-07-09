@@ -1,6 +1,7 @@
 // Creates global variables to be called to and overwritten
 var angleDeg;
 var angleDegReverse;
+var context;
 var coordinates=[];
 var drawingAngle;
 var image;
@@ -204,7 +205,7 @@ function onMouseMove(event){
 		}else if(newName==`steering engine`){
 			coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDeg+`\n\t\tunder\n\t\tleft`);
 		};
-		if(mirror){
+		if(mirror&&Math.round(xCoordinate)!=0){
 			if(newName==`engine`){
 				coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*-2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tangle `+angleDeg*-1+`\n\t\tunder`);
 			}else if(newName==`reverse engine`){
@@ -307,7 +308,7 @@ function loadImage(){
 function drawImage(){
 	loaded=true;
 	var canvas=document.getElementById(`canvas`);
-	var context=canvas.getContext(`2d`);
+	context=canvas.getContext(`2d`);
 	context.clearRect(0,0,canvas.width,canvas.height);
 	if(image){
 		context.drawImage(image,0,0,canvas.width,canvas.height);
@@ -366,89 +367,36 @@ function drawImage(){
 	};
 	var x=xCoordinate*2+.5*canvas.width;
 	var y=yCoordinate*2+.5*canvas.height;
-	context.beginPath();
-	context.arc(x,y,5,0,2*Math.PI,false);
-	context.setLineDash([]);
-	context.lineWidth=1.5;
-	context.strokeStyle=`#F00`;
-	context.stroke();
+	drawArc(x,y,5,0,2*Math.PI,`#f00`);
 	if(xAxisLocked){
-		context.beginPath();
-		context.setLineDash([15,10]);
-		context.moveTo(x,y-20);
-		context.lineTo(x,y+20);
-		context.lineWidth=1.5;
-		context.stroke();
+		drawLine(x,y-20,x,y+20,[15,10],1.5,`#f00`);
 	}else if(yAxisLocked){
-		context.beginPath();
-		context.setLineDash([15,10]);
-		context.moveTo(x-20,y);
-		context.lineTo(x+20,y);
-		context.lineWidth=1.5;
-		context.stroke();
+		drawLine(x-20,y,x+20,y,[15,10],1.5,`#f00`);
 	};
 	if(mirror){
 		var rx=canvas.width-x;
-		context.beginPath();
-		context.arc(rx,y,5,0,2*Math.PI,false);
-		context.setLineDash([]);
-		context.stroke();
+		drawArc(rx,y,5,0,2*Math.PI,`#f00`);
 		if(xAxisLocked){
-			context.beginPath();
-			context.setLineDash([15,10]);
-			context.moveTo(rx,y-20);
-			context.lineTo(rx,y+20);
-			context.lineWidth=1.5;
-			context.stroke();
+			drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`);
 		}else if(yAxisLocked){
-			context.beginPath();
-			context.setLineDash([15,10]);
-			context.moveTo(rx-20,y);
-			context.lineTo(rx+20,y);
-			context.lineWidth=1.5;
-			context.stroke();
+			drawLine(rx-20,y,rx+20,y,[15,10],1.5,`#f00`);
 		};
-		context.beginPath();
-		context.setLineDash([20,10]);
-		context.moveTo(canvas.width/2,0);
-		context.lineTo(canvas.width/2,canvas.height);
-		context.lineWidth=1.5;
-		context.stroke();
+		drawLine(canvas.width/2,0,canvas.width/2,canvas.height,[20,10],1.5,`#f00`);
 		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`;
 	}else{
 		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
 	};
 	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
 	if(drawingAngle==1){
-		context.beginPath();
-		context.moveTo(x,y);
-		context.lineTo(event.offsetX,event.offsetY);
-		context.setLineDash([15,10]);
-		context.stroke();
+		drawLine(x,y,event.offsetX,event.offsetY,[15,10],1.5,`#f00`);
 		angleDeg=Math.round(Math.atan2(event.offsetX-x,event.offsetY-y)*-180/Math.PI);
 		angleDegReverse=Math.round(Math.atan2(x-event.offsetX,y-event.offsetY)*-180/Math.PI);
 		if(newName==`reverse engine`){
-			context.beginPath();
-			context.font=`30px Arial`;
-			context.shadowColor=`black`;
-			context.shadowBlur=7;
-			context.fillStyle=`#000`;
-			context.fillText(angleDegReverse,event.offsetX,event.offsetY-9);
-			context.shadowBlur=0;
-			context.fillStyle=`#fff`;
-			context.fillText(angleDegReverse,event.offsetX,event.offsetY-10);
-			context.stroke();
+			drawText(7,`#000`,angleDegReverse,event.offsetX,event.offsetY-9);
+			drawText(0,`#fff`,angleDegReverse,event.offsetX,event.offsetY-10);
 		}else{
-			context.beginPath();
-			context.font=`30px Arial`;
-			context.shadowColor=`black`;
-			context.shadowBlur=7;
-			context.fillStyle=`#000`;
-			context.fillText(angleDeg,event.offsetX,event.offsetY-9);
-			context.shadowBlur=0;
-			context.fillStyle=`#fff`;
-			context.fillText(angleDeg,event.offsetX,event.offsetY-10);
-			context.stroke();
+			drawText(7,`#000`,angleDeg,event.offsetX,event.offsetY-9);
+			drawText(0,`#fff`,angleDeg,event.offsetX,event.offsetY-10);
 		};
 	};
 };
@@ -472,4 +420,31 @@ function toggleMirror(){
 	drawImage();
 };function copyPoints(){
 	navigator.clipboard.writeText(coordinates.join(`\n`));
+};
+
+// Call-to functions, pre-defined functions that cut down individual processing
+function drawArc(x,y,radius,start,end,colour){
+	context.beginPath();
+	context.arc(x,y,radius,start,end);
+	context.lineWidth=1.5;
+	context.strokeStyle=colour;
+	context.stroke();
+};
+function drawLine(startX,startY,endX,endY,lineDash,width,colour){
+	context.beginPath();
+	context.moveTo(startX,startY);
+	context.lineTo(endX,endY);
+	context.setLineDash(lineDash);
+	context.lineWidth=width;
+	context.strokeStyle=colour;
+	context.stroke();
+};
+function drawText(blur,colour,text,x,y){
+	context.beginPath();
+	context.font=`30px Arial`;
+	context.shadowColor=`black`;
+	context.shadowBlur=blur;
+	context.fillStyle=colour;
+	context.fillText(text,x,y);
+	context.stroke();
 };
