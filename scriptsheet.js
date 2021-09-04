@@ -418,7 +418,9 @@ function toggleMirror(){
 		outline=0;
 	};
 	drawImage();
-};function copyPoints(){
+};
+
+function copyPoints(){
 	navigator.clipboard.writeText(coordinates.join(`\n`));
 };
 
