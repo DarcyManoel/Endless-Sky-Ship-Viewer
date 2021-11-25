@@ -1,1 +1,2 @@
-# https://endless-sky-tools.github.io/Endless-Sky-Ship-Viewer
+# Developed on Safari
+### https://endless-sky-tools.github.io/Endless-Sky-Ship-Viewer
