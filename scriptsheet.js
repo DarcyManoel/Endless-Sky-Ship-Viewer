@@ -164,24 +164,24 @@ function changeSwizzle(){
 // Locks or unlocks the manipulation of coordinates along certain axis
 function lockXAxis(){
 	if(xAxisLocked){
-		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
+		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
 		xAxisLocked=false;
 		drawImage();
 	}else{
-		document.getElementById(`xCoordinate`).style=`text-decoration:underline overline;`;
-		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
+		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
+		document.getElementById(`yCoordinate`).style=`text-decoration:line-through;`;
 		yAxisLocked=false;
 		xAxisLocked=true;
 		drawImage();
 	};
 };function lockYAxis(){
 	if(yAxisLocked){
-		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
+		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
 		yAxisLocked=false;
 		drawImage();
 	}else{
-		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
-		document.getElementById(`yCoordinate`).style=`text-decoration:underline overline;`;
+		document.getElementById(`xCoordinate`).style=`text-decoration:line-through;`;
+		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
 		xAxisLocked=false;
 		yAxisLocked=true;
 		drawImage();
@@ -225,7 +225,7 @@ function onMouseMove(event){
 // Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
 	if(loaded){
-		if(!xAxisLocked){
+		if(xAxisLocked){
 			if(event.keyCode==37||event.keyCode==65){
 				if(Math.abs(image.width/4)*-1<xCoordinate){
 					xCoordinate-=.5/(inflation*scale);
@@ -237,7 +237,7 @@ function control(event){
 				};
 			};
 		};
-		if(!yAxisLocked){
+		if(yAxisLocked){
 			if(event.keyCode==38||event.keyCode==87){
 				if(Math.abs(image.height/4)*-1<yCoordinate){
 					yCoordinate-=.5/(inflation*scale);
@@ -253,12 +253,12 @@ function control(event){
 	};
 };function drawCoordinates(x,y){
 	if(xAxisLocked){
-		yCoordinate=.5*(y-.5*canvas.height);
+		xCoordinate=.5*(x-.5*canvas.width);
 	}else if(yAxisLocked){
-		xCoordinate=.5*(x-.5*canvas.width);
-	}else{
 		yCoordinate=.5*(y-.5*canvas.height);
+	}else{
 		xCoordinate=.5*(x-.5*canvas.width);
+		yCoordinate=.5*(y-.5*canvas.height);
 	};
 	drawImage();
 };
@@ -369,17 +369,17 @@ function drawImage(){
 	var y=yCoordinate*2+.5*canvas.height;
 	drawArc(x,y,5,0,2*Math.PI,`#f00`);
 	if(xAxisLocked){
-		drawLine(x,y-20,x,y+20,[15,10],1.5,`#f00`);
-	}else if(yAxisLocked){
 		drawLine(x-20,y,x+20,y,[15,10],1.5,`#f00`);
+	}else if(yAxisLocked){
+		drawLine(x,y-20,x,y+20,[15,10],1.5,`#f00`);
 	};
 	if(mirror){
 		var rx=canvas.width-x;
 		drawArc(rx,y,5,0,2*Math.PI,`#f00`);
 		if(xAxisLocked){
-			drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`);
-		}else if(yAxisLocked){
 			drawLine(rx-20,y,rx+20,y,[15,10],1.5,`#f00`);
+		}else if(yAxisLocked){
+			drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`);
 		};
 		drawLine(canvas.width/2,0,canvas.width/2,canvas.height,[20,10],1.5,`#f00`);
 		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`;
