@@ -31,12 +31,8 @@ function initialize(){
 // Hardpoints selection
 function contractHardpoints(){
 	selection=``;
-	// Reset hardpoint selection
-	document.getElementById(`engines`).classList.remove(`availableDark`);
 	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints(),expandEngines()`);
-	document.getElementById(`weapons`).classList.remove(`availableDark`);
 	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints(),expandWeapons()`);
-	document.getElementById(`bays`).classList.remove(`availableDark`);
 	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints(),expandBays()`);
 	// Hide engines
 	document.getElementById(`engine`).classList.add(`fade`);
@@ -48,43 +44,36 @@ function contractHardpoints(){
 	// Hide bays
 	document.getElementById(`fighter`).classList.add(`fade`);
 	document.getElementById(`drone`).classList.add(`fade`);
-};function expandEngines(){
+};
+function expandEngines(){
 	selection=`engines`;
-	// Filter hardpoint selection
 	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints()`);
-	document.getElementById(`weapons`).classList.add(`availableDark`);
-	document.getElementById(`bays`).classList.add(`availableDark`);
 	// Show engines
 	document.getElementById(`engine`).classList.remove(`fade`);
-	document.getElementById(`reverseEngine`).classList.remove(`fade`);
-	document.getElementById(`steeringEngine`).classList.remove(`fade`);
 	document.getElementById(`engine`).classList.remove(`hidden`);
+	document.getElementById(`reverseEngine`).classList.remove(`fade`);
 	document.getElementById(`reverseEngine`).classList.remove(`hidden`);
+	document.getElementById(`steeringEngine`).classList.remove(`fade`);
 	document.getElementById(`steeringEngine`).classList.remove(`hidden`);
-};function expandWeapons(){
+};
+function expandWeapons(){
 	selection=`weapons`;
-	// Filter hardpoint selection
-	document.getElementById(`engines`).classList.add(`availableDark`);
 	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints()`);
-	document.getElementById(`bays`).classList.add(`availableDark`);
 	// Show weapons
 	document.getElementById(`gun`).classList.remove(`fade`);
-	document.getElementById(`turret`).classList.remove(`fade`);
 	document.getElementById(`gun`).classList.remove(`hidden`);
+	document.getElementById(`turret`).classList.remove(`fade`);
 	document.getElementById(`turret`).classList.remove(`hidden`);
-};function expandBays(){
+};
+function expandBays(){
 	selection=`bays`;
-	// Filter hardpoint selection
-	document.getElementById(`engines`).classList.add(`availableDark`);
-	document.getElementById(`weapons`).classList.add(`availableDark`);
 	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints()`);
 	// Show bays
-	document.getElementById(`fighter`).classList.remove(`fade`);
 	document.getElementById(`drone`).classList.remove(`fade`);
-	document.getElementById(`fighter`).classList.remove(`hidden`);
 	document.getElementById(`drone`).classList.remove(`hidden`);
+	document.getElementById(`fighter`).classList.remove(`fade`);
+	document.getElementById(`fighter`).classList.remove(`hidden`);
 };
-
 // Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
 	newName=name;
