@@ -265,11 +265,16 @@ function control(event){
 
 // Runs on uploading image to the site, loads uploaded image into ship viewer
 function loadImage(){
-	var unavailable=document.getElementsByClassName(`unavailable`);
-	while(unavailable.length){
-		unavailable[0].classList.add(`available`);
-		unavailable[0].classList.remove(`unavailable`);
-	};
+	document.getElementById(`bays`).classList.remove(`hidden`);
+	document.getElementById(`engines`).classList.remove(`hidden`);
+	document.getElementById(`mirror`).classList.remove(`hidden`);
+	document.getElementById(`outline`).classList.remove(`hidden`);
+	document.getElementById(`points`).classList.remove(`hidden`);
+	document.getElementById(`swizzle`).classList.remove(`hidden`);
+	document.getElementById(`undo`).classList.remove(`hidden`);
+	document.getElementById(`weapons`).classList.remove(`hidden`);
+	document.getElementById(`xCoordinate`).classList.remove(`hidden`);
+	document.getElementById(`yCoordinate`).classList.remove(`hidden`);
 	if(typeof window.FileReader!==`function`){
 		return;
 	};

@@ -1,4 +1,6 @@
+/*Constants*/
 body{
+	-webkit-user-select:none;
 	background-color:#000;
 	background-image:url(assets/menu.png);
 	background-size:100%;
@@ -7,13 +9,20 @@ body{
 	margin:0;
 	overflow:hidden;
 	text-align:center;
-
-	/* USER SELECT */
 	user-select:none;
-	-webkit-user-select:none;
-
 	vertical-align:middle;
-}#canvas{
+}
+label{
+	animation:highlight .5s;
+	-webkit-animation:highlight .5s;
+	color:#aaa;
+	cursor:pointer;
+}
+label:hover{
+	animation:highlightOn .5s forwards;
+	-webkit-animation:highlightOn .5s forwards;
+}
+#canvas{
 	animation:blurOff 1s;
 	-webkit-animation:blurOff 1s;
 	bottom:0; 
@@ -23,36 +32,14 @@ body{
 	right:0;
 	top:0;
 }
-
-/* Hide scrollbars page-wide */
+.hidden{
+	display:none;
+}
 ::-webkit-scrollbar{
 	display:none;
 }
-
 /* General aesthetic */
-.hidden{
-	display:none;
-}.available{
-	animation:bright .5s;
-	-webkit-animation:bright .5s;
-	color:#aaa;
-	cursor:pointer;
-}.available:hover{
-	animation:highlight .5s forwards;
-	-webkit-animation:highlight .5s forwards;
-}.unavailable{
-	animation:darken .5s;
-	-webkit-animation:darken .5s;
-	color:#555;
-	pointer-events:none;
-}.availableDark{
-	animation:darken .5s;
-	-webkit-animation:darken .5s;
-	color:#555;
-}.availableDark:hover{
-	animation:brighten .5s forwards;
-	-webkit-animation:brighten .5s forwards;
-}.fade{
+.fade{
 	animation:hide .3s forwards !important;
 	-webkit-animation:hide .3s forwards !important;
 }
@@ -168,24 +155,21 @@ body{
 		left:-10vw;
 		opacity:0;
 	}
-}@keyframes darken{
-	0%{
-		color:#999;
-	}100%{
-		color:#555;
-	}
-}@keyframes brighten{
+}
+@keyframes brighten{
 	100%{
 		color:#999;
 	}
-}@keyframes bright{
+}
+@keyframes highlight{
 	0%{
 		color:#eee;
 	}100%{
 		color:#aaa;
 		opacity:1;
 	}
-}@keyframes highlight{
+}
+@keyframes highlightOn{
 	100%{
 		color:#eee;
 	}
