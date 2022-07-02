@@ -1,34 +1,34 @@
-// Creates global variables to be called to and overwritten
+//	Establish canvas structure
+var canvas=document.getElementById(`canvas`);
+var canvasContext=canvas.getContext(`2d`);
+//	Positional variables
 var angleDeg;
 var angleDegReverse;
-var context;
 var coordinates=[];
 var drawingAngle;
+var isDragging;
+var mirror;
+var xAxisLocked;
+var xCoordinate;
+var yAxisLocked;
+var yCoordinate;
+//	Misc variables
 var image;
 var inflation;
-var isDragging;
 var loaded;
-var mirror;
 var newName;
 var outline;
 var reader;
 var scale;
 var selection;
 var swizzle=0;
-var xAxisLocked;
-var yAxisLocked;
-var xCoordinate;
-var yCoordinate;
-
-// Runs on page load, creates the initial canvas and sets event listeners
+//	Runs on page load, creates the initial canvas and sets event listeners
 function initialize(){
-	var canvas=document.getElementById(`canvas`);
 	canvas.addEventListener(`mousedown`,onMouseDown);
 	canvas.addEventListener(`mousemove`,onMouseMove);
 	document.body.addEventListener(`mouseup`,onMouseUp);
 };
-
-// Hardpoints selection
+//	Hardpoints selection
 function contractHardpoints(){
 	selection=``;
 	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints(),expandEngines()`);
@@ -74,7 +74,7 @@ function expandBays(){
 	document.getElementById(`fighter`).classList.remove(`fade`);
 	document.getElementById(`fighter`).classList.remove(`hidden`);
 };
-// Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
+//	Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
 	newName=name;
 	for(i=0;i<name.length;i++){
@@ -123,14 +123,12 @@ function addPoint(name){
 	document.getElementById(`undo`).classList.remove(`unavailable`);
 	document.getElementById(`undo`).classList.add(`highlight`);
 };
-
-// Provides the user an opportunity to angle the engines
+//	Provides the user an opportunity to angle the engines
 function getEngineAngle(){
 	drawingAngle=1;
 	canvas.addEventListener(`mousemove`,drawImage);
 };
-
-// Removes the latest entry from the hardpoint output
+//	Removes the latest entry from the hardpoint output
 function undoPoint(){
 	coordinates.pop();
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
@@ -139,8 +137,7 @@ function undoPoint(){
 		document.getElementById(`undo`).classList.add(`unavailable`);
 	};
 };
-
-// Runs on selecting the swizzles option, each press iterates through each swizzle option
+//	Runs on selecting the swizzles option, each press iterates through each swizzle option
 function changeSwizzle(){
 	if(swizzle<6){
 		swizzle++;
@@ -149,8 +146,7 @@ function changeSwizzle(){
 	};
 	drawImage();
 };
-
-// Locks or unlocks the manipulation of coordinates along certain axis
+//	Locks or unlocks the manipulation of coordinates along certain axis
 function lockXAxis(){
 	if(xAxisLocked){
 		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
@@ -163,7 +159,8 @@ function lockXAxis(){
 		xAxisLocked=true;
 		drawImage();
 	};
-};function lockYAxis(){
+};
+function lockYAxis(){
 	if(yAxisLocked){
 		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
 		yAxisLocked=false;
@@ -176,14 +173,14 @@ function lockXAxis(){
 		drawImage();
 	};
 };
-
-// Controls the selection reticle and writes to coordinates when dragging
+//	Controls the selection reticle and writes to coordinates when dragging
 function onMouseMove(event){
 	if(!isDragging){
 		return;
 	};
 	drawCoordinates(event.offsetX,event.offsetY);
-};function onMouseDown(event){
+};
+function onMouseDown(event){
 	if(drawingAngle==1){
 		drawingAngle=0;
 		canvas.removeEventListener(`mousemove`,drawImage);
@@ -207,11 +204,11 @@ function onMouseMove(event){
 	};
 	isDragging=true;
 	drawCoordinates(event.offsetX,event.offsetY);
-};function onMouseUp(event){
+};
+function onMouseUp(event){
 	isDragging=false;
 };
-
-// Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
+//	Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
 	if(loaded){
 		if(xAxisLocked){
@@ -240,7 +237,8 @@ function control(event){
 		};
 		drawImage();
 	};
-};function drawCoordinates(x,y){
+};
+function drawCoordinates(x,y){
 	if(xAxisLocked){
 		xCoordinate=.5*(x-.5*canvas.width);
 	}else if(yAxisLocked){
@@ -251,8 +249,7 @@ function control(event){
 	};
 	drawImage();
 };
-
-// Runs on uploading image to the site, loads uploaded image into ship viewer
+//	Runs on uploading image to the site, loads uploaded image into ship viewer
 function loadImage(){
 	document.getElementById(`bays`).classList.remove(`hidden`);
 	document.getElementById(`engines`).classList.remove(`hidden`);
@@ -280,11 +277,13 @@ function loadImage(){
 	}else{
 		scale=2;
 	};
-};function createImage(){
+};
+function createImage(){
 	image=new Image();
 	image.onload=imageLoaded;
 	image.src=reader.result;
-};function imageLoaded(){
+};
+function imageLoaded(){
 	var canvas=document.getElementById(`canvas`);
 	inflation=image.height/750;
 	image.width=(image.width/image.height)*750;
@@ -297,15 +296,12 @@ function loadImage(){
 	coordinates=[];
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 };
-
-// Runs on refreshing of canvas, is called on any change to the position of the reticle or any option which alters or draws over the ship image
+//	Runs on refreshing of canvas, is called on any change to the position of the reticle or any option which alters or draws over the ship image
 function drawImage(){
 	loaded=true;
-	var canvas=document.getElementById(`canvas`);
-	context=canvas.getContext(`2d`);
-	context.clearRect(0,0,canvas.width,canvas.height);
+	canvasContext.clearRect(0,0,canvas.width,canvas.height);
 	if(image){
-		context.drawImage(image,0,0,canvas.width,canvas.height);
+		canvasContext.drawImage(image,0,0,canvas.width,canvas.height);
 	};
 	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle;
 	var SWIZZLE=[
@@ -317,7 +313,7 @@ function drawImage(){
 		[2,1,0],
 		[1,2,2]
 	];
-	var imageData=context.getImageData(0,0,canvas.width,canvas.height);
+	var imageData=canvasContext.getImageData(0,0,canvas.width,canvas.height);
 	var pixels=imageData.data;
 	for(var i=0;i<pixels.length;i+=4){
 		var red=pixels[i+SWIZZLE[swizzle][0]];
@@ -355,7 +351,7 @@ function drawImage(){
 	}else{
 		document.getElementById(`outline`).innerHTML=`Outline Hidden`;
 	};
-	context.putImageData(imageData,0,0);
+	canvasContext.putImageData(imageData,0,0);
 	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
 		return;
 	};
@@ -394,8 +390,7 @@ function drawImage(){
 		};
 	};
 };
-
-// Image overlay tools which help with hardpoint positioning/troubleshooting
+//	Image overlay tools which help with hardpoint positioning/troubleshooting
 function toggleMirror(){
 	if(!mirror){
 		mirror=1;
@@ -405,7 +400,8 @@ function toggleMirror(){
 		document.getElementById(`mirror`).innerHTML=`Mirror Off`;
 	};
 	drawImage();
-};function toggleOutline(){
+};
+function toggleOutline(){
 	if(!outline){
 		outline=1;
 	}else{
@@ -413,34 +409,33 @@ function toggleMirror(){
 	};
 	drawImage();
 };
-
+//	Misc
 function copyPoints(){
 	navigator.clipboard.writeText(coordinates.join(`\n`));
 };
-
-// Call-to functions, pre-defined functions that cut down individual processing
+//	Call-to functions, pre-defined functions that cut down individual processing
 function drawArc(x,y,radius,start,end,colour){
-	context.beginPath();
-	context.arc(x,y,radius,start,end);
-	context.lineWidth=1.5;
-	context.strokeStyle=colour;
-	context.stroke();
+	canvasContext.beginPath();
+	canvasContext.arc(x,y,radius,start,end);
+	canvasContext.lineWidth=1.5;
+	canvasContext.strokeStyle=colour;
+	canvasContext.stroke();
 };
 function drawLine(startX,startY,endX,endY,lineDash,width,colour){
-	context.beginPath();
-	context.moveTo(startX,startY);
-	context.lineTo(endX,endY);
-	context.setLineDash(lineDash);
-	context.lineWidth=width;
-	context.strokeStyle=colour;
-	context.stroke();
+	canvasContext.beginPath();
+	canvasContext.moveTo(startX,startY);
+	canvasContext.lineTo(endX,endY);
+	canvasContext.setLineDash(lineDash);
+	canvasContext.lineWidth=width;
+	canvasContext.strokeStyle=colour;
+	canvasContext.stroke();
 };
 function drawText(blur,colour,text,x,y){
-	context.beginPath();
-	context.font=`30px Arial`;
-	context.shadowColor=`black`;
-	context.shadowBlur=blur;
-	context.fillStyle=colour;
-	context.fillText(text,x,y);
-	context.stroke();
+	canvasContext.beginPath();
+	canvasContext.font=`30px Arial`;
+	canvasContext.shadowColor=`black`;
+	canvasContext.shadowBlur=blur;
+	canvasContext.fillStyle=colour;
+	canvasContext.fillText(text,x,y);
+	canvasContext.stroke();
 };
