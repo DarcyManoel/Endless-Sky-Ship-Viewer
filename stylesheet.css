@@ -11,8 +11,6 @@ body{
 	user-select:none;
 }
 canvas{
-	-webkit-animation:blurOff 1s;
-	animation:blurOff 1s;
 	bottom:0;
 	left:0; 
 	margin:auto;
