@@ -393,12 +393,3 @@ function drawLine(startX,startY,endX,endY,lineDash,width,colour){
 	canvasContext.strokeStyle=colour;
 	canvasContext.stroke();
 	};
-function drawText(blur,colour,text,x,y){
-	canvasContext.beginPath();
-	canvasContext.font=`30px Arial`;
-	canvasContext.shadowColor=`black`;
-	canvasContext.shadowBlur=blur;
-	canvasContext.fillStyle=colour;
-	canvasContext.fillText(text,x,y);
-	canvasContext.stroke();
-	};
