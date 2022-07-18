@@ -218,36 +218,6 @@ function drawCoordinates(x,y){
 	};
 	drawImage();
 	};
-//	Fine control
-function control(event){
-	if(loaded){
-		if(xAxisLocked){
-			if(event.keyCode==37||event.keyCode==65){
-				if(Math.abs(image.width/4)*-1<xCoordinate){
-					xCoordinate-=.5/(inflation*scale);
-				};
-			};
-			if(event.keyCode==39||event.keyCode==68){
-				if(image.width/4>xCoordinate){
-					xCoordinate+=.5/(inflation*scale);
-				};
-			};
-		};
-		if(yAxisLocked){
-			if(event.keyCode==38||event.keyCode==87){
-				if(Math.abs(image.height/4)*-1<yCoordinate){
-					yCoordinate-=.5/(inflation*scale);
-				};
-			};
-			if(event.keyCode==40||event.keyCode==83){
-				if((image.height/4)>yCoordinate){
-					yCoordinate+=.5/(inflation*scale);
-				};
-			};
-		};
-		drawImage();
-	};
-	};
 //	Hardpoint selection
 function contractHardpoints(){
 	selection=``;
