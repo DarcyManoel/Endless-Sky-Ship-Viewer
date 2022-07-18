@@ -1,30 +1,20 @@
-//	Establish canvas structure
-var canvas=document.getElementById(`canvas`);
-var canvasContext=canvas.getContext(`2d`);
-//	Positional variables
-var coordinates=[];
-var isDragging;
-var mirror;
-var xAxisLocked;
-var xCoordinate;
-var yAxisLocked;
-var yCoordinate;
-//	Misc variables
-var image;
-var inflation;
-var loaded;
-var newName;
-var outline;
-var reader;
-var scale;
-var selection;
-var swizzle=0;
+//	Canvas
+	var canvas=document.getElementById(`canvas`);
+	var canvasContext=canvas.getContext(`2d`);
+//	Preferences
+	var swizzle=0;
+	var outline;
+	var mirror;
+	var xAxisLocked;
+	var yAxisLocked;
+//	Positional
+	var coordinates=[];
 //	Runs on page load, creates the initial canvas and sets event listeners
 function initialize(){
 	canvas.addEventListener(`mousedown`,onMouseDown);
 	canvas.addEventListener(`mousemove`,onMouseMove);
 	document.body.addEventListener(`mouseup`,onMouseUp);
-};
+	};
 //	Hardpoints selection
 function contractHardpoints(){
 	selection=``;
@@ -41,7 +31,7 @@ function contractHardpoints(){
 	// Hide bays
 	document.getElementById(`fighter`).classList.add(`fade`);
 	document.getElementById(`drone`).classList.add(`fade`);
-};
+	};
 function expandEngines(){
 	selection=`engines`;
 	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints()`);
@@ -52,7 +42,7 @@ function expandEngines(){
 	document.getElementById(`reverseEngine`).classList.remove(`hidden`);
 	document.getElementById(`steeringEngine`).classList.remove(`fade`);
 	document.getElementById(`steeringEngine`).classList.remove(`hidden`);
-};
+	};
 function expandWeapons(){
 	selection=`weapons`;
 	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints()`);
@@ -61,7 +51,7 @@ function expandWeapons(){
 	document.getElementById(`gun`).classList.remove(`hidden`);
 	document.getElementById(`turret`).classList.remove(`fade`);
 	document.getElementById(`turret`).classList.remove(`hidden`);
-};
+	};
 function expandBays(){
 	selection=`bays`;
 	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints()`);
@@ -70,7 +60,7 @@ function expandBays(){
 	document.getElementById(`drone`).classList.remove(`hidden`);
 	document.getElementById(`fighter`).classList.remove(`fade`);
 	document.getElementById(`fighter`).classList.remove(`hidden`);
-};
+	};
 //	Runs on adding a hardpoint to the active image, detects pressed hardpoint and writes it to output with positions
 function addPoint(name){
 	newName=name;
@@ -139,7 +129,7 @@ function addPoint(name){
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	document.getElementById(`undo`).classList.remove(`unavailable`);
 	document.getElementById(`undo`).classList.add(`highlight`);
-};
+	};
 //	Removes the latest entry from the hardpoint output
 function undoPoint(){
 	coordinates.pop();
@@ -148,7 +138,7 @@ function undoPoint(){
 		document.getElementById(`undo`).classList.remove(`highlight`);
 		document.getElementById(`undo`).classList.add(`unavailable`);
 	};
-};
+	};
 //	Runs on selecting the swizzles option, each press iterates through each swizzle option
 function changeSwizzle(){
 	if(swizzle<6){
@@ -157,7 +147,7 @@ function changeSwizzle(){
 		swizzle=0;
 	};
 	drawImage();
-};
+	};
 //	Locks or unlocks the manipulation of coordinates along certain axis
 function lockXAxis(){
 	if(xAxisLocked){
@@ -171,7 +161,7 @@ function lockXAxis(){
 		xAxisLocked=true;
 		drawImage();
 	};
-};
+	};
 function lockYAxis(){
 	if(yAxisLocked){
 		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
@@ -184,21 +174,21 @@ function lockYAxis(){
 		yAxisLocked=true;
 		drawImage();
 	};
-};
+	};
 //	Controls the selection reticle and writes to coordinates when dragging
 function onMouseMove(event){
 	if(!isDragging){
 		return;
 	};
 	drawCoordinates(event.offsetX,event.offsetY);
-};
+	};
 function onMouseDown(event){
 	isDragging=true;
 	drawCoordinates(event.offsetX,event.offsetY);
-};
+	};
 function onMouseUp(event){
 	isDragging=false;
-};
+	};
 //	Controls the actions for WASD and arrow keys, moves relevant position marginally per press or dependant on how long they are held
 function control(event){
 	if(loaded){
@@ -228,7 +218,7 @@ function control(event){
 		};
 		drawImage();
 	};
-};
+	};
 function drawCoordinates(x,y){
 	if(xAxisLocked){
 		xCoordinate=.5*(x-.5*canvas.width);
@@ -239,7 +229,7 @@ function drawCoordinates(x,y){
 		yCoordinate=.5*(y-.5*canvas.height);
 	};
 	drawImage();
-};
+	};
 //	Runs on uploading image to the site, loads uploaded image into ship viewer
 function loadImage(){
 	document.getElementById(`bays`).classList.remove(`hidden`);
@@ -268,12 +258,12 @@ function loadImage(){
 	}else{
 		scale=2;
 	};
-};
+	};
 function createImage(){
 	image=new Image();
 	image.onload=imageLoaded;
 	image.src=reader.result;
-};
+	};
 function imageLoaded(){
 	var canvas=document.getElementById(`canvas`);
 	inflation=image.height/750;
@@ -286,7 +276,7 @@ function imageLoaded(){
 	drawImage();
 	coordinates=[];
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
-};
+	};
 //	Runs on refreshing of canvas, is called on any change to the position of the reticle or any option which alters or draws over the ship image
 function drawImage(){
 	loaded=true;
@@ -368,7 +358,7 @@ function drawImage(){
 		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
 	};
 	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`;
-};
+	};
 //	Image overlay tools which help with hardpoint positioning/troubleshooting
 function toggleMirror(){
 	if(!mirror){
@@ -379,7 +369,7 @@ function toggleMirror(){
 		document.getElementById(`mirror`).innerHTML=`Mirror Off`;
 	};
 	drawImage();
-};
+	};
 function toggleOutline(){
 	if(!outline){
 		outline=1;
@@ -387,11 +377,11 @@ function toggleOutline(){
 		outline=0;
 	};
 	drawImage();
-};
+	};
 //	Misc
 function copyPoints(){
 	navigator.clipboard.writeText(coordinates.join(`\n`));
-};
+	};
 //	Call-to functions, pre-defined functions that cut down individual processing
 function drawArc(x,y,radius,start,end,colour){
 	canvasContext.beginPath();
@@ -400,7 +390,7 @@ function drawArc(x,y,radius,start,end,colour){
 	canvasContext.lineWidth=1.5;
 	canvasContext.strokeStyle=colour;
 	canvasContext.stroke();
-};
+	};
 function drawLine(startX,startY,endX,endY,lineDash,width,colour){
 	canvasContext.beginPath();
 	canvasContext.moveTo(startX,startY);
@@ -409,7 +399,7 @@ function drawLine(startX,startY,endX,endY,lineDash,width,colour){
 	canvasContext.lineWidth=width;
 	canvasContext.strokeStyle=colour;
 	canvasContext.stroke();
-};
+	};
 function drawText(blur,colour,text,x,y){
 	canvasContext.beginPath();
 	canvasContext.font=`30px Arial`;
@@ -418,4 +408,4 @@ function drawText(blur,colour,text,x,y){
 	canvasContext.fillStyle=colour;
 	canvasContext.fillText(text,x,y);
 	canvasContext.stroke();
-};
+	};
