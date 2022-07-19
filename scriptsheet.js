@@ -60,6 +60,14 @@ function drawImage(){
 	if(image){
 		canvasContext.drawImage(image,0,0,canvas.width,canvas.height);
 	};
+	imageData=canvasContext.getImageData(0,0,canvas.width,canvas.height);
+	pixels=imageData.data;
+	swizzleImage();
+	outlineImage();
+	canvasContext.putImageData(imageData,0,0);
+	drawCursor();
+	};
+function swizzleImage(){
 	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle;
 	var SWIZZLE=[
 		[0,1,2],
@@ -70,8 +78,6 @@ function drawImage(){
 		[2,1,0],
 		[1,2,2]
 	];
-	var imageData=canvasContext.getImageData(0,0,canvas.width,canvas.height);
-	var pixels=imageData.data;
 	for(var i=0;i<pixels.length;i+=4){
 		var red=pixels[i+SWIZZLE[swizzle][0]];
 		var green=pixels[i+SWIZZLE[swizzle][1]];
@@ -80,6 +86,8 @@ function drawImage(){
 		pixels[i+1]=green;
 		pixels[i+2]=blue;
 	};
+	};
+function outlineImage(){
 	if(outline){
 		document.getElementById(`outline`).innerHTML=`Outline Shown`;
 		var i=0;
@@ -108,10 +116,8 @@ function drawImage(){
 	}else{
 		document.getElementById(`outline`).innerHTML=`Outline Hidden`;
 	};
-	canvasContext.putImageData(imageData,0,0);
-	if(isNaN(xCoordinate)||isNaN(yCoordinate)){
-		return;
 	};
+function drawCursor(){
 	var x=xCoordinate*2+.5*canvas.width;
 	var y=yCoordinate*2+.5*canvas.height;
 	drawArc(x,y,5,0,2*Math.PI,`#f00`);
