@@ -139,8 +139,10 @@ function changeSwizzle(){
 function toggleOutline(){
 	if(!outline){
 		outline=1;
+		document.getElementById(`outline`).innerHTML=`Outline Shown`;
 	}else{
 		outline=0;
+		document.getElementById(`outline`).innerHTML=`Outline Hidden`;
 	}
 	drawImage();
 }
