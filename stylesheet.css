@@ -35,74 +35,75 @@ label:hover{
 }
 /*Interactables*/
 #loadImage{
-	left:20px;
+	left:50%;
+	transform:translate(-50%,0);
 	position:absolute;
-	top:20px;
+	top:10px;
 }
 #swizzle{
 	left:20px;
 	position:absolute;
-	top:60px;
+	top:20px;
 }
 #outline{
 	left:20px;
 	position:absolute;
-	top:80px;
+	top:40px;
 }
 #mirror{
 	left:20px;
 	position:absolute;
-	top:100px;
+	top:60px;
 }
 #engines{
 	left:20px;
 	position:absolute;
-	top:140px;
+	top:100px;
 }
 #engine{
 	left:9.5vw;
 	position:absolute;
-	top:120px;
+	top:80px;
 }
 #reverseEngine{
 	left:9.5vw;
 	position:absolute;
-	top:140px;
+	top:100px;
 }
 #steeringEngine{
 	left:9.5vw;
 	position:absolute;
-	top:160px;
+	top:120px;
 }
 #weapons{
 	left:20px;
 	position:absolute;
-	top:160px;
+	top:120px;
 }
 #gun{
 	left:9.5vw;
 	position:absolute;
-	top:150px;
+	top:110px;
 }
 #turret{
 	left:9.5vw;
 	position:absolute;
-	top:170px;
+	top:130px;
 }
 #bays{
 	left:20px;
 	position:absolute;
-	top:180px;
+	top:140px;
 }
 #fighter{
 	left:9.5vw;
 	position:absolute;
-	top:170px;
+	top:130px;
 }
 #drone{
 	left:9.5vw;
 	position:absolute;
-	top:190px;
+	top:150px;
 }
 #undo{
 	font-size:40px;
