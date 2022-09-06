@@ -1,58 +1,37 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
-		<!-- Establish resource links -->
 		<link href="assets/sparrow.png" rel="icon">
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
-
 		<title>Ship Viewer</title>
 	</head>
-
-	<!-- Contains all page content, initializes content -->
 	<body onload="initialize()">
-
-		<!-- Ship hitbox -->
 		<canvas id="canvas"></canvas>
-
-		<!-- Actions -->
 		<label id="loadImage" for="file">Load Image</label>
 		<input class="hidden" id="file" type="file" onchange="loadImage()"/>
 		<label class="hidden" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
 		<label class="hidden" id="outline" onclick="toggleOutline()">Outline Hidden</label>
 		<label class="hidden" id="mirror" onclick="toggleMirror()">Mirror Off</label>
-
-		<!-- Engine hardpoints -->
 		<label class="hidden" id="engines" onclick="contractHardpoints(),expandEngines()">Engines&hellip;</label>
 		<label class="hidden fade" id="engine" onclick="addPoint(this.id),contractHardpoints()">Engine</label>
 		<label class="hidden fade" id="reverseEngine" onclick="addPoint(this.id),contractHardpoints()">Reverse Engine</label>
 		<label class="hidden fade" id="steeringEngine" onclick="addPoint(this.id),contractHardpoints()">Steering Engine</label>
-
-		<!-- Weapon hardpoints -->
 		<label class="hidden" id="weapons" onclick="contractHardpoints(),expandWeapons()">Weapons&hellip;</label>
 		<label class="hidden fade" id="gun" onclick="addPoint(this.id),contractHardpoints()">Gun</label>
 		<label class="hidden fade" id="turret" onclick="addPoint(this.id),contractHardpoints()">Turret</label>
-
-		<!-- Bay hardpoints -->
 		<label class="hidden" id="bays" onclick="contractHardpoints(),expandBays()">Bays&hellip;</label>
 		<label class="hidden fade" id="fighter" onclick="addPoint(this.id),contractHardpoints()">Fighter</label>
 		<label class="hidden fade" id="drone" onclick="addPoint(this.id),contractHardpoints()">Drone</label>
-
-		<!-- Coordinates -->
 		<label class="hidden" id="undo" onclick="undoPoint()">&#9100;</label>
 		<label class="hidden" id="xCoordinate" onclick="lockXAxis()">X:</label>
 		<label class="hidden" id="yCoordinate" onclick="lockYAxis()">Y:</label>
 		<label class="hidden" id="points" onclick="copyPoints()"></p>
-
 	</body>
-
-	<!-- Link page functions to page content -->
 	<script type="text/javascript" src="backend/actions.js"></script>
 	<script type="text/javascript" src="backend/initialize.js"></script>
 	<script type="text/javascript" src="backend/main.js"></script>
 	<script type="text/javascript" src="backend/mouse.js"></script>
 	<script type="text/javascript" src="backend/processing.js"></script>
 	<script type="text/javascript" src="backend/shortcuts.js"></script>
-
 </html>
