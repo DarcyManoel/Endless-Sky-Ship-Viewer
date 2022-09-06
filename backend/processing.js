@@ -10,12 +10,12 @@ function loadImage(){
 	document.getElementById(`xCoordinate`).classList.remove(`hidden`);
 	document.getElementById(`yCoordinate`).classList.remove(`hidden`);
 	if(typeof window.FileReader!==`function`){
-		return;
-	};
+		return
+	}
 	var input=document.getElementById(`file`);
 	if(!input||!input.files||!input.files[0]){
-		return;
-	};
+		return
+	}
 	reader=new FileReader();
 	reader.onload=createImage;
 	var file=input.files[0];
@@ -24,13 +24,13 @@ function loadImage(){
 		scale=1;
 	}else{
 		scale=2;
-	};
-};
+	}
+}
 function createImage(){
 	image=new Image();
 	image.onload=imageLoaded;
 	image.src=reader.result;
-};
+}
 function imageLoaded(){
 	var canvas=document.getElementById(`canvas`);
 	inflation=image.height/750;
@@ -43,4 +43,4 @@ function imageLoaded(){
 	drawImage();
 	coordinates=[];
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
-};
+}

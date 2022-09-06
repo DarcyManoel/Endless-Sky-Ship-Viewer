@@ -5,7 +5,7 @@ function drawArc(x,y,radius,start,end,colour){
 	canvasContext.lineWidth=1.5;
 	canvasContext.strokeStyle=colour;
 	canvasContext.stroke();
-};
+}
 function drawLine(startX,startY,endX,endY,lineDash,width,colour){
 	canvasContext.beginPath();
 	canvasContext.moveTo(startX,startY);
@@ -14,4 +14,4 @@ function drawLine(startX,startY,endX,endY,lineDash,width,colour){
 	canvasContext.lineWidth=width;
 	canvasContext.strokeStyle=colour;
 	canvasContext.stroke();
-};
+}

@@ -19,7 +19,7 @@ function contractHardpoints(){
 	// Hide bays
 	document.getElementById(`fighter`).classList.add(`fade`);
 	document.getElementById(`drone`).classList.add(`fade`);
-};
+}
 function expandEngines(){
 	selection=`engines`;
 	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints()`);
@@ -30,7 +30,7 @@ function expandEngines(){
 	document.getElementById(`reverseEngine`).classList.remove(`hidden`);
 	document.getElementById(`steeringEngine`).classList.remove(`fade`);
 	document.getElementById(`steeringEngine`).classList.remove(`hidden`);
-};
+}
 function expandWeapons(){
 	selection=`weapons`;
 	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints()`);
@@ -39,7 +39,7 @@ function expandWeapons(){
 	document.getElementById(`gun`).classList.remove(`hidden`);
 	document.getElementById(`turret`).classList.remove(`fade`);
 	document.getElementById(`turret`).classList.remove(`hidden`);
-};
+}
 function expandBays(){
 	selection=`bays`;
 	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints()`);
@@ -48,7 +48,7 @@ function expandBays(){
 	document.getElementById(`drone`).classList.remove(`hidden`);
 	document.getElementById(`fighter`).classList.remove(`fade`);
 	document.getElementById(`fighter`).classList.remove(`hidden`);
-};
+}
 function addPoint(name){
 	newName=name;
 	for(i=0;i<name.length;i++){
@@ -56,19 +56,19 @@ function addPoint(name){
 			newName=``;
 			for(j=0;j<i;j++){
 				newName+=name[j];
-			};
+			}
 			newName+=` `+name[i].toLowerCase();
 			for(j=i+1;j<name.length;j++){
 				newName+=name[j];
-			};
-		};
+			}
+		}
 		if(selection==`bays`&&i==0){
 			newName=name[i].toUpperCase();
 			for(j=i+1;j<name.length;j++){
 				newName+=name[j];
-			};
-		};
-	};
+			}
+		}
+	}
 	if(mirror){
 		if(selection==`engines`){
 			if(newName==`engine`){
@@ -77,12 +77,12 @@ function addPoint(name){
 				coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
 			}else if(newName==`steering engine`){
 				coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder\n\t\tleft`);
-			};
+			}
 		}else if(selection==`weapons`){
 			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else if(selection==`bays`){
 			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		};
+		}
 		if(Math.round(xCoordinate)!=0){
 			if(selection==`engines`){
 				if(newName==`engine`){
@@ -91,13 +91,13 @@ function addPoint(name){
 					coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
 				}else if(newName==`steering engine`){
 					coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder\n\t\tleft`);
-				};
+				}
 			}else if(selection==`weapons`){
 				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 			}else if(selection==`bays`){
 				coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-			};
-		};
+			}
+		}
 	}else{
 		if(selection==`engines`){
 			if(newName==`engine`){
@@ -106,44 +106,44 @@ function addPoint(name){
 				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
 			}else if(newName==`steering engine`){
 				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder\n\t\tleft`);
-			};
+			}
 		}else if(selection==`weapons`){
 			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
 		}else if(selection==`bays`){
 			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		};
-	};
+		}
+	}
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	document.getElementById(`undo`).classList.remove(`unavailable`);
 	document.getElementById(`undo`).classList.add(`highlight`);
-};
+}
 function undoPoint(){
 	coordinates.pop();
 	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
 	if(!coordinates[0]){
 		document.getElementById(`undo`).classList.remove(`highlight`);
 		document.getElementById(`undo`).classList.add(`unavailable`);
-	};
-};
+	}
+}
 function copyPoints(){
 	navigator.clipboard.writeText(coordinates.join(`\n`));
-};
+}
 function changeSwizzle(){
 	if(swizzle<6){
 		swizzle++;
 	}else{
 		swizzle=0;
-	};
+	}
 	drawImage();
-};
+}
 function toggleOutline(){
 	if(!outline){
 		outline=1;
 	}else{
 		outline=0;
-	};
+	}
 	drawImage();
-};
+}
 function toggleMirror(){
 	if(!mirror){
 		mirror=1;
@@ -151,9 +151,9 @@ function toggleMirror(){
 	}else{
 		mirror=0;
 		document.getElementById(`mirror`).innerHTML=`Mirror Off`;
-	};
+	}
 	drawImage();
-};
+}
 function lockXAxis(){
 	if(xAxisLocked){
 		document.getElementById(`yCoordinate`).style=`text-decoration:none;`;
@@ -165,8 +165,8 @@ function lockXAxis(){
 		yAxisLocked=false;
 		xAxisLocked=true;
 		drawImage();
-	};
-};
+	}
+}
 function lockYAxis(){
 	if(yAxisLocked){
 		document.getElementById(`xCoordinate`).style=`text-decoration:none;`;
@@ -178,5 +178,5 @@ function lockYAxis(){
 		xAxisLocked=false;
 		yAxisLocked=true;
 		drawImage();
-	};
-};
+	}
+}
