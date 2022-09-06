@@ -1,3 +1,33 @@
+//	Fine coordinate control using arrow keys or WASD
+function control(event){
+	switch(event.keyCode){
+		case 37:
+		case 65:
+			if(!yAxisLocked){
+				xCoordinate-=.5/(inflation*scale);
+			}
+			break
+		case 38:
+		case 87:
+			if(!xAxisLocked){
+				yCoordinate-=.5/(inflation*scale);
+			}
+			break
+		case 39:
+		case 68:
+			if(!yAxisLocked){
+				xCoordinate+=.5/(inflation*scale);
+			}
+			break
+		case 40:
+		case 83:
+			if(!xAxisLocked){
+				yCoordinate+=.5/(inflation*scale);
+			}
+			break
+	}
+	drawImage()
+}
 function onMouseMove(event){
 	if(!isDragging){
 		return

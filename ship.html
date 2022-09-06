@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 		<title>Ship Viewer</title>
 	</head>
-	<body onload="initialize()">
+	<body onkeydown="control(event)" onload="initialize()">
 		<canvas id="canvas"></canvas>
 		<label id="loadImage" for="file">&#10162; Upload Image</label>
 		<input class="hidden" id="file" type="file" onchange="loadImage()"/>
