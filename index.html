@@ -13,20 +13,17 @@
 		<label class="hidden" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
 		<label class="hidden" id="outline" onclick="toggleOutline()">Outline Hidden</label>
 		<label class="hidden" id="mirror" onclick="toggleMirror()">Mirror Off</label>
-		<label class="hidden" id="engines" onclick="contractHardpoints(),expandEngines()">Engines&hellip;</label>
-		<label class="hidden fade" id="engine" onclick="addPoint(this.id),contractHardpoints()">Engine</label>
-		<label class="hidden fade" id="reverseEngine" onclick="addPoint(this.id),contractHardpoints()">Reverse Engine</label>
-		<label class="hidden fade" id="steeringEngine" onclick="addPoint(this.id),contractHardpoints()">Steering Engine</label>
-		<label class="hidden" id="weapons" onclick="contractHardpoints(),expandWeapons()">Weapons&hellip;</label>
-		<label class="hidden fade" id="gun" onclick="addPoint(this.id),contractHardpoints()">Gun</label>
-		<label class="hidden fade" id="turret" onclick="addPoint(this.id),contractHardpoints()">Turret</label>
-		<label class="hidden" id="bays" onclick="contractHardpoints(),expandBays()">Bays&hellip;</label>
-		<label class="hidden fade" id="fighter" onclick="addPoint(this.id),contractHardpoints()">Fighter</label>
-		<label class="hidden fade" id="drone" onclick="addPoint(this.id),contractHardpoints()">Drone</label>
-		<label class="hidden" id="undo" onclick="undoPoint()">&#9100;</label>
+		<div class="hidden" id="addHardpoints">
+			<label id="gun" onclick="addHardpoint(this.id)">Gun</label>
+			<label id="turret" onclick="addHardpoint(this.id)">Turret</label>
+			<label id="engine" onclick="addHardpoint(this.id)">Engine</label>
+			<label id="left" onclick="addHardpoint(this.id)">Left</label>
+			<label id="right" onclick="addHardpoint(this.id)">Right</label>
+			<label id="reverse" onclick="addHardpoint(this.id)">Reverse</label>
+		</div>
 		<label class="hidden" id="xCoordinate" onclick="lockXAxis()">X:</label>
 		<label class="hidden" id="yCoordinate" onclick="lockYAxis()">Y:</label>
-		<label class="hidden" id="points" onclick="copyPoints()"></p>
+		<label id="hardpoints" onclick="copyPoints()"></p>
 	</body>
 	<script type="text/javascript" src="backend/actions.js"></script>
 	<script type="text/javascript" src="backend/control.js"></script>

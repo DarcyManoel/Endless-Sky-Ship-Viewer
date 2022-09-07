@@ -55,62 +55,47 @@ label:hover{
 	position:absolute;
 	top:60px;
 }
-#engines{
-	left:20px;
-	position:absolute;
-	top:100px;
-}
-#engine{
-	left:9.5vw;
-	position:absolute;
-	top:80px;
-}
-#reverseEngine{
-	left:9.5vw;
-	position:absolute;
-	top:100px;
-}
-#steeringEngine{
-	left:9.5vw;
-	position:absolute;
-	top:120px;
-}
-#weapons{
-	left:20px;
-	position:absolute;
-	top:120px;
-}
 #gun{
-	left:9.5vw;
+	bottom:120px;
+	left:40px;
 	position:absolute;
-	top:110px;
+	text-align:center;
+	width:60px;
 }
 #turret{
-	left:9.5vw;
+	bottom:100px;
+	left:40px;
 	position:absolute;
-	top:130px;
+	text-align:center;
+	width:60px;
 }
-#bays{
+#engine{
+	bottom:80px;
+	left:40px;
+	position:absolute;
+	text-align:center;
+	width:60px;
+}
+#left{
+	bottom:60px;
 	left:20px;
 	position:absolute;
-	top:140px;
+	text-align:center;
+	width:60px;
 }
-#fighter{
-	left:9.5vw;
+#right{
+	bottom:60px;
+	left:60px;
 	position:absolute;
-	top:130px;
+	text-align:center;
+	width:60px;
 }
-#drone{
-	left:9.5vw;
+#reverse{
+	bottom:40px;
+	left:40px;
 	position:absolute;
-	top:150px;
-}
-#undo{
-	font-size:40px;
-	position:absolute;
-	right:130px;
-	text-align:left;
-	top:15px;
+	text-align:center;
+	width:60px;
 }
 #xCoordinate{
 	position:absolute;
@@ -126,9 +111,9 @@ label:hover{
 	top:40px;
 	width:120px;
 }
-#points{
+#hardpoints{
 	line-height:3vh;
-	max-height:85vh;
+	height:85vh;
 	overflow-x:hidden;
 	overflow-y:scroll;
 	position:absolute;

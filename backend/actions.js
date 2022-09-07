@@ -1,132 +1,51 @@
-var coordinates=[];
+var hardpointType=`gun`;
+var hardpoints=[];
 var swizzle=0;
 var outline;
 var mirror;
 var xAxisLocked;
 var yAxisLocked;
-function contractHardpoints(){
-	selection=``;
-	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints(),expandEngines()`);
-	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints(),expandWeapons()`);
-	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints(),expandBays()`);
-	// Hide engines
-	document.getElementById(`engine`).classList.add(`fade`);
-	document.getElementById(`reverseEngine`).classList.add(`fade`);
-	document.getElementById(`steeringEngine`).classList.add(`fade`);
-	// Hide weapons
-	document.getElementById(`gun`).classList.add(`fade`);
-	document.getElementById(`turret`).classList.add(`fade`);
-	// Hide bays
-	document.getElementById(`fighter`).classList.add(`fade`);
-	document.getElementById(`drone`).classList.add(`fade`);
-}
-function expandEngines(){
-	selection=`engines`;
-	document.getElementById(`engines`).setAttribute(`onclick`,`contractHardpoints()`);
-	// Show engines
-	document.getElementById(`engine`).classList.remove(`fade`);
-	document.getElementById(`engine`).classList.remove(`hidden`);
-	document.getElementById(`reverseEngine`).classList.remove(`fade`);
-	document.getElementById(`reverseEngine`).classList.remove(`hidden`);
-	document.getElementById(`steeringEngine`).classList.remove(`fade`);
-	document.getElementById(`steeringEngine`).classList.remove(`hidden`);
-}
-function expandWeapons(){
-	selection=`weapons`;
-	document.getElementById(`weapons`).setAttribute(`onclick`,`contractHardpoints()`);
-	// Show weapons
-	document.getElementById(`gun`).classList.remove(`fade`);
-	document.getElementById(`gun`).classList.remove(`hidden`);
-	document.getElementById(`turret`).classList.remove(`fade`);
-	document.getElementById(`turret`).classList.remove(`hidden`);
-}
-function expandBays(){
-	selection=`bays`;
-	document.getElementById(`bays`).setAttribute(`onclick`,`contractHardpoints()`);
-	// Show bays
-	document.getElementById(`drone`).classList.remove(`fade`);
-	document.getElementById(`drone`).classList.remove(`hidden`);
-	document.getElementById(`fighter`).classList.remove(`fade`);
-	document.getElementById(`fighter`).classList.remove(`hidden`);
-}
-function addPoint(name){
-	newName=name;
-	for(i=0;i<name.length;i++){
-		if(name[i]==name[i].toUpperCase()){
-			newName=``;
-			for(j=0;j<i;j++){
-				newName+=name[j];
+function addHardpoint(type){
+	switch(type){
+		case `gun`:
+			hardpoints.push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2]);
+			if(mirror){
+				hardpoints.push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2]);
 			}
-			newName+=` `+name[i].toLowerCase();
-			for(j=i+1;j<name.length;j++){
-				newName+=name[j];
+			break
+		case `turret`:
+			hardpoints.push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2]);
+			if(mirror){
+				hardpoints.push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2]);
 			}
-		}
-		if(selection==`bays`&&i==0){
-			newName=name[i].toUpperCase();
-			for(j=i+1;j<name.length;j++){
-				newName+=name[j];
+			break
+		case `engine`:
+			hardpoints.push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2]);
+			if(mirror){
+				hardpoints.push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2]);
 			}
-		}
+			break
+		case `left`:
+			hardpoints.push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2]);
+			hardpoints.push([`\t\tangle 90`]);
+			hardpoints.push([`\t\tleft`]);
+			break
+		case `right`:
+			hardpoints.push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2]);
+			hardpoints.push([`\t\tangle 270`]);
+			hardpoints.push([`\t\tright`]);
+			break
+		case `reverse`:
+			hardpoints.push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2]);
+			if(mirror){
+				hardpoints.push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2]);
+			}
+			break
 	}
-	if(mirror){
-		if(selection==`engines`){
-			if(newName==`engine`){
-				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
-			}else if(newName==`reverse engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
-			}else if(newName==`steering engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder\n\t\tleft`);
-			}
-		}else if(selection==`weapons`){
-			coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}else if(selection==`bays`){
-			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}
-		if(Math.round(xCoordinate)!=0){
-			if(selection==`engines`){
-				if(newName==`engine`){
-					coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
-				}else if(newName==`reverse engine`){
-					coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
-				}else if(newName==`steering engine`){
-					coordinates.push(`\t`+`"`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)*-1+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder\n\t\tleft`);
-				}
-			}else if(selection==`weapons`){
-				coordinates.push(`\t`+newName+` `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-			}else if(selection==`bays`){
-				coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.abs(Math.round((xCoordinate*(inflation*scale))*2)/2)+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-			}
-		}
-	}else{
-		if(selection==`engines`){
-			if(newName==`engine`){
-				coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
-			}else if(newName==`reverse engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder`);
-			}else if(newName==`steering engine`){
-				coordinates.push(`\t`+`"`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2+`\n\t\tzoom 1\n\t\tunder\n\t\tleft`);
-			}
-		}else if(selection==`weapons`){
-			coordinates.push(`\t`+newName+` `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}else if(selection==`bays`){
-			coordinates.push(`\t`+`bay`+` "`+newName+`" `+Math.round((xCoordinate*(inflation*scale))*2)/2+` `+Math.round((yCoordinate*(inflation*scale))*2)/2);
-		}
-	}
-	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
-	document.getElementById(`undo`).classList.remove(`unavailable`);
-	document.getElementById(`undo`).classList.add(`highlight`);
-}
-function undoPoint(){
-	coordinates.pop();
-	document.getElementById(`points`).innerHTML=coordinates.join(`<br>`);
-	if(!coordinates[0]){
-		document.getElementById(`undo`).classList.remove(`highlight`);
-		document.getElementById(`undo`).classList.add(`unavailable`);
-	}
+	document.getElementById(`hardpoints`).innerHTML=hardpoints.map(e=>e.join(` `)).join(`\n`);
 }
 function copyPoints(){
-	navigator.clipboard.writeText(coordinates.join(`\n`));
+	navigator.clipboard.writeText(hardpoints.map(e=>e.join(` `)).join(`\n`));
 }
 function changeSwizzle(){
 	if(swizzle<6){
