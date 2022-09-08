@@ -4,25 +4,25 @@ function control(event){
 		case 37:
 		case 65:
 			if(!yAxisLocked){
-				xCoordinate-=.5/(inflation*scale);
+				xCoordinate-=.5/(inflation*scale)
 			}
 			break
 		case 38:
 		case 87:
 			if(!xAxisLocked){
-				yCoordinate-=.5/(inflation*scale);
+				yCoordinate-=.5/(inflation*scale)
 			}
 			break
 		case 39:
 		case 68:
 			if(!yAxisLocked){
-				xCoordinate+=.5/(inflation*scale);
+				xCoordinate+=.5/(inflation*scale)
 			}
 			break
 		case 40:
 		case 83:
 			if(!xAxisLocked){
-				yCoordinate+=.5/(inflation*scale);
+				yCoordinate+=.5/(inflation*scale)
 			}
 			break
 	}
@@ -32,23 +32,23 @@ function onMouseMove(event){
 	if(!isDragging){
 		return
 	}
-	drawCoordinates(event.offsetX,event.offsetY);
+	drawCoordinates(event.offsetX,event.offsetY)
 }
 function onMouseDown(event){
-	isDragging=true;
-	drawCoordinates(event.offsetX,event.offsetY);
+	isDragging=true
+	drawCoordinates(event.offsetX,event.offsetY)
 }
 function onMouseUp(event){
-	isDragging=false;
+	isDragging=false
 }
 function drawCoordinates(x,y){
 	if(xAxisLocked){
-		xCoordinate=.5*(x-.5*canvas.width);
+		xCoordinate=.5*(x-.5*canvas.width)
 	}else if(yAxisLocked){
-		yCoordinate=.5*(y-.5*canvas.height);
+		yCoordinate=.5*(y-.5*canvas.height)
 	}else{
-		xCoordinate=.5*(x-.5*canvas.width);
-		yCoordinate=.5*(y-.5*canvas.height);
+		xCoordinate=.5*(x-.5*canvas.width)
+		yCoordinate=.5*(y-.5*canvas.height)
 	}
-	drawImage();
+	drawImage()
 }
