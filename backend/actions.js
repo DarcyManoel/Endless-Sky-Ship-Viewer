@@ -77,12 +77,12 @@ function toggleMirror(){
 }
 function lockXAxis(){
 	if(xAxisLocked){
-		document.getElementById(`yCoordinate`).style=`text-decoration:none;`
+		document.getElementById(`yCoordinate`).classList.remove(`blocked`)
 		xAxisLocked=false
 		drawImage()
 	}else{
-		document.getElementById(`xCoordinate`).style=`text-decoration:none;`
-		document.getElementById(`yCoordinate`).style=`text-decoration:line-through;`
+		document.getElementById(`xCoordinate`).classList.remove(`blocked`)
+		document.getElementById(`yCoordinate`).classList.add(`blocked`)
 		yAxisLocked=false
 		xAxisLocked=true
 		drawImage()
@@ -90,12 +90,12 @@ function lockXAxis(){
 }
 function lockYAxis(){
 	if(yAxisLocked){
-		document.getElementById(`xCoordinate`).style=`text-decoration:none;`
+		document.getElementById(`xCoordinate`).classList.remove(`blocked`)
 		yAxisLocked=false
 		drawImage()
 	}else{
-		document.getElementById(`xCoordinate`).style=`text-decoration:line-through;`
-		document.getElementById(`yCoordinate`).style=`text-decoration:none;`
+		document.getElementById(`xCoordinate`).classList.add(`blocked`)
+		document.getElementById(`yCoordinate`).classList.remove(`blocked`)
 		xAxisLocked=false
 		yAxisLocked=true
 		drawImage()

@@ -10,10 +10,10 @@
 		<canvas id="canvas"></canvas>
 		<label id="loadImage" for="file">&#10162; Upload Image</label>
 		<input class="hidden" id="file" type="file" onchange="loadImage()"/>
-		<label class="hidden" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
-		<label class="hidden" id="outline" onclick="toggleOutline()">Outline Hidden</label>
-		<label class="hidden" id="mirror" onclick="toggleMirror()">Mirror Off</label>
-		<div class="hidden" id="addHardpoints">
+		<label class="blocked" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
+		<label class="blocked" id="outline" onclick="toggleOutline()">Outline Hidden</label>
+		<label class="blocked" id="mirror" onclick="toggleMirror()">Mirror Off</label>
+		<div class="blocked" id="addHardpoints">
 			<label id="gun" onclick="addHardpoint(this.id)">Gun</label>
 			<label id="turret" onclick="addHardpoint(this.id)">Turret</label>
 			<label id="engine" onclick="addHardpoint(this.id)">Engine</label>
@@ -21,8 +21,8 @@
 			<label id="right" onclick="addHardpoint(this.id)">Right</label>
 			<label id="reverse" onclick="addHardpoint(this.id)">Reverse</label>
 		</div>
-		<label class="hidden" id="xCoordinate" onclick="lockXAxis()">X:</label>
-		<label class="hidden" id="yCoordinate" onclick="lockYAxis()">Y:</label>
+		<label class="blocked" id="xCoordinate" onclick="lockXAxis()">X:</label>
+		<label class="blocked" id="yCoordinate" onclick="lockYAxis()">Y:</label>
 		<label id="hardpoints" onclick="copyPoints()"></p>
 	</body>
 	<script type="text/javascript" src="backend/actions.js"></script>

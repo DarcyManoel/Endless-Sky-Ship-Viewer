@@ -1,10 +1,10 @@
 function loadImage(){
-	document.getElementById(`swizzle`).classList.remove(`hidden`)
-	document.getElementById(`outline`).classList.remove(`hidden`)
-	document.getElementById(`mirror`).classList.remove(`hidden`)
-	document.getElementById(`addHardpoints`).classList.remove(`hidden`)
-	document.getElementById(`xCoordinate`).classList.remove(`hidden`)
-	document.getElementById(`yCoordinate`).classList.remove(`hidden`)
+	document.getElementById(`swizzle`).classList.remove(`blocked`)
+	document.getElementById(`outline`).classList.remove(`blocked`)
+	document.getElementById(`mirror`).classList.remove(`blocked`)
+	document.getElementById(`addHardpoints`).classList.remove(`blocked`)
+	document.getElementById(`xCoordinate`).classList.remove(`blocked`)
+	document.getElementById(`yCoordinate`).classList.remove(`blocked`)
 	if(typeof window.FileReader!==`function`){
 		return
 	}

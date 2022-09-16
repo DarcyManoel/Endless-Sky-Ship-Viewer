@@ -27,6 +27,12 @@ label:hover{
 	animation:highlightOn .5s forwards;
 	cursor:pointer;
 }
+.blocked,
+.blocked label{
+	animation:none;
+	color:#333;
+	pointer-events:none;
+}
 .hidden{
 	display:none;
 }
