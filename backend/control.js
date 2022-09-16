@@ -1,3 +1,4 @@
+var isDragging=false
 //	Fine coordinate control using arrow keys or WASD
 function control(event){
 	switch(event.keyCode){
