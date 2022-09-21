@@ -34,9 +34,9 @@ function createImage(){
 }
 function imageLoaded(){
 	var canvas=document.getElementById(`canvas`)
-	inflation=image.height/750
-	image.width=(image.width/image.height)*750
-	image.height=750
+	inflation=image.height/700
+	image.width=(image.width/image.height)*700
+	image.height=700
 	canvas.height=image.height
 	canvas.width=image.width
 	xCoordinate=0
