@@ -6,24 +6,30 @@
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 		<title>Ship Viewer</title>
 	</head>
-	<body onkeydown="control(event)" onload="initialize()">
+	<body onKeyDown="control(event)" onLoad="initialize()">
 		<canvas id="canvas"></canvas>
 		<label id="loadImage" for="file">&#10162; Upload Image</label>
-		<input class="hidden" id="file" type="file" onchange="loadImage()"/>
-		<label class="blocked" id="swizzle" onclick="changeSwizzle()">Swizzle 0</label>
-		<label class="blocked" id="outline" onclick="toggleOutline()">Outline Hidden</label>
-		<label class="blocked" id="mirror" onclick="toggleMirror()">Mirror Off</label>
+		<input class="hidden" id="file" type="file" onChange="loadImage()"/>
+		<label class="hidden" id="helpUpload">Upload a ship sprite to easily divine hardpoint coordinates for it.</label>
+		<label id="help" onClick="toggleHelp()">Help Me!</label>
+		<label class="blocked" id="swizzle" onClick="changeSwizzle()">Swizzle 0</label>
+		<label class="hidden" id="helpSwizzle">Cycle swizzles 0 through 6</label>
+		<label class="blocked" id="outline" onClick="toggleOutline()">Outline Hidden</label>
+		<label class="hidden" id="helpOutline">Collision mask</label>
+		<label class="blocked" id="mirror" onClick="toggleMirror()">Mirror Off</label>
+		<label class="hidden" id="helpMirror">Mirror hardpoints horizontally</label>
 		<div class="blocked" id="addHardpoints">
-			<label id="gun" onclick="addHardpoint(this.id)">Gun</label>
-			<label id="turret" onclick="addHardpoint(this.id)">Turret</label>
-			<label id="engine" onclick="addHardpoint(this.id)">Engine</label>
-			<label id="left" onclick="addHardpoint(this.id)">Left</label>
-			<label id="right" onclick="addHardpoint(this.id)">Right</label>
-			<label id="reverse" onclick="addHardpoint(this.id)">Reverse</label>
+			<label id="gun" onClick="addHardpoint(this.id)">Gun</label>
+			<label id="turret" onClick="addHardpoint(this.id)">Turret</label>
+			<label id="engine" onClick="addHardpoint(this.id)">Engine</label>
+			<label id="left" onClick="addHardpoint(this.id)">Left</label>
+			<label id="right" onClick="addHardpoint(this.id)">Right</label>
+			<label id="reverse" onClick="addHardpoint(this.id)">Reverse</label>
 		</div>
-		<label class="blocked" id="xCoordinate" onclick="lockXAxis()">X:</label>
-		<label class="blocked" id="yCoordinate" onclick="lockYAxis()">Y:</label>
-		<label id="hardpoints" onclick="copyPoints()"></p>
+		<label class="hidden" id="helpHardpoints">Define preset hardpoint types</label>
+		<label class="blocked" id="xCoordinate" onClick="lockXAxis()">X:</label>
+		<label class="blocked" id="yCoordinate" onClick="lockYAxis()">Y:</label>
+		<label id="hardpoints" onClick="copyPoints()"></p>
 	</body>
 	<script type="text/javascript" src="backend/actions.js"></script>
 	<script type="text/javascript" src="backend/control.js"></script>

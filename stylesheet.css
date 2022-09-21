@@ -46,6 +46,12 @@ label:hover{
 	position:absolute;
 	top:10px;
 }
+#help{
+	bottom:10px;
+	left:50%;
+	position:absolute;
+	transform:translate(-50%,0);
+}
 #swizzle{
 	left:20px;
 	position:absolute;
@@ -128,6 +134,35 @@ label:hover{
 	top:80px;
 	white-space:pre;
 	width:240px;
+}
+/*Informational*/
+#helpUpload{
+	left:50%;
+	position:absolute;
+	text-align:center;
+	top:40px;
+	transform:translate(-50%,0);
+	width:400px;
+}
+#helpSwizzle{
+	left:110px;
+	position:absolute;
+	top:20px;
+}
+#helpOutline{
+	left:160px;
+	position:absolute;
+	top:40px;
+}
+#helpMirror{
+	left:120px;
+	position:absolute;
+	top:60px;
+}
+#helpHardpoints{
+	left:120px;
+	position:absolute;
+	bottom:80px;
 }
 /*Fade*/
 .fade{

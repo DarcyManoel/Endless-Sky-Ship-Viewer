@@ -1,3 +1,4 @@
+var help=false
 var hardpointType=`gun`
 var hardpoints=[]
 var swizzle=0
@@ -5,6 +6,29 @@ var outline
 var mirror
 var xAxisLocked
 var yAxisLocked
+function toggleHelp(){
+	switch(help){
+		case true:
+			document.getElementById(`help`).innerHTML=`Help Me!`
+			document.getElementById(`helpUpload`).classList.add(`hidden`)
+			document.getElementById(`helpSwizzle`).classList.add(`hidden`)
+			document.getElementById(`helpOutline`).classList.add(`hidden`)
+			document.getElementById(`helpMirror`).classList.add(`hidden`)
+			document.getElementById(`helpHardpoints`).classList.add(`hidden`)
+			help=false
+			break
+		case false:
+			document.getElementById(`help`).innerHTML=`Don't Help Me!`
+			document.getElementById(`helpUpload`).classList.remove(`hidden`)
+			document.getElementById(`helpSwizzle`).classList.remove(`hidden`)
+			document.getElementById(`helpOutline`).classList.remove(`hidden`)
+			document.getElementById(`helpMirror`).classList.remove(`hidden`)
+			document.getElementById(`helpHardpoints`).classList.remove(`hidden`)
+			help=true
+			break
+	}
+	localStorage.setItem(`help`,help)
+}
 function addHardpoint(type){
 	switch(type){
 		case `gun`:

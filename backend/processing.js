@@ -5,6 +5,11 @@ function loadImage(){
 	document.getElementById(`addHardpoints`).classList.remove(`blocked`)
 	document.getElementById(`xCoordinate`).classList.remove(`blocked`)
 	document.getElementById(`yCoordinate`).classList.remove(`blocked`)
+	document.getElementById(`helpUpload`).classList.add(`blocked`)
+	document.getElementById(`helpSwizzle`).classList.add(`blocked`)
+	document.getElementById(`helpOutline`).classList.add(`blocked`)
+	document.getElementById(`helpMirror`).classList.add(`blocked`)
+	document.getElementById(`helpHardpoints`).classList.add(`blocked`)
 	if(typeof window.FileReader!==`function`){
 		return
 	}
