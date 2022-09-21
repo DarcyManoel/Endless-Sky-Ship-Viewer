@@ -68,45 +68,45 @@ label:hover{
 	top:60px;
 }
 #gun{
-	bottom:120px;
 	left:40px;
 	position:absolute;
 	text-align:center;
+	top:100px;
 	width:60px;
 }
 #turret{
-	bottom:100px;
 	left:40px;
 	position:absolute;
 	text-align:center;
+	top:120px;
 	width:60px;
 }
 #engine{
-	bottom:80px;
 	left:40px;
 	position:absolute;
 	text-align:center;
+	top:140px;
 	width:60px;
 }
 #left{
-	bottom:60px;
 	left:20px;
 	position:absolute;
 	text-align:center;
+	top:160px;
 	width:60px;
 }
 #right{
-	bottom:60px;
 	left:60px;
 	position:absolute;
 	text-align:center;
+	top:160px;
 	width:60px;
 }
 #reverse{
-	bottom:40px;
 	left:40px;
 	position:absolute;
 	text-align:center;
+	top:180px;
 	width:60px;
 }
 #xCoordinate{
@@ -162,7 +162,7 @@ label:hover{
 #helpHardpoints{
 	left:120px;
 	position:absolute;
-	bottom:80px;
+	top:140px;
 }
 /*Fade*/
 .fade{
