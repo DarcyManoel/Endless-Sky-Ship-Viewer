@@ -1,9 +1,8 @@
 var help=false
-var hardpointType=`gun`
-var hardpoints=[]
 var swizzle=0
 var outline
 var mirror
+var hardpoints=[[],[],[]]
 var xAxisLocked
 var yAxisLocked
 function toggleHelp(){
@@ -28,48 +27,6 @@ function toggleHelp(){
 			break
 	}
 	localStorage.setItem(`help`,help)
-}
-function addHardpoint(type){
-	switch(type){
-		case `gun`:
-			hardpoints.push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			if(mirror){
-				hardpoints.push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			}
-			break
-		case `turret`:
-			hardpoints.push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			if(mirror){
-				hardpoints.push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			}
-			break
-		case `engine`:
-			hardpoints.push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			if(mirror){
-				hardpoints.push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			}
-			break
-		case `left`:
-			hardpoints.push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			hardpoints.push([`\t\tangle 90`])
-			hardpoints.push([`\t\tleft`])
-			break
-		case `right`:
-			hardpoints.push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			hardpoints.push([`\t\tangle 270`])
-			hardpoints.push([`\t\tright`])
-			break
-		case `reverse`:
-			hardpoints.push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			if(mirror){
-				hardpoints.push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			}
-			break
-	}
-	document.getElementById(`hardpoints`).innerHTML=hardpoints.map(e=>e.join(` `)).join(`\n`)
-}
-function copyPoints(){
-	navigator.clipboard.writeText(hardpoints.map(e=>e.join(` `)).join(`\n`))
 }
 function changeSwizzle(){
 	if(swizzle<6){
@@ -99,6 +56,51 @@ function toggleMirror(){
 	}
 	drawImage()
 }
+function addHardpoint(type){
+	switch(type){
+		case `gun`:
+			hardpoints[0].push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			if(mirror){
+				hardpoints[0].push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			}
+			break
+		case `turret`:
+			hardpoints[1].push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			if(mirror){
+				hardpoints[1].push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			}
+			break
+		case `engine`:
+			hardpoints[2].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			if(mirror){
+				hardpoints[2].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			}
+			break
+		case `left`:
+			hardpoints[2].push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[2].push([`\t\tangle 90`])
+			hardpoints[2].push([`\t\tleft`])
+			break
+		case `right`:
+			hardpoints[2].push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[2].push([`\t\tangle 270`])
+			hardpoints[2].push([`\t\tright`])
+			break
+		case `reverse`:
+			hardpoints[2].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			if(mirror){
+				hardpoints[2].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			}
+			break
+	}
+	console.log(hardpoints)
+	document.getElementById(`hardpoints`).innerHTML=
+		hardpoints[0].map(e=>e.join(` `)).join(`\n`)+
+		`\n`+
+		hardpoints[1].map(e=>e.join(` `)).join(`\n`)+
+		`\n`+
+		hardpoints[2].map(e=>e.join(` `)).join(`\n`)
+}
 function lockXAxis(){
 	if(xAxisLocked){
 		document.getElementById(`yCoordinate`).classList.remove(`blocked`)
@@ -124,4 +126,13 @@ function lockYAxis(){
 		yAxisLocked=true
 		drawImage()
 	}
+}
+function copyPoints(){
+	navigator.clipboard.writeText(
+		hardpoints[0].map(e=>e.join(` `)).join(`\n`)+
+		`\n`+
+		hardpoints[1].map(e=>e.join(` `)).join(`\n`)+
+		`\n`+
+		hardpoints[2].map(e=>e.join(` `)).join(`\n`)
+	)
 }
