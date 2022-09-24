@@ -8,28 +8,20 @@ var yAxisLocked
 function toggleHelp(){
 	switch(help){
 		case true:
-			document.getElementById(`help`).innerHTML=`Help Me!`
-			document.getElementById(`helpUpload`).classList.add(`hidden`)
-			document.getElementById(`helpSwizzle`).classList.add(`hidden`)
+			document.getElementById(`helpToggle`).innerHTML=`Help Me!`
+			document.getElementById(`help`).classList.add(`hidden`)
 			document.getElementById(`swizzle`).style=``
-			document.getElementById(`helpOutline`).classList.add(`hidden`)
 			document.getElementById(`outline`).style=``
-			document.getElementById(`helpMirror`).classList.add(`hidden`)
 			document.getElementById(`mirror`).style=``
-			document.getElementById(`helpHardpoints`).classList.add(`hidden`)
 			document.getElementById(`addHardpoints`).style=``
 			help=false
 			break
 		case false:
-			document.getElementById(`help`).innerHTML=`Don't Help Me!`
-			document.getElementById(`helpUpload`).classList.remove(`hidden`)
-			document.getElementById(`helpSwizzle`).classList.remove(`hidden`)
+			document.getElementById(`helpToggle`).innerHTML=`Don't Help Me!`
+			document.getElementById(`help`).classList.remove(`hidden`)
 			document.getElementById(`swizzle`).style=`border-right:1px solid #fff`
-			document.getElementById(`helpOutline`).classList.remove(`hidden`)
 			document.getElementById(`outline`).style=`border-right:1px solid #fff`
-			document.getElementById(`helpMirror`).classList.remove(`hidden`)
 			document.getElementById(`mirror`).style=`border-right:1px solid #fff`
-			document.getElementById(`helpHardpoints`).classList.remove(`hidden`)
 			document.getElementById(`addHardpoints`).style=`border-right:1px solid #fff`
 			help=true
 			break
