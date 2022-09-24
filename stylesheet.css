@@ -54,73 +54,81 @@ label:hover{
 }
 #swizzle{
 	left:20px;
+	padding-right:20px;
 	position:absolute;
 	top:20px;
 }
 #outline{
 	left:20px;
+	padding-right:20px;
 	position:absolute;
 	top:60px;
 }
 #mirror{
 	left:20px;
+	padding-right:20px;
 	position:absolute;
 	top:100px;
 }
-#gun{
-	left:40px;
+#addHardpoints{
+	height:120px;
+	left:20px;
+	padding-right:120px;
 	position:absolute;
-	text-align:center;
 	top:140px;
-	width:60px;
 }
-#turret{
-	left:40px;
-	position:absolute;
-	text-align:center;
-	top:160px;
-	width:60px;
-}
-#fighter{
-	left:15px;
-	position:absolute;
-	text-align:center;
-	top:180px;
-	width:60px;
-}
-#drone{
-	left:70px;
-	position:absolute;
-	text-align:center;
-	top:180px;
-	width:60px;
-}
-#engine{
-	left:40px;
-	position:absolute;
-	text-align:center;
-	top:200px;
-	width:60px;
-}
-#left{
+#gun{
 	left:20px;
 	position:absolute;
 	text-align:center;
-	top:220px;
+	width:60px;
+}
+#turret{
+	left:20px;
+	position:absolute;
+	text-align:center;
+	top:20px;
+	width:60px;
+}
+#fighter{
+	left:-5px;
+	position:absolute;
+	text-align:center;
+	top:40px;
+	width:60px;
+}
+#drone{
+	left:50px;
+	position:absolute;
+	text-align:center;
+	top:40px;
+	width:60px;
+}
+#engine{
+	left:20px;
+	position:absolute;
+	text-align:center;
+	top:60px;
+	width:60px;
+}
+#left{
+	position:absolute;
+	text-align:center;
+	top:80px;
 	width:60px;
 }
 #right{
-	left:60px;
-	position:absolute;
-	text-align:center;
-	top:220px;
-	width:60px;
-}
-#reverse{
 	left:40px;
 	position:absolute;
 	text-align:center;
-	top:240px;
+	top:80px;
+	width:60px;
+}
+#reverse{
+	left:20px;
+	position:absolute;
+	text-align:center;
+	top:100px;
 	width:60px;
 }
 #xCoordinate{
@@ -159,7 +167,7 @@ label:hover{
 	width:400px;
 }
 #helpSwizzle{
-	left:110px;
+	left:115px;
 	position:absolute;
 	top:20px;
 }
@@ -169,14 +177,14 @@ label:hover{
 	top:60px;
 }
 #helpMirror{
-	left:120px;
+	left:125px;
 	position:absolute;
 	top:100px;
 }
 #helpHardpoints{
-	left:120px;
+	left:150px;
 	position:absolute;
-	top:150px;
+	top:140px;
 }
 /*Fade*/
 .fade{
