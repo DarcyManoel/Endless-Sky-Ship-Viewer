@@ -22,20 +22,19 @@ function swizzleImage(){
 		[2,1,0],
 		[1,2,2]
 	]
-	for(var i=0;i<pixels.length;i+=4){
-		var red=pixels[i+SWIZZLE[swizzle][0]]
-		var green=pixels[i+SWIZZLE[swizzle][1]]
-		var blue=pixels[i+SWIZZLE[swizzle][2]]
-		pixels[i+0]=red
-		pixels[i+1]=green
-		pixels[i+2]=blue
+	for(var i1=0;i1<pixels.length;i1+=4){
+		var red=pixels[i1+SWIZZLE[swizzle][0]]
+		var green=pixels[i1+SWIZZLE[swizzle][1]]
+		var blue=pixels[i1+SWIZZLE[swizzle][2]]
+		pixels[i1+0]=red
+		pixels[i1+1]=green
+		pixels[i1+2]=blue
 	}
 }
 function outlineImage(){
 	if(outline){
-		var i=0
-		for(var i=0;i<pixels.length&&!pixels[i+3];i+=4){}
-		var start=i
+		for(i1=0;i1<pixels.length&&!pixels[i1+3];i1+=4){}
+		var start=i1
 		var DIR=[
 			pixels.length-4*canvas.width,
 			pixels.length-4*canvas.width+4,
@@ -46,16 +45,16 @@ function outlineImage(){
 			pixels.length-4,
 			pixels.length-4*canvas.width-4
 		]
-		var d=0
+		var i2=0
 		do{
-			pixels[i+0]=255
-			pixels[i+1]=0
-			pixels[i+2]=0
-			pixels[i+3]=255
-			while(!pixels[(i+3+DIR[d])%pixels.length]){d=(d+1)%8;}
-			i=(i+DIR[d])%pixels.length
-			d=(d+6)%8
-		}while(i!=start)
+			pixels[i1+0]=255
+			pixels[i1+1]=0
+			pixels[i1+2]=0
+			pixels[i1+3]=255
+			while(!pixels[(i1+3+DIR[i2])%pixels.length]){i2=(i2+1)%8;}
+			i1=(i1+DIR[i2])%pixels.length
+			i2=(i2+6)%8
+		}while(i1!=start)
 	}
 }
 function drawCursor(){
@@ -67,18 +66,21 @@ function drawCursor(){
 	}else if(yAxisLocked){
 		drawLine(x,y-20,x,y+20,[15,10],1.5,`#f00`)
 	}
-	if(mirror){
-		var rx=canvas.width-x
-		drawArc(rx,y,5,0,2*Math.PI,`#f00`)
-		if(xAxisLocked){
-			drawLine(rx-20,y,rx+20,y,[15,10],1.5,`#f00`)
-		}else if(yAxisLocked){
-			drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`)
-		}
-		drawLine(canvas.width/2,0,canvas.width/2,canvas.height,[20,10],1.5,`#f00`)
-		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`
-	}else{
-		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`
+	switch(mirror){
+		case 0:
+			document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`
+			break
+		case 1:
+			var rx=canvas.width-x
+			drawArc(rx,y,5,0,2*Math.PI,`#f00`)
+			if(xAxisLocked){
+				drawLine(rx-20,y,rx+20,y,[15,10],1.5,`#f00`)
+			}else if(yAxisLocked){
+				drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`)
+			}
+			drawLine(canvas.width/2,0,canvas.width/2,canvas.height,[20,10],1.5,`#f00`)
+			document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`
+			break
 	}
 	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`
 }

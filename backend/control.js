@@ -30,26 +30,34 @@ function control(event){
 	drawImage()
 }
 function onMouseMove(event){
-	if(!isDragging){
-		return
+	switch(isDragging){
+		case 0:
+			return
+			break
 	}
 	drawCoordinates(event.offsetX,event.offsetY)
 }
 function onMouseDown(event){
-	isDragging=true
+	isDragging=1
 	drawCoordinates(event.offsetX,event.offsetY)
 }
 function onMouseUp(event){
-	isDragging=false
+	isDragging=0
 }
 function drawCoordinates(x,y){
-	if(xAxisLocked){
-		xCoordinate=.5*(x-.5*canvas.width)
-	}else if(yAxisLocked){
-		yCoordinate=.5*(y-.5*canvas.height)
-	}else{
+	if(!xAxisLocked&&!yAxisLocked){
 		xCoordinate=.5*(x-.5*canvas.width)
 		yCoordinate=.5*(y-.5*canvas.height)
+	}
+	switch(xAxisLocked){
+		case 1:
+			xCoordinate=.5*(x-.5*canvas.width)
+			break
+	}
+	switch(yAxisLocked){
+		case 1:
+			yCoordinate=.5*(y-.5*canvas.height)
+			break
 	}
 	drawImage()
 }

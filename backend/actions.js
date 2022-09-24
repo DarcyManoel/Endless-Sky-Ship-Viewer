@@ -1,10 +1,10 @@
 var help=false
 var swizzle=0
-var outline
-var mirror
+var outline=0
+var mirror=0
 var hardpoints=[[],[],[],[]]
-var xAxisLocked
-var yAxisLocked
+var xAxisLocked=0
+var yAxisLocked=0
 function toggleHelp(){
 	switch(help){
 		case true:
@@ -29,30 +29,44 @@ function toggleHelp(){
 	localStorage.setItem(`help`,help)
 }
 function changeSwizzle(){
-	if(swizzle<6){
-		swizzle++
-	}else{
-		swizzle=0
+	switch(swizzle){
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			swizzle++
+			break
+		case 6:
+			swizzle=0
+			break
 	}
 	drawImage()
 }
 function toggleOutline(){
-	if(!outline){
-		outline=1
-		document.getElementById(`outline`).innerHTML=`Outline Shown`
-	}else{
-		outline=0
-		document.getElementById(`outline`).innerHTML=`Outline Hidden`
+	switch(outline){
+		case 0:
+			outline++
+			document.getElementById(`outline`).innerHTML=`Outline Shown`
+			break
+		case 1:
+			outline=0
+			document.getElementById(`outline`).innerHTML=`Outline Hidden`
+			break
 	}
 	drawImage()
 }
 function toggleMirror(){
-	if(!mirror){
-		mirror=1
-		document.getElementById(`mirror`).innerHTML=`Mirror On`
-	}else{
-		mirror=0
-		document.getElementById(`mirror`).innerHTML=`Mirror Off`
+	switch(mirror){
+		case 0:
+			mirror++
+			document.getElementById(`mirror`).innerHTML=`Mirror On`
+			break
+		case 1:
+			mirror=0
+			document.getElementById(`mirror`).innerHTML=`Mirror Off`
+			break
 	}
 	drawImage()
 }
@@ -111,30 +125,30 @@ function addHardpoint(type){
 	}
 }
 function lockXAxis(){
-	if(xAxisLocked){
-		document.getElementById(`yCoordinate`).classList.remove(`blocked`)
-		xAxisLocked=false
-		drawImage()
-	}else{
-		document.getElementById(`xCoordinate`).classList.remove(`blocked`)
-		document.getElementById(`yCoordinate`).classList.add(`blocked`)
-		yAxisLocked=false
-		xAxisLocked=true
-		drawImage()
+	switch(xAxisLocked){
+		case 0:
+			document.getElementById(`yCoordinate`).classList.add(`blocked`)
+			xAxisLocked=1
+			break
+		case 1:
+			document.getElementById(`yCoordinate`).classList.remove(`blocked`)
+			xAxisLocked=0
+			break
 	}
+	drawImage()
 }
 function lockYAxis(){
-	if(yAxisLocked){
-		document.getElementById(`xCoordinate`).classList.remove(`blocked`)
-		yAxisLocked=false
-		drawImage()
-	}else{
-		document.getElementById(`xCoordinate`).classList.add(`blocked`)
-		document.getElementById(`yCoordinate`).classList.remove(`blocked`)
-		xAxisLocked=false
-		yAxisLocked=true
-		drawImage()
+	switch(yAxisLocked){
+		case 0:
+			document.getElementById(`xCoordinate`).classList.add(`blocked`)
+			yAxisLocked=1
+			break
+		case 1:
+			document.getElementById(`xCoordinate`).classList.remove(`blocked`)
+			yAxisLocked=0
+			break
 	}
+	drawImage()
 }
 function copyPoints(){
 	navigator.clipboard.writeText(
