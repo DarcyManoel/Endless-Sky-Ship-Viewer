@@ -60,53 +60,67 @@ label:hover{
 #outline{
 	left:20px;
 	position:absolute;
-	top:40px;
+	top:60px;
 }
 #mirror{
 	left:20px;
 	position:absolute;
-	top:60px;
+	top:100px;
 }
 #gun{
-	left:40px;
-	position:absolute;
-	text-align:center;
-	top:100px;
-	width:60px;
-}
-#turret{
-	left:40px;
-	position:absolute;
-	text-align:center;
-	top:120px;
-	width:60px;
-}
-#engine{
 	left:40px;
 	position:absolute;
 	text-align:center;
 	top:140px;
 	width:60px;
 }
+#turret{
+	left:40px;
+	position:absolute;
+	text-align:center;
+	top:160px;
+	width:60px;
+}
+#fighter{
+	left:15px;
+	position:absolute;
+	text-align:center;
+	top:180px;
+	width:60px;
+}
+#drone{
+	left:70px;
+	position:absolute;
+	text-align:center;
+	top:180px;
+	width:60px;
+}
+#engine{
+	left:40px;
+	position:absolute;
+	text-align:center;
+	top:200px;
+	width:60px;
+}
 #left{
 	left:20px;
 	position:absolute;
 	text-align:center;
-	top:160px;
+	top:220px;
 	width:60px;
 }
 #right{
 	left:60px;
 	position:absolute;
 	text-align:center;
-	top:160px;
+	top:220px;
 	width:60px;
 }
 #reverse{
 	left:40px;
 	position:absolute;
 	text-align:center;
-	top:180px;
+	top:240px;
 	width:60px;
 }
 #xCoordinate{
@@ -152,17 +166,17 @@ label:hover{
 #helpOutline{
 	left:160px;
 	position:absolute;
-	top:40px;
+	top:60px;
 }
 #helpMirror{
 	left:120px;
 	position:absolute;
-	top:60px;
+	top:100px;
 }
 #helpHardpoints{
 	left:120px;
 	position:absolute;
-	top:140px;
+	top:150px;
 }
 /*Fade*/
 .fade{
