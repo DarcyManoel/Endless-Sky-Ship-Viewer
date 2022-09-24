@@ -103,17 +103,11 @@ function addHardpoint(type){
 	}
 	console.log(hardpoints)
 	document.getElementById(`hardpoints`).innerHTML=``
-	if(hardpoints[0].length){
-		document.getElementById(`hardpoints`).innerHTML+=hardpoints[0].map(e=>e.join(` `)).join(``)
-	}
-	if(hardpoints[1].length){
-		document.getElementById(`hardpoints`).innerHTML+=hardpoints[1].map(e=>e.join(` `)).join(``)
-	}
-	if(hardpoints[2].length){
-		document.getElementById(`hardpoints`).innerHTML+=hardpoints[2].map(e=>e.join(` `)).join(``)
-	}
-	if(hardpoints[3].length){
-		document.getElementById(`hardpoints`).innerHTML+=hardpoints[3].map(e=>e.join(` `)).join(``)
+	for(i1=0;i1<hardpoints.length;i1++){
+		if(hardpoints[i1].length){
+			hardpoints[i1].sort(function(a,b){return a[2]-b[2]})
+			document.getElementById(`hardpoints`).innerHTML+=hardpoints[i1].map(e=>e.join(` `)).join(``)
+		}
 	}
 }
 function lockXAxis(){
