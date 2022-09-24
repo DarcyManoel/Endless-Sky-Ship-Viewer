@@ -1,4 +1,6 @@
 function loadImage(){
+	hardpoints=[[],[],[],[]]
+	document.getElementById(`hardpoints`).innerHTML=``
 	document.getElementById(`swizzle`).classList.remove(`blocked`)
 	document.getElementById(`outline`).classList.remove(`blocked`)
 	document.getElementById(`mirror`).classList.remove(`blocked`)

@@ -2,7 +2,7 @@ var help=false
 var swizzle=0
 var outline
 var mirror
-var hardpoints=[[],[],[]]
+var hardpoints=[[],[],[],[]]
 var xAxisLocked
 var yAxisLocked
 function toggleHelp(){
@@ -71,37 +71,37 @@ function addHardpoint(type){
 			}
 			break
 		case `fighter`:
-			hardpoints[1].push([`\tbay "fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[2].push([`\tbay "fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			if(mirror){
-				hardpoints[1].push([`\tbay "fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+				hardpoints[2].push([`\tbay "fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			}
 			break
 		case `drone`:
-			hardpoints[1].push([`\tbay "drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[2].push([`\tbay "drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			if(mirror){
-				hardpoints[1].push([`\tbay "drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+				hardpoints[2].push([`\tbay "drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			}
 			break
 		case `engine`:
-			hardpoints[2].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[3].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			if(mirror){
-				hardpoints[2].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+				hardpoints[3].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			}
 			break
 		case `left`:
-			hardpoints[2].push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			hardpoints[2].push([`\t\tangle 90`])
-			hardpoints[2].push([`\t\tleft`])
+			hardpoints[3].push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[3].push([`\t\tangle 90`])
+			hardpoints[3].push([`\t\tleft`])
 			break
 		case `right`:
-			hardpoints[2].push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
-			hardpoints[2].push([`\t\tangle 270`])
-			hardpoints[2].push([`\t\tright`])
+			hardpoints[3].push([`\t"steering engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[3].push([`\t\tangle 270`])
+			hardpoints[3].push([`\t\tright`])
 			break
 		case `reverse`:
-			hardpoints[2].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
+			hardpoints[3].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			if(mirror){
-				hardpoints[2].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
+				hardpoints[3].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2])
 			}
 			break
 	}
@@ -111,7 +111,9 @@ function addHardpoint(type){
 		`\n`+
 		hardpoints[1].map(e=>e.join(` `)).join(`\n`)+
 		`\n`+
-		hardpoints[2].map(e=>e.join(` `)).join(`\n`)
+		hardpoints[2].map(e=>e.join(` `)).join(`\n`)+
+		`\n`+
+		hardpoints[3].map(e=>e.join(` `)).join(`\n`)
 }
 function lockXAxis(){
 	if(xAxisLocked){
