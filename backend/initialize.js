@@ -7,7 +7,7 @@ function initialize(){
 		document.getElementById(`swizzle`).style=`border-right:1px solid #fff`
 		document.getElementById(`outline`).style=`border-right:1px solid #fff`
 		document.getElementById(`mirror`).style=`border-right:1px solid #fff`
-		document.getElementById(`addHardpoints`).style=`border-right:1px solid #fff`
+		document.getElementById(`hardpoints`).style=`border-right:1px solid #fff`
 		help=true
 	}
 	canvas.addEventListener(`mousedown`,onMouseDown)

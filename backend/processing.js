@@ -1,10 +1,10 @@
 function loadImage(){
 	hardpoints=[[],[],[],[]]
-	document.getElementById(`hardpoints`).innerHTML=``
+	document.getElementById(`output`).innerHTML=``
 	document.getElementById(`swizzle`).classList.remove(`blocked`)
 	document.getElementById(`outline`).classList.remove(`blocked`)
 	document.getElementById(`mirror`).classList.remove(`blocked`)
-	document.getElementById(`addHardpoints`).classList.remove(`blocked`)
+	document.getElementById(`hardpoints`).classList.remove(`blocked`)
 	document.getElementById(`xCoordinate`).classList.remove(`blocked`)
 	document.getElementById(`yCoordinate`).classList.remove(`blocked`)
 	document.getElementById(`help`).classList.add(`blocked`)

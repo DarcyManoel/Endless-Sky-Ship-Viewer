@@ -14,7 +14,7 @@
 		<label class="blocked" id="swizzle" onClick="changeSwizzle()">Swizzle 0</label>
 		<label class="blocked" id="outline" onClick="toggleOutline()">Outline Hidden</label>
 		<label class="blocked" id="mirror" onClick="toggleMirror()">Mirror Off</label>
-		<div class="blocked" id="addHardpoints">
+		<div class="blocked" id="hardpoints">
 			<label id="gun" onClick="addHardpoint(this.id)">Gun</label>
 			<label id="turret" onClick="addHardpoint(this.id)">Turret</label>
 			<label id="fighter" onClick="addHardpoint(this.id)">Fighter</label>
@@ -26,7 +26,7 @@
 		</div>
 		<label class="blocked" id="xCoordinate" onClick="lockXAxis()">X:</label>
 		<label class="blocked" id="yCoordinate" onClick="lockYAxis()">Y:</label>
-		<label id="hardpoints" onClick="copyPoints()"></label>
+		<label id="output" onClick="copyOutput()"></label>
 		<div class="hidden" id="help">
 			<label id="helpUpload">Upload a ship sprite to easily divine hardpoint coordinates for it.</label>
 			<label id="helpSwizzle">Cycle swizzles 0 through 6</label>

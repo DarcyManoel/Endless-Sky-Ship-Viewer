@@ -13,7 +13,7 @@ function toggleHelp(){
 			document.getElementById(`swizzle`).style=``
 			document.getElementById(`outline`).style=``
 			document.getElementById(`mirror`).style=``
-			document.getElementById(`addHardpoints`).style=``
+			document.getElementById(`hardpoints`).style=``
 			help=false
 			break
 		case false:
@@ -22,7 +22,7 @@ function toggleHelp(){
 			document.getElementById(`swizzle`).style=`border-right:1px solid #fff`
 			document.getElementById(`outline`).style=`border-right:1px solid #fff`
 			document.getElementById(`mirror`).style=`border-right:1px solid #fff`
-			document.getElementById(`addHardpoints`).style=`border-right:1px solid #fff`
+			document.getElementById(`hardpoints`).style=`border-right:1px solid #fff`
 			help=true
 			break
 	}
@@ -116,11 +116,11 @@ function addHardpoint(type){
 			break
 	}
 	console.log(hardpoints)
-	document.getElementById(`hardpoints`).innerHTML=``
+	document.getElementById(`output`).innerHTML=``
 	for(i1=0;i1<hardpoints.length;i1++){
 		if(hardpoints[i1].length){
 			hardpoints[i1].sort(function(a,b){return a[2]-b[2]})
-			document.getElementById(`hardpoints`).innerHTML+=hardpoints[i1].map(e=>e.join(` `)).join(``)
+			document.getElementById(`output`).innerHTML+=hardpoints[i1].map(e=>e.join(` `)).join(``)
 		}
 	}
 }
@@ -150,7 +150,7 @@ function lockYAxis(){
 	}
 	drawImage()
 }
-function copyPoints(){
+function copyOutput(){
 	navigator.clipboard.writeText(
 		hardpoints[0].map(e=>e.join(` `)).join(``)+
 		hardpoints[1].map(e=>e.join(` `)).join(``)+
