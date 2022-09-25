@@ -146,7 +146,7 @@ label:hover{
 	width:120px;
 }
 #output{
-	line-height:3vh;
+	font-size:12px;
 	height:85vh;
 	overflow-x:hidden;
 	overflow-y:scroll;
