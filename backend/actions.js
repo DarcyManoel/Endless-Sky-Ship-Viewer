@@ -1,33 +1,9 @@
-var help=false
 var swizzle=0
 var outline=0
 var mirror=0
 var hardpoints=[[],[],[],[]]
 var xAxisLocked=0
 var yAxisLocked=0
-function toggleHelp(){
-	switch(help){
-		case true:
-			document.getElementById(`helpToggle`).innerHTML=`Help Me!`
-			document.getElementById(`help`).classList.add(`hidden`)
-			document.getElementById(`swizzle`).style=``
-			document.getElementById(`outline`).style=``
-			document.getElementById(`mirror`).style=``
-			document.getElementById(`hardpoints`).style=``
-			help=false
-			break
-		case false:
-			document.getElementById(`helpToggle`).innerHTML=`Don't Help Me!`
-			document.getElementById(`help`).classList.remove(`hidden`)
-			document.getElementById(`swizzle`).style=`border-right:1px solid #fff`
-			document.getElementById(`outline`).style=`border-right:1px solid #fff`
-			document.getElementById(`mirror`).style=`border-right:1px solid #fff`
-			document.getElementById(`hardpoints`).style=`border-right:1px solid #fff`
-			help=true
-			break
-	}
-	localStorage.setItem(`help`,help)
-}
 function changeSwizzle(){
 	switch(swizzle){
 		case 0:

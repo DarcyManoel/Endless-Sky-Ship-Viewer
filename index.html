@@ -10,7 +10,6 @@
 		<canvas id="canvas"></canvas>
 		<label id="loadImage" for="file">&#10162; Upload Image</label>
 		<input class="hidden" id="file" type="file" onChange="loadImage()"/>
-		<label id="helpToggle" onClick="toggleHelp()">Help Me!</label>
 		<label class="blocked" id="swizzle" onClick="changeSwizzle()">Swizzle 0</label>
 		<label class="blocked" id="outline" onClick="toggleOutline()">Outline Hidden</label>
 		<label class="blocked" id="mirror" onClick="toggleMirror()">Mirror Off</label>
@@ -27,13 +26,6 @@
 		<label class="blocked" id="xCoordinate" onClick="lockXAxis()">X:</label>
 		<label class="blocked" id="yCoordinate" onClick="lockYAxis()">Y:</label>
 		<label id="output" onClick="copyOutput()"></label>
-		<div class="hidden" id="help">
-			<label id="helpUpload">Upload a ship sprite to easily divine hardpoint coordinates for it.</label>
-			<label id="helpSwizzle">Cycle swizzles 0 through 6</label>
-			<label id="helpOutline">Collision mask</label>
-			<label id="helpMirror">Mirror hardpoints horizontally</label>
-			<label id="helpHardpoints">Define preset hardpoint types</label>
-		</div>
 	</body>
 	<script type="text/javascript" src="backend/actions.js"></script>
 	<script type="text/javascript" src="backend/control.js"></script>

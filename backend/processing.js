@@ -7,7 +7,6 @@ function loadImage(){
 	document.getElementById(`hardpoints`).classList.remove(`blocked`)
 	document.getElementById(`xCoordinate`).classList.remove(`blocked`)
 	document.getElementById(`yCoordinate`).classList.remove(`blocked`)
-	document.getElementById(`help`).classList.add(`blocked`)
 	if(typeof window.FileReader!==`function`){
 		return
 	}
