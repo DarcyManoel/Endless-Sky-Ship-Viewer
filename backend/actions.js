@@ -23,12 +23,12 @@ function changeSwizzle(){
 function toggleOutline(){
 	switch(outline){
 		case 0:
-			outline++
-			document.getElementById(`outline`).innerHTML=`Outline Shown`
+			outline=1
+			document.getElementById(`outline`).classList.remove(`dark`)
 			break
 		case 1:
 			outline=0
-			document.getElementById(`outline`).innerHTML=`Outline Hidden`
+			document.getElementById(`outline`).classList.add(`dark`)
 			break
 	}
 	drawImage()
@@ -36,12 +36,12 @@ function toggleOutline(){
 function toggleMirror(){
 	switch(mirror){
 		case 0:
-			mirror++
-			document.getElementById(`mirror`).innerHTML=`Mirror On`
+			mirror=1
+			document.getElementById(`mirror`).classList.remove(`dark`)
 			break
 		case 1:
 			mirror=0
-			document.getElementById(`mirror`).innerHTML=`Mirror Off`
+			document.getElementById(`mirror`).classList.add(`dark`)
 			break
 	}
 	drawImage()
