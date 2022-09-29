@@ -22,7 +22,7 @@ function swizzleImage(){
 		[2,1,0],
 		[1,2,2]
 	]
-	for(var i1=0;i1<pixels.length;i1+=4){
+	for(i1=0;i1<pixels.length;i1+=4){
 		var red=pixels[i1+SWIZZLE[swizzle][0]]
 		var green=pixels[i1+SWIZZLE[swizzle][1]]
 		var blue=pixels[i1+SWIZZLE[swizzle][2]]
@@ -66,21 +66,18 @@ function drawCursor(){
 	}else if(yAxisLocked){
 		drawLine(x,y-20,x,y+20,[15,10],1.5,`#f00`)
 	}
-	switch(mirror){
-		case 0:
-			document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`
-			break
-		case 1:
-			var rx=canvas.width-x
-			drawArc(rx,y,5,0,2*Math.PI,`#f00`)
-			if(xAxisLocked){
-				drawLine(rx-20,y,rx+20,y,[15,10],1.5,`#f00`)
-			}else if(yAxisLocked){
-				drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`)
-			}
-			drawLine(canvas.width/2,0,canvas.width/2,canvas.height,[20,10],1.5,`#f00`)
-			document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`
-			break
+	if(mirror){
+		var rx=canvas.width-x
+		drawArc(rx,y,5,0,2*Math.PI,`#f00`)
+		if(xAxisLocked){
+			drawLine(rx-20,y,rx+20,y,[15,10],1.5,`#f00`)
+		}else if(yAxisLocked){
+			drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`)
+		}
+		drawLine(canvas.width/2,0,canvas.width/2,canvas.height,[20,10],1.5,`#f00`)
+		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`
+	}else{
+		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`
 	}
 	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`
 }

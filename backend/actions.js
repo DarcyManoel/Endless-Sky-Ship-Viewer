@@ -1,9 +1,9 @@
 var swizzle=0
-var outline=0
-var mirror=0
+var outline=false
+var mirror=false
 var hardpoints=[[],[],[],[]]
-var xAxisLocked=0
-var yAxisLocked=0
+var xAxisLocked=false
+var yAxisLocked=false
 function changeSwizzle(){
 	switch(swizzle){
 		case 0:
@@ -22,12 +22,12 @@ function changeSwizzle(){
 }
 function toggleOutline(){
 	switch(outline){
-		case 0:
-			outline=1
+		case false:
+			outline=true
 			document.getElementById(`outline`).classList.remove(`dark`)
 			break
-		case 1:
-			outline=0
+		case true:
+			outline=false
 			document.getElementById(`outline`).classList.add(`dark`)
 			break
 	}
@@ -35,12 +35,12 @@ function toggleOutline(){
 }
 function toggleMirror(){
 	switch(mirror){
-		case 0:
-			mirror=1
+		case false:
+			mirror=true
 			document.getElementById(`mirror`).classList.remove(`dark`)
 			break
-		case 1:
-			mirror=0
+		case true:
+			mirror=false
 			document.getElementById(`mirror`).classList.add(`dark`)
 			break
 	}
@@ -102,26 +102,26 @@ function addHardpoint(type){
 }
 function lockXAxis(){
 	switch(xAxisLocked){
-		case 0:
+		case false:
 			document.getElementById(`yCoordinate`).classList.add(`blocked`)
-			xAxisLocked=1
+			xAxisLocked=true
 			break
-		case 1:
+		case true:
 			document.getElementById(`yCoordinate`).classList.remove(`blocked`)
-			xAxisLocked=0
+			xAxisLocked=false
 			break
 	}
 	drawImage()
 }
 function lockYAxis(){
 	switch(yAxisLocked){
-		case 0:
+		case false:
 			document.getElementById(`xCoordinate`).classList.add(`blocked`)
-			yAxisLocked=1
+			yAxisLocked=true
 			break
-		case 1:
+		case true:
 			document.getElementById(`xCoordinate`).classList.remove(`blocked`)
-			yAxisLocked=0
+			yAxisLocked=false
 			break
 	}
 	drawImage()
