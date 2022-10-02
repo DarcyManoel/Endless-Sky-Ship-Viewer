@@ -4,6 +4,7 @@ function loadImage(){
 	document.getElementById(`swizzle`).classList.remove(`blocked`)
 	document.getElementById(`outline`).classList.remove(`blocked`)
 	document.getElementById(`mirror`).classList.remove(`blocked`)
+	document.getElementById(`formatting`).classList.remove(`blocked`)
 	document.getElementById(`hardpoints`).classList.remove(`blocked`)
 	document.getElementById(`xCoordinate`).classList.remove(`blocked`)
 	document.getElementById(`yCoordinate`).classList.remove(`blocked`)
