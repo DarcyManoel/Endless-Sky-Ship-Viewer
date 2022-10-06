@@ -2,8 +2,8 @@ var swizzle=0
 var outline=false
 var mirror=false
 var formatting=true
-var hardpointsFormatted=[[],[],[],[]]
 var hardpoints=[[],[],[],[]]
+var hardpointsFormatted=[[],[],[],[]]
 var xAxisLocked=false
 var yAxisLocked=false
 function changeSwizzle(){
