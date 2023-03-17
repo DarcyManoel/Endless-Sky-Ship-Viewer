@@ -162,6 +162,11 @@ label:hover{
 	white-space:pre;
 	width:240px;
 }
+#copy{
+	bottom:20px;
+	right:20px;
+	position:absolute;
+}
 /*Fade*/
 .fade{
 	animation:fade .3s forwards !important;
