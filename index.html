@@ -9,25 +9,25 @@
 	<body onKeyDown="control(event)" onLoad="initialize()">
 		<canvas id="canvas"></canvas>
 		<label id="loadImage" for="file">&#10162; Upload Image</label>
-		<input class="hidden" id="file" type="file" onChange="loadImage()"/>
-		<label class="blocked" id="swizzle" onClick="changeSwizzle()">Swizzle 0</label>
-		<label class="blocked dark" id="outline" onClick="toggleOutline()">Outline</label>
-		<label class="blocked dark" id="mirror" onClick="toggleMirror()">Mirror</label>
-		<label class="blocked" id="formatting" onClick="toggleFormatting()">Formatting</label>
+		<input class="hidden" id="file" type="file" onChange="actionLoadImage()"/>
+		<label class="blocked" id="swizzle" onClick="actionSwizzle()">Swizzle 0</label>
+		<label class="blocked dark" id="outline" onClick="actionOutline()">Outline</label>
+		<label class="blocked dark" id="mirror" onClick="actionMirror()">Mirror</label>
+		<label class="blocked" id="formatting" onClick="actionFormatting()">Formatting</label>
 		<div class="blocked" id="hardpoints">
-			<label id="gun" onClick="addHardpoint(this.id)">Gun</label>
-			<label id="turret" onClick="addHardpoint(this.id)">Turret</label>
-			<label id="fighter" onClick="addHardpoint(this.id)">Fighter</label>
-			<label id="drone" onClick="addHardpoint(this.id)">Drone</label>
-			<label id="engine" onClick="addHardpoint(this.id)">Engine</label>
-			<label id="left" onClick="addHardpoint(this.id)">Left</label>
-			<label id="right" onClick="addHardpoint(this.id)">Right</label>
-			<label id="reverse" onClick="addHardpoint(this.id)">Reverse</label>
+			<label id="gun" onClick="actionHardpoint(this.id)">Gun</label>
+			<label id="turret" onClick="actionHardpoint(this.id)">Turret</label>
+			<label id="fighter" onClick="actionHardpoint(this.id)">Fighter</label>
+			<label id="drone" onClick="actionHardpoint(this.id)">Drone</label>
+			<label id="engine" onClick="actionHardpoint(this.id)">Engine</label>
+			<label id="left" onClick="actionHardpoint(this.id)">Left</label>
+			<label id="right" onClick="actionHardpoint(this.id)">Right</label>
+			<label id="reverse" onClick="actionHardpoint(this.id)">Reverse</label>
 		</div>
-		<label class="blocked" id="xCoordinate" onClick="lockXAxis()">X:</label>
-		<label class="blocked" id="yCoordinate" onClick="lockYAxis()">Y:</label>
+		<label class="blocked" id="xCoordinate" onClick="actionLockX()">X:</label>
+		<label class="blocked" id="yCoordinate" onClick="actionLockY()">Y:</label>
 		<p id="output"></p>
-		<label class="blocked" id="copy" onClick="copyOutput()">Copy</label>
+		<label class="blocked" id="copy" onClick="actionCopy()">Copy</label>
 	</body>
 	<script type="text/javascript" src="scriptsheet.js"></script>
 </html>
