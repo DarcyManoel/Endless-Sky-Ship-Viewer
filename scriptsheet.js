@@ -15,7 +15,7 @@ function initialize(){
 	document.body.addEventListener(`mouseup`,onMouseUp)
 }
 //	User Input
-function actionLoadImage(){
+function actionUpload(){
 	hardpoints=[[],[],[],[]]
 	hardpointsFormatted=[[],[],[],[]]
 	document.getElementById(`output`).innerHTML=``
