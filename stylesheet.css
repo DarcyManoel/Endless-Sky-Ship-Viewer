@@ -1,14 +1,16 @@
 /*Constants*/
-body{
+*{
 	-webkit-user-select:none;
-	background-color:#000;
-	background-image:url(assets/menu.png);
-	background-size:100%;
 	color:#9f9f9f;
 	font-family:Ubuntu;
 	margin:0;
 	overflow:hidden;
 	user-select:none;
+}
+body{
+	background-color:#000;
+	background-image:url(assets/menu.png);
+	background-size:100%;
 }
 canvas{
 	bottom:0;
