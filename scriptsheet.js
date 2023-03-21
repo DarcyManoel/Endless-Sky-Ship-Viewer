@@ -50,42 +50,18 @@ function actionSwizzle(){
 	drawImage()
 }
 function actionOutline(){
-	switch(outline){
-		case false:
-			outline=true
-			document.getElementById(`outline`).classList.remove(`dark`)
-			break
-		case true:
-			outline=false
-			document.getElementById(`outline`).classList.add(`dark`)
-			break
-	}
+	outline=!outline
+	document.getElementById(`outline`).classList.toggle(`dark`)
 	drawImage()
 }
 function actionMirror(){
-	switch(mirror){
-		case false:
-			mirror=true
-			document.getElementById(`mirror`).classList.remove(`dark`)
-			break
-		case true:
-			mirror=false
-			document.getElementById(`mirror`).classList.add(`dark`)
-			break
-	}
+	mirror=!mirror
+	document.getElementById(`mirror`).classList.toggle(`dark`)
 	drawImage()
 }
 function actionFormatting(){
-	switch(formatting){
-		case false:
-			formatting=true
-			document.getElementById(`formatting`).classList.remove(`dark`)
-			break
-		case true:
-			formatting=false
-			document.getElementById(`formatting`).classList.add(`dark`)
-			break
-	}
+	formatting=!formatting
+	document.getElementById(`formatting`).classList.toggle(`dark`)
 	printHardpoints()
 }
 function actionHardpoint(type){
