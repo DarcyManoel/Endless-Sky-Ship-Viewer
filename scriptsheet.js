@@ -35,23 +35,17 @@ function actionUpload(){
 	reader.readAsDataURL(file)
 	if(file.name.lastIndexOf(`@2x`)==file.name.lastIndexOf(`.`)-3){
 		scale=1
-	}else{
+	}
+	else{
 		scale=2
 	}
 }
 function actionSwizzle(){
-	switch(swizzle){
-		case 0:
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-			swizzle++
-			break
-		case 6:
-			swizzle=0
-			break
+	if(swizzle==6){
+		swizzle=0
+	}
+	else{
+		swizzle++
 	}
 	drawImage()
 }
