@@ -19,14 +19,9 @@ function actionUpload(){
 	hardpoints=[[],[],[],[]]
 	hardpointsFormatted=[[],[],[],[]]
 	document.getElementById(`output`).innerHTML=``
-	document.getElementById(`swizzle`).classList.remove(`blocked`)
-	document.getElementById(`outline`).classList.remove(`blocked`)
-	document.getElementById(`mirror`).classList.remove(`blocked`)
-	document.getElementById(`formatting`).classList.remove(`blocked`)
-	document.getElementById(`hardpoints`).classList.remove(`blocked`)
-	document.getElementById(`xCoordinate`).classList.remove(`blocked`)
-	document.getElementById(`yCoordinate`).classList.remove(`blocked`)
-	document.getElementById(`copy`).classList.remove(`blocked`)
+	document.querySelectorAll('.blocked').forEach((element)=>{
+		element.classList.remove('blocked')
+	})
 	if(typeof window.FileReader!==`function`){
 		return
 	}
