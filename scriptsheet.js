@@ -1,15 +1,27 @@
 var canvas=document.getElementById(`canvas`)
 var canvasContext=canvas.getContext(`2d`)
-var formatting=true
 var hardpoints=[[],[],[],[]]
 var hardpointsFormatted=[[],[],[],[]]
 var isDragging=false
+var formatting=false
 var mirror=false
 var outline=false
 var swizzle=0
 var xAxisLocked=false
 var yAxisLocked=false
 function initialize(){
+	if(localStorage.getItem(`formatting`)==`true`){
+		document.getElementById(`formatting`).classList.remove(`dark`)
+		formatting=true
+	}
+	if(localStorage.getItem(`mirror`)==`true`){
+		document.getElementById(`mirror`).classList.remove(`dark`)
+		mirror=true
+	}
+	if(localStorage.getItem(`outline`)==`true`){
+		document.getElementById(`outline`).classList.remove(`dark`)
+		outline=true
+	}
 	canvas.addEventListener(`mousedown`,onMouseDown)
 	canvas.addEventListener(`mousemove`,onMouseMove)
 	document.body.addEventListener(`mouseup`,onMouseUp)
@@ -49,20 +61,23 @@ function actionSwizzle(){
 	}
 	drawImage()
 }
-function actionOutline(){
-	outline=!outline
-	document.getElementById(`outline`).classList.toggle(`dark`)
-	drawImage()
+function actionFormatting(){
+	formatting=!formatting
+	localStorage.setItem(`formatting`,formatting)
+	document.getElementById(`formatting`).classList.toggle(`dark`)
+	printHardpoints()
 }
 function actionMirror(){
 	mirror=!mirror
+	localStorage.setItem(`mirror`,mirror)
 	document.getElementById(`mirror`).classList.toggle(`dark`)
 	drawImage()
 }
-function actionFormatting(){
-	formatting=!formatting
-	document.getElementById(`formatting`).classList.toggle(`dark`)
-	printHardpoints()
+function actionOutline(){
+	outline=!outline
+	localStorage.setItem(`outline`,outline)
+	document.getElementById(`outline`).classList.toggle(`dark`)
+	drawImage()
 }
 function actionHardpoint(type){
 	switch(type){
