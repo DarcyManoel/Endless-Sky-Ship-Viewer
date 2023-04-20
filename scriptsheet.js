@@ -1,5 +1,5 @@
-var canvas=document.getElementById(`canvas`)
-var canvasContext=canvas.getContext(`2d`)
+const canvas=document.getElementById(`canvas`)
+const canvasContext=canvas.getContext(`2d`)
 var hardpoints=[[],[],[],[]]
 var hardpointsFormatted=[[],[],[],[]]
 var isDragging=false
