@@ -23,9 +23,10 @@ canvas{
 label{
 	-webkit-animation:highlightOff .5s;
 	animation:highlightOff .5s;
+	font-size:16px;
+	position:absolute;
 }
 label:hover{
-	-webkit-animation:highlightOn .5s forwards;
 	animation:highlightOn .5s forwards;
 	cursor:pointer;
 }
@@ -46,111 +47,89 @@ label:hover{
 ::-webkit-scrollbar{
 	display:none;
 }
-/*Interactables*/
+/*	Load	*/
 #loadImage{
-	left:50%;
-	transform:translate(-50%,0);
-	position:absolute;
+	font-size:32px;
+	left:20px;
 	top:10px;
 }
-#swizzle{
-	left:20px;
-	padding-right:20px;
-	position:absolute;
-	top:20px;
-}
+/*	Menu Options	*/
 #formatting{
-	left:20px;
-	padding-right:20px;
-	position:absolute;
-	top:60px;
+	left:270px;
+	top:10px;
 }
 #mirror{
-	left:20px;
-	padding-right:20px;
-	position:absolute;
-	top:80px;
+	left:361px;
+	top:10px;
 }
 #outline{
-	left:20px;
-	padding-right:20px;
-	position:absolute;
-	top:100px;
+	left:414px;
+	top:10px;
 }
-#hardpoints{
-	height:120px;
-	left:20px;
-	padding-right:120px;
-	position:absolute;
-	top:140px;
+/*	Menu Cycles	*/
+#swizzle{
+	left:270px;
+	top:30px;
 }
+/*	Hardpoints	*/
 #gun{
-	left:20px;
-	position:absolute;
+	bottom:120px;
+	left:40px;
 	text-align:center;
 	width:60px;
 }
 #turret{
-	left:20px;
-	position:absolute;
+	bottom:100px;
+	left:40px;
 	text-align:center;
-	top:20px;
 	width:60px;
 }
 #fighter{
-	left:-5px;
-	position:absolute;
+	bottom:80px;
+	left:15px;
 	text-align:center;
-	top:40px;
 	width:60px;
 }
 #drone{
-	left:50px;
-	position:absolute;
+	bottom:80px;
+	left:70px;
 	text-align:center;
-	top:40px;
 	width:60px;
 }
 #engine{
-	left:20px;
-	position:absolute;
+	bottom:60px;
+	left:40px;
 	text-align:center;
-	top:60px;
 	width:60px;
 }
 #left{
-	position:absolute;
+	bottom:40px;
+	left:20px;
 	text-align:center;
-	top:80px;
 	width:60px;
 }
 #right{
-	left:40px;
-	position:absolute;
+	bottom:40px;
+	left:60px;
 	text-align:center;
-	top:80px;
 	width:60px;
 }
 #reverse{
-	left:20px;
-	position:absolute;
+	bottom:20px;
+	left:40px;
 	text-align:center;
-	top:100px;
 	width:60px;
 }
+/*	Informational	*/
 #xCoordinate{
-	position:absolute;
-	right:0;
+	left:20px;
 	text-align:left;
-	top:20px;
-	width:120px;
+	top:60px;
 }
 #yCoordinate{
-	position:absolute;
-	right:0;
+	left:20px;
 	text-align:left;
-	top:40px;
-	width:120px;
+	top:80px;
 }
 #output{
 	font-size:12px;
@@ -160,7 +139,7 @@ label:hover{
 	position:absolute;
 	right:0;
 	text-align:left;
-	top:80px;
+	top:20px;
 	white-space:pre;
 	width:240px;
 }

@@ -1,12 +1,12 @@
 const canvas=document.getElementById(`canvas`)
 const canvasContext=canvas.getContext(`2d`)
+var swizzle=0
+var mirror=false
 var hardpoints=[[],[],[],[]]
 var hardpointsFormatted=[[],[],[],[]]
 var isDragging=false
 var formatting=false
-var mirror=false
 var outline=false
-var swizzle=0
 var xAxisLocked=false
 var yAxisLocked=false
 function initialize(){
@@ -26,8 +26,8 @@ function initialize(){
 	canvas.addEventListener(`mousemove`,onMouseMove)
 	document.body.addEventListener(`mouseup`,onMouseUp)
 }
-//	User Input
-function actionUpload(){
+//	Load
+function uploadImage(){
 	hardpoints=[[],[],[],[]]
 	hardpointsFormatted=[[],[],[],[]]
 	document.getElementById(`output`).innerHTML=``
@@ -52,7 +52,45 @@ function actionUpload(){
 		scale=2
 	}
 }
-function actionSwizzle(){
+//	Interaction
+function onMouseMove(event){
+	if(isDragging){
+		drawCoordinates(event.offsetX,event.offsetY)
+	}
+}
+function onMouseDown(event){
+	isDragging=true
+	drawCoordinates(event.offsetX,event.offsetY)
+}
+function onMouseUp(event){
+	isDragging=false
+}
+function keyDown(event){
+	//	Left
+	if(event.keyCode==37||event.keyCode==65){
+		if(!yAxisLocked){
+			xCoordinate-=.5/(inflation*scale)
+		}
+	//	Right
+	}else if(event.keyCode==39||event.keyCode==68){
+		if(!yAxisLocked){
+			xCoordinate+=.5/(inflation*scale)
+		}
+	//	Up
+	}else if(event.keyCode==38||event.keyCode==87){
+		if(!xAxisLocked){
+			yCoordinate-=.5/(inflation*scale)
+		}
+	//	Down
+	}else if(event.keyCode==40||event.keyCode==83){
+		if(!xAxisLocked){
+			yCoordinate+=.5/(inflation*scale)
+		}
+	}
+	drawImage()
+}
+//	Image Manipulation
+function cycleSwizzle(){
 	if(swizzle==6){
 		swizzle=0
 	}
@@ -61,25 +99,72 @@ function actionSwizzle(){
 	}
 	drawImage()
 }
-function actionFormatting(){
-	formatting=!formatting
-	localStorage.setItem(`formatting`,formatting)
-	document.getElementById(`formatting`).classList.toggle(`dark`)
-	printHardpoints()
+function swizzleImage(){
+	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle
+	var SWIZZLE=[
+		[0,1,2],
+		[0,2,1],
+		[1,0,2],
+		[2,0,1],
+		[1,2,0],
+		[2,1,0],
+		[1,2,2]
+	]
+	for(i1=0;i1<pixels.length;i1+=4){
+		var red=pixels[i1+SWIZZLE[swizzle][0]]
+		var green=pixels[i1+SWIZZLE[swizzle][1]]
+		var blue=pixels[i1+SWIZZLE[swizzle][2]]
+		pixels[i1+0]=red
+		pixels[i1+1]=green
+		pixels[i1+2]=blue
+	}
 }
-function actionMirror(){
+function toggleMirror(){
 	mirror=!mirror
 	localStorage.setItem(`mirror`,mirror)
 	document.getElementById(`mirror`).classList.toggle(`dark`)
 	drawImage()
 }
-function actionOutline(){
+function toggleOutline(){
 	outline=!outline
 	localStorage.setItem(`outline`,outline)
 	document.getElementById(`outline`).classList.toggle(`dark`)
 	drawImage()
 }
-function actionHardpoint(type){
+function outlineImage(){
+	if(outline){
+		for(i1=0;i1<pixels.length&&!pixels[i1+3];i1+=4){}
+		var start=i1
+		var DIR=[
+			pixels.length-4*canvas.width,
+			pixels.length-4*canvas.width+4,
+			4,
+			4*canvas.width+4,
+			4*canvas.width,
+			4*canvas.width-4,
+			pixels.length-4,
+			pixels.length-4*canvas.width-4
+		]
+		var i2=0
+		do{
+			pixels[i1+0]=255
+			pixels[i1+1]=0
+			pixels[i1+2]=0
+			pixels[i1+3]=255
+			while(!pixels[(i1+3+DIR[i2])%pixels.length]){i2=(i2+1)%8;}
+			i1=(i1+DIR[i2])%pixels.length
+			i2=(i2+6)%8
+		}while(i1!=start)
+	}
+}
+//	Hardpoints
+function formatHardpoints(){
+	formatting=!formatting
+	localStorage.setItem(`formatting`,formatting)
+	document.getElementById(`formatting`).classList.toggle(`dark`)
+	printHardpoints()
+}
+function addHardpoint(type){
 	switch(type){
 		case `gun`:
 			hardpointsFormatted[0].push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
@@ -141,85 +226,61 @@ function actionHardpoint(type){
 	console.log(hardpointsFormatted)
 	printHardpoints()
 }
-function actionLockX(){
-	switch(xAxisLocked){
-		case false:
-			document.getElementById(`yCoordinate`).classList.add(`blocked`)
-			xAxisLocked=true
-			break
-		case true:
-			document.getElementById(`yCoordinate`).classList.remove(`blocked`)
-			xAxisLocked=false
-			break
+function printHardpoints(){
+	document.getElementById(`output`).innerHTML=``
+	if(formatting){
+		for(i1=0;i1<hardpointsFormatted.length;i1++){
+			if(hardpointsFormatted[i1].length){
+				hardpointsFormatted[i1].sort(function(a,b){return a[2]-b[2]})
+				document.getElementById(`output`).innerHTML+=hardpointsFormatted[i1].map(e=>e.join(` `)).join(``)
+			}
+		}
+	}else{
+		document.getElementById(`output`).innerHTML=hardpoints.map(e=>e.join(` `)).join(``)
+	}
+}
+function copy(){
+	if(formatting){
+		navigator.clipboard.writeText(
+			hardpointsFormatted[0].map(e=>e.join(` `)).join(``)+
+			hardpointsFormatted[1].map(e=>e.join(` `)).join(``)+
+			hardpointsFormatted[2].map(e=>e.join(` `)).join(``)+
+			hardpointsFormatted[3].map(e=>e.join(` `)).join(``)
+		)
+	}else{
+		navigator.clipboard.writeText(hardpoints.map(e=>e.join(` `)).join(``))
+	}
+}
+//	Informational
+function lockX(){
+	if(xAxisLocked){
+		document.getElementById(`yCoordinate`).classList.remove(`blocked`)
+		xAxisLocked=false
+	}else{
+		document.getElementById(`yCoordinate`).classList.add(`blocked`)
+		xAxisLocked=true
 	}
 	drawImage()
 }
-function actionLockY(){
-	switch(yAxisLocked){
-		case false:
-			document.getElementById(`xCoordinate`).classList.add(`blocked`)
-			yAxisLocked=true
-			break
-		case true:
-			document.getElementById(`xCoordinate`).classList.remove(`blocked`)
-			yAxisLocked=false
-			break
+function lockY(){
+	if(yAxisLocked){
+		document.getElementById(`xCoordinate`).classList.remove(`blocked`)
+		yAxisLocked=false
+	}else{
+		document.getElementById(`xCoordinate`).classList.add(`blocked`)
+		yAxisLocked=true
 	}
 	drawImage()
 }
-function actionCopy(){
-	switch(formatting){
-		case false:
-			navigator.clipboard.writeText(hardpoints.map(e=>e.join(` `)).join(``))
-			break
-		case true:
-			navigator.clipboard.writeText(
-				hardpointsFormatted[0].map(e=>e.join(` `)).join(``)+
-				hardpointsFormatted[1].map(e=>e.join(` `)).join(``)+
-				hardpointsFormatted[2].map(e=>e.join(` `)).join(``)+
-				hardpointsFormatted[3].map(e=>e.join(` `)).join(``)
-			)
-			break
+function drawCoordinates(x,y){
+	if(!xAxisLocked&&!yAxisLocked){
+		xCoordinate=.5*(x-.5*canvas.width)
+		yCoordinate=.5*(y-.5*canvas.height)
 	}
-}
-function onMouseMove(event){
-	if(isDragging){
-		drawCoordinates(event.offsetX,event.offsetY)
-	}
-}
-function onMouseDown(event){
-	isDragging=true
-	drawCoordinates(event.offsetX,event.offsetY)
-}
-function onMouseUp(event){
-	isDragging=false
-}
-function control(event){
-	switch(event.keyCode){
-		case 37:
-		case 65:
-			if(!yAxisLocked){
-				xCoordinate-=.5/(inflation*scale)
-			}
-			break
-		case 38:
-		case 87:
-			if(!xAxisLocked){
-				yCoordinate-=.5/(inflation*scale)
-			}
-			break
-		case 39:
-		case 68:
-			if(!yAxisLocked){
-				xCoordinate+=.5/(inflation*scale)
-			}
-			break
-		case 40:
-		case 83:
-			if(!xAxisLocked){
-				yCoordinate+=.5/(inflation*scale)
-			}
-			break
+	if(xAxisLocked){
+		xCoordinate=.5*(x-.5*canvas.width)
+	}else if(yAxisLocked){
+		yCoordinate=.5*(y-.5*canvas.height)
 	}
 	drawImage()
 }
@@ -253,65 +314,6 @@ function drawImage(){
 	canvasContext.putImageData(imageData,0,0)
 	drawCursor()
 }
-function swizzleImage(){
-	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle
-	var SWIZZLE=[
-		[0,1,2],
-		[0,2,1],
-		[1,0,2],
-		[2,0,1],
-		[1,2,0],
-		[2,1,0],
-		[1,2,2]
-	]
-	for(i1=0;i1<pixels.length;i1+=4){
-		var red=pixels[i1+SWIZZLE[swizzle][0]]
-		var green=pixels[i1+SWIZZLE[swizzle][1]]
-		var blue=pixels[i1+SWIZZLE[swizzle][2]]
-		pixels[i1+0]=red
-		pixels[i1+1]=green
-		pixels[i1+2]=blue
-	}
-}
-//	Display Extras
-function drawCoordinates(x,y){
-	if(!xAxisLocked&&!yAxisLocked){
-		xCoordinate=.5*(x-.5*canvas.width)
-		yCoordinate=.5*(y-.5*canvas.height)
-	}
-	if(xAxisLocked){
-		xCoordinate=.5*(x-.5*canvas.width)
-	}else if(yAxisLocked){
-		yCoordinate=.5*(y-.5*canvas.height)
-	}
-	drawImage()
-}
-function outlineImage(){
-	if(outline){
-		for(i1=0;i1<pixels.length&&!pixels[i1+3];i1+=4){}
-		var start=i1
-		var DIR=[
-			pixels.length-4*canvas.width,
-			pixels.length-4*canvas.width+4,
-			4,
-			4*canvas.width+4,
-			4*canvas.width,
-			4*canvas.width-4,
-			pixels.length-4,
-			pixels.length-4*canvas.width-4
-		]
-		var i2=0
-		do{
-			pixels[i1+0]=255
-			pixels[i1+1]=0
-			pixels[i1+2]=0
-			pixels[i1+3]=255
-			while(!pixels[(i1+3+DIR[i2])%pixels.length]){i2=(i2+1)%8;}
-			i1=(i1+DIR[i2])%pixels.length
-			i2=(i2+6)%8
-		}while(i1!=start)
-	}
-}
 function drawCursor(){
 	var x=xCoordinate*2+.5*canvas.width
 	var y=yCoordinate*2+.5*canvas.height
@@ -330,11 +332,11 @@ function drawCursor(){
 			drawLine(rx,y-20,rx,y+20,[15,10],1.5,`#f00`)
 		}
 		drawLine(canvas.width/2,0,canvas.width/2,canvas.height,[20,10],1.5,`#f00`)
-		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)&nbsp;`
+		document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+` (`+Math.round(((xCoordinate*(inflation*scale))*-1)*2)/2+`)`
 	}else{
-		document.getElementById(`xCoordinate`).innerHTML=`&nbsp;X: `+Math.round((xCoordinate*(inflation*scale))*2)/2+`&nbsp;`
+		document.getElementById(`xCoordinate`).innerHTML=`X: `+Math.round((xCoordinate*(inflation*scale))*2)/2
 	}
-	document.getElementById(`yCoordinate`).innerHTML=`&nbsp;Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2+`&nbsp;`
+	document.getElementById(`yCoordinate`).innerHTML=`Y: `+Math.round((yCoordinate*(inflation*scale))*2)/2
 }
 function drawArc(x,y,radius,start,end,colour){
 	canvasContext.beginPath()
@@ -352,21 +354,4 @@ function drawLine(startX,startY,endX,endY,lineDash,width,colour){
 	canvasContext.lineWidth=width
 	canvasContext.strokeStyle=colour
 	canvasContext.stroke()
-}
-//	Misc
-function printHardpoints(){
-	document.getElementById(`output`).innerHTML=``
-	switch(formatting){
-		case false:
-			document.getElementById(`output`).innerHTML=hardpoints.map(e=>e.join(` `)).join(``)
-			break
-		case true:
-			for(i1=0;i1<hardpointsFormatted.length;i1++){
-				if(hardpointsFormatted[i1].length){
-					hardpointsFormatted[i1].sort(function(a,b){return a[2]-b[2]})
-					document.getElementById(`output`).innerHTML+=hardpointsFormatted[i1].map(e=>e.join(` `)).join(``)
-				}
-			}
-			break
-	}
 }

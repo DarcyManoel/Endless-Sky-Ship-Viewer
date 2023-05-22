@@ -6,28 +6,32 @@
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 		<title>Ship Viewer</title>
 	</head>
-	<body onKeyDown="control(event)" onLoad="initialize()">
+	<body onKeyDown="keyDown(event)" onLoad="initialize()">
+		<!--	Structure	-->
 		<canvas id="canvas"></canvas>
+		<!--	Load	-->
 		<label id="loadImage" for="file">&#10162; Upload Image</label>
-		<input class="hidden" id="file" type="file" onChange="actionUpload()"/>
-		<label class="blocked" id="swizzle" onClick="actionSwizzle()">Swizzle 0</label>
-		<label class="blocked dark" id="formatting" onClick="actionFormatting()">Formatting</label>
-		<label class="blocked dark" id="mirror" onClick="actionMirror()">Mirror</label>
-		<label class="blocked dark" id="outline" onClick="actionOutline()">Outline</label>
-		<div class="blocked" id="hardpoints">
-			<label id="gun" onClick="actionHardpoint(this.id)">Gun</label>
-			<label id="turret" onClick="actionHardpoint(this.id)">Turret</label>
-			<label id="fighter" onClick="actionHardpoint(this.id)">Fighter</label>
-			<label id="drone" onClick="actionHardpoint(this.id)">Drone</label>
-			<label id="engine" onClick="actionHardpoint(this.id)">Engine</label>
-			<label id="left" onClick="actionHardpoint(this.id)">Left</label>
-			<label id="right" onClick="actionHardpoint(this.id)">Right</label>
-			<label id="reverse" onClick="actionHardpoint(this.id)">Reverse</label>
-		</div>
-		<label class="blocked" id="xCoordinate" onClick="actionLockX()">X:</label>
-		<label class="blocked" id="yCoordinate" onClick="actionLockY()">Y:</label>
+		<input id="file" class="hidden" onChange="uploadImage()" type="file"/>
+		<!--	Menu Options	-->
+		<label id="formatting" class="blocked dark" onClick="formatHardpoints()">Formatting</label>
+		<label id="mirror" class="blocked dark" onClick="toggleMirror()">Mirror</label>
+		<label id="outline" class="blocked dark" onClick="toggleOutline()">Outline</label>
+		<!--	Menu Cycles	-->
+		<label class="blocked" id="swizzle" onClick="cycleSwizzle()">Swizzle 0</label>
+		<!--	Hardpoints	-->
+		<label id="gun" class="blocked" onClick="addHardpoint(this.id)">Gun</label>
+		<label id="turret" class="blocked" onClick="addHardpoint(this.id)">Turret</label>
+		<label id="fighter" class="blocked" onClick="addHardpoint(this.id)">Fighter</label>
+		<label id="drone" class="blocked" onClick="addHardpoint(this.id)">Drone</label>
+		<label id="engine" class="blocked" onClick="addHardpoint(this.id)">Engine</label>
+		<label id="left" class="blocked" onClick="addHardpoint(this.id)">Left</label>
+		<label id="right" class="blocked" onClick="addHardpoint(this.id)">Right</label>
+		<label id="reverse" class="blocked" onClick="addHardpoint(this.id)">Reverse</label>
+		<!--	Informational	-->
+		<label class="blocked" id="xCoordinate" onClick="lockX()">X:</label>
+		<label class="blocked" id="yCoordinate" onClick="lockY()">Y:</label>
 		<p id="output"></p>
-		<label class="blocked" id="copy" onClick="actionCopy()">Copy</label>
+		<label class="blocked" id="copy" onClick="copy()">Copy</label>
 	</body>
 	<script type="text/javascript" src="scriptsheet.js"></script>
 </html>
