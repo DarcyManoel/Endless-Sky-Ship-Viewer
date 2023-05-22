@@ -87,7 +87,30 @@ function keyDown(event){
 			yCoordinate+=.5/(inflation*scale)
 		}
 	}
+	//	Left Alt
+	if(event.keyCode==18){
+		document.getElementById(`hotkeyLegend`).classList.remove(`hidden`)
+	}
+	//	C
+	if(event.keyCode==67){
+		copyHardpoints()
+	}
+	//	F
+	if(event.keyCode==70){
+		formatHardpoints()
+	}
+	//	M
+	if(event.keyCode==77){
+		toggleMirror()
+	}
+	//	O
+	if(event.keyCode==79){
+		toggleOutline()
+	}
 	drawImage()
+}
+function keyUp(event){
+	document.getElementById(`hotkeyLegend`).classList.add(`hidden`)
 }
 //	Image Manipulation
 function cycleSwizzle(){
@@ -239,7 +262,7 @@ function printHardpoints(){
 		document.getElementById(`output`).innerHTML=hardpoints.map(e=>e.join(` `)).join(``)
 	}
 }
-function copy(){
+function copyHardpoints(){
 	if(formatting){
 		navigator.clipboard.writeText(
 			hardpointsFormatted[0].map(e=>e.join(` `)).join(``)+
