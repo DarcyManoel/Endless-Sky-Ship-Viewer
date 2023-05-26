@@ -1,6 +1,8 @@
-# 26th May 2023
+# Ship Builder
+## 26th May 2023
+### Major
 ```diff
-+	Overhaul the UI to match the new style established with Map Viewer
-#		General buttons are placed along a menu bar that lies atop the screen.
 +	Add hotkeys for general use and hotkey sheet for help
 ```
+### Minor
+- UI redesign of interactables into menu bar
