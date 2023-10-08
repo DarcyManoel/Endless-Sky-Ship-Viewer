@@ -140,6 +140,7 @@ label:hover{
 	right:0;
 	text-align:left;
 	top:20px;
+	user-select:all;
 	white-space:pre;
 	width:240px;
 }

@@ -246,7 +246,6 @@ function addHardpoint(type){
 			}
 			break
 	}
-	console.log(hardpointsFormatted)
 	printHardpoints()
 }
 function printHardpoints(){
