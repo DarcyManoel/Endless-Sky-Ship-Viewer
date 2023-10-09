@@ -86,10 +86,6 @@ function keyDown(event){
 			yCoordinate+=.5/(inflation*scale)
 		}
 	}
-	//	Left Alt
-	if(event.keyCode==18){
-		document.getElementById(`hotkeyLegend`).classList.remove(`hidden`)
-	}
 	//	C
 	if(event.keyCode==67){
 		copyHardpoints()
@@ -107,9 +103,6 @@ function keyDown(event){
 		toggleOutline()
 	}
 	drawImage()
-}
-function keyUp(event){
-	document.getElementById(`hotkeyLegend`).classList.add(`hidden`)
 }
 //	Image Manipulation
 function cycleSwizzle(){

@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 		<title>Ship Viewer</title>
 	</head>
-	<body onKeyDown="keyDown(event)" onKeyUp="keyUp(event)" onLoad="initialize()">
+	<body onKeyDown="keyDown(event)" onLoad="initialize()">
 		<!--	Structure	-->
 		<canvas id="canvas"></canvas>
 		<!--	Load	-->
@@ -32,14 +32,6 @@
 		<label class="blocked" id="yCoordinate" onClick="lockY()">Y:</label>
 		<p id="output"></p>
 		<label class="blocked" id="copy" onClick="copyHardpoints()">Copy</label>
-		<!--	Hotkeys	-->
-		<label class="blocked" style="bottom:20px;left:50%;transform:translate(-50%);">Press left alt to show hotkey sheet.</label>
-		<div class="hidden" id="hotkeyLegend">
-			<label class="tooltipRight" style="left:20px;top:40px;" tooltip="F">Toggle automatic formatting of created hardpoints.</label>
-			<label class="tooltipRight" style="left:20px;top:60px;" tooltip="M">Mirror hardpoints during creation for symmetrical arrangements.</label>
-			<label class="tooltipRight" style="left:20px;top:80px;" tooltip="O">Outline the borders of the ship image to visualise game mask.</label>
-			<label class="tooltipLeft" style="right:20px;top:40px;" tooltip="C">Copy hardpoints to clipboard.</label>
-		</div>
 	</body>
 	<script type="text/javascript" src="scriptsheet.js"></script>
 </html>
