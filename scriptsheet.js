@@ -65,41 +65,33 @@ function onMouseUp(event){
 	isDragging=false
 }
 function keyDown(event){
-	//	Left
-	if(event.keyCode==37||event.keyCode==65){
+	if(event.keyCode==37||event.keyCode==65){			//	Left / A
 		if(!yAxisLocked){
 			xCoordinate-=.5/(inflation*scale)
 		}
-	//	Right
-	}else if(event.keyCode==39||event.keyCode==68){
+	}else if(event.keyCode==39||event.keyCode==68){		//	Right / D
 		if(!yAxisLocked){
 			xCoordinate+=.5/(inflation*scale)
 		}
-	//	Up
-	}else if(event.keyCode==38||event.keyCode==87){
+	}else if(event.keyCode==38||event.keyCode==87){		//	Up / W
 		if(!xAxisLocked){
 			yCoordinate-=.5/(inflation*scale)
 		}
-	//	Down
-	}else if(event.keyCode==40||event.keyCode==83){
+	}else if(event.keyCode==40||event.keyCode==83){		//	Down / S
 		if(!xAxisLocked){
 			yCoordinate+=.5/(inflation*scale)
 		}
 	}
-	//	C
-	if(event.keyCode==67){
+	if(event.keyCode==67){								//	C
 		copyHardpoints()
 	}
-	//	F
-	if(event.keyCode==70){
-		formatHardpoints()
+	if(event.keyCode==70){								//	F
+		toggleFormatting()
 	}
-	//	M
-	if(event.keyCode==77){
+	if(event.keyCode==77){								//	M
 		toggleMirror()
 	}
-	//	O
-	if(event.keyCode==79){
+	if(event.keyCode==79){								//	O
 		toggleOutline()
 	}
 	drawImage()
@@ -117,13 +109,13 @@ function cycleSwizzle(){
 function swizzleImage(){
 	document.getElementById(`swizzle`).innerHTML=`Swizzle `+swizzle
 	var SWIZZLE=[
-		[0,1,2],
-		[0,2,1],
-		[1,0,2],
-		[2,0,1],
-		[1,2,0],
-		[2,1,0],
-		[1,2,2]
+		[0,1,2],	//	0
+		[0,2,1],	//	1
+		[1,0,2],	//	2
+		[2,0,1],	//	3
+		[1,2,0],	//	4
+		[2,1,0],	//	5
+		[1,2,2]		//	6
 	]
 	for(i1=0;i1<pixels.length;i1+=4){
 		var red=pixels[i1+SWIZZLE[swizzle][0]]
@@ -133,6 +125,12 @@ function swizzleImage(){
 		pixels[i1+1]=green
 		pixels[i1+2]=blue
 	}
+}
+function toggleFormatting(){
+	isFormatted=!isFormatted
+	localStorage.setItem(`isFormatted`,isFormatted)
+	document.getElementById(`formatting`).classList.toggle(`dark`)
+	printHardpoints()
 }
 function toggleMirror(){
 	isMirrored=!isMirrored
@@ -173,12 +171,6 @@ function outlineImage(){
 	}
 }
 //	Hardpoints
-function formatHardpoints(){
-	isFormatted=!isFormatted
-	localStorage.setItem(`isFormatted`,isFormatted)
-	document.getElementById(`formatting`).classList.toggle(`dark`)
-	printHardpoints()
-}
 function addHardpoint(type){
 	switch(type){
 		case `gun`:
