@@ -1,26 +1,26 @@
 const canvas=document.getElementById(`canvas`)
 const canvasContext=canvas.getContext(`2d`)
 var swizzle=0
-var mirror=false
+var isMirrored=false
+var isFormatted=false
+var isOutlined=false
 var hardpoints=[[],[],[],[]]
 var hardpointsFormatted=[[],[],[],[]]
 var isDragging=false
-var formatting=false
-var outline=false
 var xAxisLocked=false
 var yAxisLocked=false
 function initialize(){
-	if(localStorage.getItem(`formatting`)==`true`){
+	if(localStorage.getItem(`isFormatted`)==`true`){
 		document.getElementById(`formatting`).classList.remove(`dark`)
-		formatting=true
+		isFormatted=true
 	}
-	if(localStorage.getItem(`mirror`)==`true`){
+	if(localStorage.getItem(`isMirrored`)==`true`){
 		document.getElementById(`mirror`).classList.remove(`dark`)
-		mirror=true
+		isMirrored=true
 	}
-	if(localStorage.getItem(`outline`)==`true`){
+	if(localStorage.getItem(`isOutlined`)==`true`){
 		document.getElementById(`outline`).classList.remove(`dark`)
-		outline=true
+		isOutlined=true
 	}
 	canvas.addEventListener(`mousedown`,onMouseDown)
 	canvas.addEventListener(`mousemove`,onMouseMove)
@@ -47,8 +47,7 @@ function uploadImage(){
 	reader.readAsDataURL(file)
 	if(file.name.lastIndexOf(`@2x`)==file.name.lastIndexOf(`.`)-3){
 		scale=1
-	}
-	else{
+	}else{
 		scale=2
 	}
 }
@@ -143,19 +142,19 @@ function swizzleImage(){
 	}
 }
 function toggleMirror(){
-	mirror=!mirror
-	localStorage.setItem(`mirror`,mirror)
+	isMirrored=!isMirrored
+	localStorage.setItem(`isMirrored`,isMirrored)
 	document.getElementById(`mirror`).classList.toggle(`dark`)
 	drawImage()
 }
 function toggleOutline(){
-	outline=!outline
-	localStorage.setItem(`outline`,outline)
+	isOutlined=!isOutlined
+	localStorage.setItem(`isOutlined`,isOutlined)
 	document.getElementById(`outline`).classList.toggle(`dark`)
 	drawImage()
 }
 function outlineImage(){
-	if(outline){
+	if(isOutlined){
 		for(i1=0;i1<pixels.length&&!pixels[i1+3];i1+=4){}
 		var start=i1
 		var DIR=[
@@ -182,8 +181,8 @@ function outlineImage(){
 }
 //	Hardpoints
 function formatHardpoints(){
-	formatting=!formatting
-	localStorage.setItem(`formatting`,formatting)
+	isFormatted=!isFormatted
+	localStorage.setItem(`isFormatted`,isFormatted)
 	document.getElementById(`formatting`).classList.toggle(`dark`)
 	printHardpoints()
 }
@@ -192,7 +191,7 @@ function addHardpoint(type){
 		case `gun`:
 			hardpointsFormatted[0].push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			hardpoints.push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
-			if(mirror){
+			if(isMirrored){
 				hardpointsFormatted[0].push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 				hardpoints.push([`\tgun`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			}
@@ -200,7 +199,7 @@ function addHardpoint(type){
 		case `turret`:
 			hardpointsFormatted[1].push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			hardpoints.push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
-			if(mirror){
+			if(isMirrored){
 				hardpointsFormatted[1].push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 				hardpoints.push([`\tturret`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			}
@@ -208,7 +207,7 @@ function addHardpoint(type){
 		case `fighter`:
 			hardpointsFormatted[2].push([`\tbay "Fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			hardpoints.push([`\tbay "Fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
-			if(mirror){
+			if(isMirrored){
 				hardpointsFormatted[2].push([`\tbay "Fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 				hardpoints.push([`\tbay "Fighter"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			}
@@ -216,7 +215,7 @@ function addHardpoint(type){
 		case `drone`:
 			hardpointsFormatted[2].push([`\tbay "Drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			hardpoints.push([`\tbay "Drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
-			if(mirror){
+			if(isMirrored){
 				hardpointsFormatted[2].push([`\tbay "Drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 				hardpoints.push([`\tbay "Drone"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			}
@@ -224,7 +223,7 @@ function addHardpoint(type){
 		case `engine`:
 			hardpointsFormatted[3].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			hardpoints.push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
-			if(mirror){
+			if(isMirrored){
 				hardpointsFormatted[3].push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 				hardpoints.push([`\tengine`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			}
@@ -240,7 +239,7 @@ function addHardpoint(type){
 		case `reverse`:
 			hardpointsFormatted[3].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			hardpoints.push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
-			if(mirror){
+			if(isMirrored){
 				hardpointsFormatted[3].push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 				hardpoints.push([`\t"reverse engine"`,Math.round((xCoordinate*(inflation*scale))*2)/2*-1,Math.round((yCoordinate*(inflation*scale))*2)/2,`\n`])
 			}
@@ -250,7 +249,7 @@ function addHardpoint(type){
 }
 function printHardpoints(){
 	document.getElementById(`output`).innerHTML=``
-	if(formatting){
+	if(isFormatted){
 		for(i1=0;i1<hardpointsFormatted.length;i1++){
 			if(hardpointsFormatted[i1].length){
 				hardpointsFormatted[i1].sort(function(a,b){return a[2]-b[2]})
@@ -262,7 +261,7 @@ function printHardpoints(){
 	}
 }
 function copyHardpoints(){
-	if(formatting){
+	if(isFormatted){
 		navigator.clipboard.writeText(
 			hardpointsFormatted[0].map(e=>e.join(` `)).join(``)+
 			hardpointsFormatted[1].map(e=>e.join(` `)).join(``)+
@@ -345,7 +344,7 @@ function drawCursor(){
 	}else if(yAxisLocked){
 		drawLine(x,y-20,x,y+20,[15,10],1.5,`#f00`)
 	}
-	if(mirror){
+	if(isMirrored){
 		var rx=canvas.width-x
 		drawArc(rx,y,5,0,2*Math.PI,`#f00`)
 		if(xAxisLocked){
